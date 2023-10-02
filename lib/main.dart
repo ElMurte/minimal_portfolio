@@ -42,8 +42,8 @@ class _ImageWithMisalignedSquareEffectState
                   right: 20.0, // 10% from the right of the wrapper
                   top: 20.0, // 10% from the top of the wrapper
                   child: AnimatedContainer(
-                    duration:
-                        Duration(milliseconds: 300), // Adjust the duration
+                    duration: const Duration(
+                        milliseconds: 300), // Adjust the duration
                     transform: isHovered
                         ? Matrix4.translationValues(10.0, 0.0, 0.0)
                         : Matrix4.translationValues(0.0, 0.0, 0.0),
@@ -61,14 +61,14 @@ class _ImageWithMisalignedSquareEffectState
                 Container(
                   color: (!isHovered) ? Colors.blue : Colors.transparent,
                   child: AnimatedContainer(
-                    duration: Duration(milliseconds: 300),
+                    duration: const Duration(milliseconds: 300),
                     transform: isHovered
                         ? Matrix4.translationValues(-10.0, -10.0, 0.0)
                         : Matrix4.translationValues(0.0, 0.0, 0.0),
                     width: 200.0,
                     height: 200.0,
                     child: AnimatedOpacity(
-                      duration: Duration(milliseconds: 300),
+                      duration: const Duration(milliseconds: 300),
                       opacity: isHovered ? 1 : 0.5, // Adjust the opacity
                       child: Image.network(
                         'https://avatars.githubusercontent.com/u/32709092',
@@ -236,12 +236,12 @@ class _MyAppState extends State<MyApp> {
             child: Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.all(80),
+                  padding: const EdgeInsets.all(80),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        'Hello people, I am',
+                        'Hello people!  I am',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w700,
@@ -250,18 +250,20 @@ class _MyAppState extends State<MyApp> {
                       ),
                       const SizedBox(height: 16),
                       const Text(
-                        '                   Elvis Murtezan.',
-                        style: TextStyle(fontSize: 46),
+                        'Elvis Murtezan.',
+                        style: TextStyle(
+                            fontSize: 66, fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 16),
                       const Text(
                         'I build software with different technologies.',
-                        style: TextStyle(fontSize: 43),
+                        style: TextStyle(
+                            fontSize: 43, fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 16),
                       const Text(
                         'I’m a confident software engineer, I consider myself a full stack developer \nand enjoy it a lot, currently working in the air transport industry.',
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(fontSize: 19),
                       ),
                     ],
                   ),
@@ -269,6 +271,39 @@ class _MyAppState extends State<MyApp> {
                 _buildAbout(),
                 _buildProjects(),
                 _buildExperience(),
+                // Footer section
+                Container(
+                  alignment: Alignment.center,
+                  color: Colors.blue, // Customize the background color.
+                  padding:
+                      const EdgeInsets.all(16.0), // Add padding for content.
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Built with Flutter and AI tools using',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14.0,
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Image.network(
+                            'https://github.gallerycdn.vsassets.io/extensions/github/copilotvs/1.110.0.0/1694462364886/Microsoft.VisualStudio.Services.Icons.Default',
+                            height: 50.0, // Limit the height to 50 pixels.
+                          ),
+                          const SizedBox(
+                              width: 8.0), // Add spacing between icons.
+                          Image.network(
+                            'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/2048px-ChatGPT_logo.svg.png',
+                            height: 50.0, // Limit the height to 50 pixels.
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
@@ -324,7 +359,7 @@ class _MyAppState extends State<MyApp> {
         key: _projectsKey, // Add this line
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Row(children: <Widget>[
+          const Row(children: <Widget>[
             Text(
               'About',
               style: TextStyle(fontSize: 32),
@@ -334,14 +369,30 @@ class _MyAppState extends State<MyApp> {
           Row(
             children: <Widget>[
               // Left side: Description
-              Expanded(
+              const Expanded(
                 child: Padding(
                   padding: EdgeInsets.all(8.0), // Adjust padding as needed
-                  child: Text(
-                    'Your Description Here',
-                    style: TextStyle(
-                      fontSize: 16.0, // Adjust the font size as needed
-                    ),
+                  child: Column(
+                    children: [
+                      Text(
+                          style: TextStyle(
+                            fontSize: 19.0, // Adjust the font size as needed
+                          ),
+                          'Hi again, I\'m Elvis Murtezan, an Associate Software Developer.\n My journey in software development born in my childhood from the passion for videogames, now is driven by my genuine passion for problem-solving and technology.I approach every challenge with solid determination, whether it\'s an individual problem I\'m tackling or a collaborative effort within a team.'),
+                      const SizedBox(height: 16),
+                      Text(
+                          style: TextStyle(
+                            fontSize: 19.0, // Adjust the font size as needed
+                          ),
+                          'Currently, I\'m contributing in the dynamic field of air transport. Here are some of the most recent technologies I\'ve worked with:'),
+                      const SizedBox(height: 16),
+                      Text(
+                        ' List the technologies here.',
+                        style: TextStyle(
+                          fontSize: 19.0, // Adjust the font size as needed
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -400,7 +451,7 @@ class _MyAppState extends State<MyApp> {
           const SizedBox(height: 8),
           Text(
             title,
-            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 8),
           Text(
@@ -453,7 +504,7 @@ class _MyAppState extends State<MyApp> {
               backgroundColor: Colors.white,
               foregroundColor: Colors.black,
             ),
-            primaryColorDark: Color(0xFF011638),
+            primaryColorDark: const Color(0xFF011638),
             scaffoldBackgroundColor: Colors.white,
             textTheme: const TextTheme(),
           );
