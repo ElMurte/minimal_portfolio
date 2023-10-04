@@ -1,91 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:minimal_portfolio/animated_shapes.dart';
+import 'package:minimal_portfolio/projectcard.dart';
+import 'AboutWidget.dart';
 
 void main() {
   runApp(const MyApp());
-}
-
-class ImageWithMisalignedSquareEffect extends StatefulWidget {
-  @override
-  _ImageWithMisalignedSquareEffectState createState() =>
-      _ImageWithMisalignedSquareEffectState();
-}
-
-class _ImageWithMisalignedSquareEffectState
-    extends State<ImageWithMisalignedSquareEffect> {
-  bool isHovered = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return MouseRegion(
-      onEnter: (_) {
-        setState(() {
-          isHovered = true;
-        });
-      },
-      onExit: (_) {
-        setState(() {
-          isHovered = false;
-        });
-      },
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          // Wrapper for Image and Square
-          Container(
-            width: 220.0, // 10% larger than the image
-            height: 220.0, // 10% larger than the image
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                // Misaligned Square with Transition
-                Positioned(
-                  right: 20.0, // 10% from the right of the wrapper
-                  top: 20.0, // 10% from the top of the wrapper
-                  child: AnimatedContainer(
-                    duration: const Duration(
-                        milliseconds: 300), // Adjust the duration
-                    transform: isHovered
-                        ? Matrix4.translationValues(10.0, 0.0, 0.0)
-                        : Matrix4.translationValues(0.0, 0.0, 0.0),
-                    width: 200.0, // Same size as the wrapper
-                    height: 200.0, // Same size as the wrapper
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.blue,
-                        width: 2.0, // Adjust the border width
-                      ),
-                    ),
-                  ),
-                ),
-                // Image with Hover Effect and Positioning
-                Container(
-                  color: (!isHovered) ? Colors.blue : Colors.transparent,
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 300),
-                    transform: isHovered
-                        ? Matrix4.translationValues(-10.0, -10.0, 0.0)
-                        : Matrix4.translationValues(0.0, 0.0, 0.0),
-                    width: 200.0,
-                    height: 200.0,
-                    child: AnimatedOpacity(
-                      duration: const Duration(milliseconds: 300),
-                      opacity: isHovered ? 1 : 0.5, // Adjust the opacity
-                      child: Image.network(
-                        'https://avatars.githubusercontent.com/u/32709092',
-                        fit: BoxFit.cover,
-                        width: 200.0,
-                        height: 200.0,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 }
 
 class MyApp extends StatefulWidget {
@@ -156,156 +75,167 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'Elvis Murtezan',
       theme: _buildTheme(),
-      home: Container(
-        child: Scaffold(
-          appBar: AppBar(
-            title: TextButton(
-              style: TextButton.styleFrom(
-                padding: EdgeInsets.zero,
+      home: Scaffold(
+        appBar: AppBar(
+          title: TextButton(
+            style: TextButton.styleFrom(
+              padding: EdgeInsets.zero,
+            ),
+            child: const Text(
+              'Elvis Murtezan',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
               ),
-              child: const Text(
-                'Elvis Murtezan',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+            ),
+            onPressed: () {
+              setState(() {
+                _selectedSection = 'About';
+                _scrollToSection(_aboutOffset);
+              });
+            },
+          ),
+          actions: <Widget>[
+            if (MediaQuery.of(context).size.width > 600)
+              Row(
+                children: <Widget>[
+                  _buildLink('About', _aboutOffset),
+                  _buildLink('Projects', _projectsOffset),
+                  _buildLink('Experience', _experienceOffset),
+                ],
+              )
+            else
+              SingleChildScrollView(
+                controller: _scrollController,
+                child: PopupMenuButton<String>(
+                  icon: const Icon(Icons.menu),
+                  onSelected: (value) {
+                    setState(() {
+                      _selectedSection = value;
+                    });
+                    _scrollToSection(
+                      value == 'About'
+                          ? _aboutOffset
+                          : value == 'Projects'
+                              ? _projectsOffset
+                              : _experienceOffset,
+                    );
+                  },
+                  itemBuilder: (BuildContext context) {
+                    return <PopupMenuEntry<String>>[
+                      const PopupMenuItem<String>(
+                        value: 'About',
+                        child: Text(
+                          'About',
+                        ),
+                      ),
+                      const PopupMenuItem<String>(
+                        value: 'Projects',
+                        child: Text('Projects'),
+                      ),
+                      const PopupMenuItem<String>(
+                        value: 'Experience',
+                        child: Text('Experience'),
+                      ),
+                    ];
+                  },
                 ),
               ),
-              onPressed: () {
-                setState(() {
-                  _selectedSection = 'About';
-                  _scrollToSection(_aboutOffset);
-                });
+            Switch(
+              value: _isDarkMode,
+              onChanged: (value) {
+                _toggleTheme();
               },
             ),
-            actions: <Widget>[
-              if (MediaQuery.of(context).size.width > 600)
-                Row(
-                  children: <Widget>[
-                    _buildLink('About', _aboutOffset),
-                    _buildLink('Projects', _projectsOffset),
-                    _buildLink('Experience', _experienceOffset),
-                  ],
-                )
-              else
-                SingleChildScrollView(
-                  controller: _scrollController,
-                  child: PopupMenuButton<String>(
-                    icon: const Icon(Icons.menu),
-                    onSelected: (value) {
-                      setState(() {
-                        _selectedSection = value;
-                      });
-                      _scrollToSection(
-                        value == 'About'
-                            ? _aboutOffset
-                            : value == 'Projects'
-                                ? _projectsOffset
-                                : _experienceOffset,
-                      );
-                    },
-                    itemBuilder: (BuildContext context) {
-                      return <PopupMenuEntry<String>>[
-                        const PopupMenuItem<String>(
-                          value: 'About',
-                          child: Text(
-                            'About',
+          ],
+        ),
+        body: SingleChildScrollView(
+          controller: _scrollController,
+          child: Stack(
+            children: [
+              SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
+                  child: AnimatedBackground()),
+              Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.all(
+                        MediaQuery.of(context).size.width * 0.12),
+                    child: Column(
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              'Hello people!  I am',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w700,
+                                color: Theme.of(context).primaryColorDark,
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            const Text(
+                              'Elvis Murtezan.',
+                              style: TextStyle(
+                                  fontSize: 66, fontWeight: FontWeight.bold),
+                            ),
+                            const SizedBox(height: 16),
+                            const Text(
+                              'I build software with different technologies.',
+                              style: TextStyle(
+                                  fontSize: 43, fontWeight: FontWeight.bold),
+                            ),
+                            const SizedBox(height: 16),
+                            const Text(
+                              'I’m a confident software engineer, I consider myself a full stack developer \nand enjoy it a lot, currently working in the air transport industry.',
+                              style: TextStyle(fontSize: 19),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  AboutWidget(),
+                  _buildProjects(),
+                  _buildExperience(),
+                  // Footer section
+                  Container(
+                    alignment: Alignment.center,
+                    color: Colors.blue, // Customize the background color.
+                    padding:
+                        const EdgeInsets.all(16.0), // Add padding for content.
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'Built with Flutter and AI tools using',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14.0,
                           ),
                         ),
-                        const PopupMenuItem<String>(
-                          value: 'Projects',
-                          child: Text('Projects'),
+                        Row(
+                          children: [
+                            Image.network(
+                              'https://github.gallerycdn.vsassets.io/extensions/github/copilotvs/1.110.0.0/1694462364886/Microsoft.VisualStudio.Services.Icons.Default',
+                              height: 50.0, // Limit the height to 50 pixels.
+                            ),
+                            const SizedBox(
+                                width: 8.0), // Add spacing between icons.
+                            Image.network(
+                              'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/2048px-ChatGPT_logo.svg.png',
+                              height: 50.0, // Limit the height to 50 pixels.
+                            ),
+                          ],
                         ),
-                        const PopupMenuItem<String>(
-                          value: 'Experience',
-                          child: Text('Experience'),
-                        ),
-                      ];
-                    },
+                      ],
+                    ),
                   ),
-                ),
-              Switch(
-                value: _isDarkMode,
-                onChanged: (value) {
-                  _toggleTheme();
-                },
+                ],
               ),
             ],
-          ),
-          body: SingleChildScrollView(
-            controller: _scrollController,
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(80),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        'Hello people!  I am',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
-                          color: Theme.of(context).primaryColorDark,
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-                      const Text(
-                        'Elvis Murtezan.',
-                        style: TextStyle(
-                            fontSize: 66, fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(height: 16),
-                      const Text(
-                        'I build software with different technologies.',
-                        style: TextStyle(
-                            fontSize: 43, fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(height: 16),
-                      const Text(
-                        'I’m a confident software engineer, I consider myself a full stack developer \nand enjoy it a lot, currently working in the air transport industry.',
-                        style: TextStyle(fontSize: 19),
-                      ),
-                    ],
-                  ),
-                ),
-                _buildAbout(),
-                _buildProjects(),
-                _buildExperience(),
-                // Footer section
-                Container(
-                  alignment: Alignment.center,
-                  color: Colors.blue, // Customize the background color.
-                  padding:
-                      const EdgeInsets.all(16.0), // Add padding for content.
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Built with Flutter and AI tools using',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 14.0,
-                        ),
-                      ),
-                      Row(
-                        children: [
-                          Image.network(
-                            'https://github.gallerycdn.vsassets.io/extensions/github/copilotvs/1.110.0.0/1694462364886/Microsoft.VisualStudio.Services.Icons.Default',
-                            height: 50.0, // Limit the height to 50 pixels.
-                          ),
-                          const SizedBox(
-                              width: 8.0), // Add spacing between icons.
-                          Image.network(
-                            'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/2048px-ChatGPT_logo.svg.png',
-                            height: 50.0, // Limit the height to 50 pixels.
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
           ),
         ),
       ),
@@ -323,6 +253,39 @@ class _MyAppState extends State<MyApp> {
         SizedBox(height: 16),
         // Add your experience content here
       ],
+    );
+  }
+
+  Widget _buildFixedMenu() {
+    return Positioned(
+      bottom: 16.0, // Adjust the vertical position as needed
+      left: 16.0, // Adjust the horizontal position as needed
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          IconButton(
+            icon: const Icon(
+              Icons.mail,
+              size: 30.0,
+              color: Colors.blue,
+            ),
+            onPressed: () {
+              // Handle GitHub button click
+            },
+          ),
+          const SizedBox(height: 16.0), // Add spacing between icons
+          IconButton(
+            icon: const Icon(
+              Icons.shield,
+              size: 30.0,
+              color: Colors.blue,
+            ),
+            onPressed: () {
+              // Handle LinkedIn button click
+            },
+          ),
+        ],
+      ),
     );
   }
 
@@ -347,143 +310,34 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  Widget _buildAbout() {
-    Key _projectsKey = GlobalKey();
-    // Add this line
-    double padding_size = MediaQuery.of(context).size.width > 600 ? 80.0 : 16.0;
-    double margin_size = MediaQuery.of(context).size.width > 600 ? 220.0 : 0.0;
+  Widget _buildProjects() {
+    double padding_size = MediaQuery.of(context).size.width > 600
+        ? MediaQuery.of(context).size.width * 0.1
+        : 40.0;
+    double margin_size = MediaQuery.of(context).size.width > 600
+        ? MediaQuery.of(context).size.width * 0.12
+        : 0.0;
     return Container(
       padding: EdgeInsets.all(padding_size),
       margin: EdgeInsets.only(left: margin_size, right: margin_size),
-      child: Column(
-        key: _projectsKey, // Add this line
+      child: const Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          const Row(children: <Widget>[
-            Text(
-              'About',
-              style: TextStyle(fontSize: 32),
-            ),
-            SizedBox(width: 16),
-          ]),
-          Row(
-            children: <Widget>[
-              // Left side: Description
-              const Expanded(
-                child: Padding(
-                  padding: EdgeInsets.all(8.0), // Adjust padding as needed
-                  child: Column(
-                    children: [
-                      Text(
-                          style: TextStyle(
-                            fontSize: 19.0, // Adjust the font size as needed
-                          ),
-                          'Hi again, I\'m Elvis Murtezan, an Associate Software Developer.\n My journey in software development born in my childhood from the passion for videogames, now is driven by my genuine passion for problem-solving and technology.I approach every challenge with solid determination, whether it\'s an individual problem I\'m tackling or a collaborative effort within a team.'),
-                      const SizedBox(height: 16),
-                      Text(
-                          style: TextStyle(
-                            fontSize: 19.0, // Adjust the font size as needed
-                          ),
-                          'Currently, I\'m contributing in the dynamic field of air transport. Here are some of the most recent technologies I\'ve worked with:'),
-                      const SizedBox(height: 16),
-                      Text(
-                        ' List the technologies here.',
-                        style: TextStyle(
-                          fontSize: 19.0, // Adjust the font size as needed
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              // Right side: Image
-              Container(
-                child: ImageWithMisalignedSquareEffect(),
-              ),
-            ],
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget _buildProjects() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        const Text(
-          'Projects',
-          style: TextStyle(fontSize: 24),
-        ),
-        const SizedBox(height: 16),
-        _buildProjectCard(
-          'BlockCOVID',
-          '7',
-          'SWE Exam',
-          '10/2020 - 6/2021',
-          'flutter',
-          'https://raw.githubusercontent.com/flutter/website/master/src/_assets/image/flutter-logomark-320px.png',
-        ),
-        _buildProjectCard(
-          'BlockCOVID',
-          '7',
-          'SWE Exam',
-          '10/2020 - 6/2021',
-          'flutter',
-          'https://raw.githubusercontent.com/flutter/website/master/src/_assets/image/flutter-logomark-320px.png',
-        )
-      ],
-    );
-  }
-
-  Widget _buildProjectCard(
-    String title,
-    String numberOfPersons,
-    String context,
-    String timeframe,
-    String technology,
-    String mainUrlImage,
-  ) {
-    return Card(
-      child: Column(
-        children: <Widget>[
-          Image.network(mainUrlImage),
-          const SizedBox(height: 8),
           Text(
-            title,
-            style: const TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
+            'Projects',
+            style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
           ),
-          const SizedBox(height: 8),
-          Text(
-            'Number of persons: $numberOfPersons',
-            style: const TextStyle(fontSize: 16),
+          SizedBox(height: 16),
+          ProjectCard(
+            title: 'BlockCOVID',
+            numberOfPersons: '7',
+            context: 'SWE Exam',
+            timeframe: '10/2020 - 6/2021',
+            technology: 'flutter',
+            mainUrlImage:
+                'https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
           ),
-          const SizedBox(height: 8),
-          Text(
-            'Context: $context',
-            style: const TextStyle(fontSize: 16),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            'Timeframe: $timeframe',
-            style: const TextStyle(fontSize: 16),
-          ),
-          const SizedBox(height: 8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Image.network(
-                'https://cdn.iconscout.com/icon/free/png-256/flutter-2038877-1720090.png',
-                height: 24,
-              ),
-              const SizedBox(width: 8),
-              Text(
-                technology,
-                style: const TextStyle(fontSize: 16),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
         ],
       ),
     );
