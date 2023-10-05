@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:minimal_portfolio/animated_shapes.dart';
+import 'package:minimal_portfolio/mainproject.dart';
 import 'package:minimal_portfolio/projectcard.dart';
-import 'AboutWidget.dart';
+import 'aboutwidget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,10 +12,10 @@ class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  _MyAppState createState() => _MyAppState();
+  MyAppState createState() => MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class MyAppState extends State<MyApp> {
   bool _isDarkMode = false;
   String _selectedSection = 'About';
   final ScrollController _scrollController = ScrollController();
@@ -70,8 +71,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    Color _selectedLinkColor = _isDarkMode ? Colors.white : Colors.blue;
-
     return MaterialApp(
       title: 'Elvis Murtezan',
       theme: _buildTheme(),
@@ -156,12 +155,15 @@ class _MyAppState extends State<MyApp> {
               SizedBox(
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height,
-                  child: AnimatedBackground()),
+                  child: const AnimatedBackground()),
               Column(
                 children: [
-                  Padding(
-                    padding: EdgeInsets.all(
-                        MediaQuery.of(context).size.width * 0.12),
+                  Container(
+                    margin: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.width * 0.12,
+                        bottom: MediaQuery.of(context).size.width * 0.12,
+                        left: MediaQuery.of(context).size.width * 0.0,
+                        right: MediaQuery.of(context).size.width * 0.0),
                     child: Column(
                       children: [
                         Column(
@@ -256,39 +258,6 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  Widget _buildFixedMenu() {
-    return Positioned(
-      bottom: 16.0, // Adjust the vertical position as needed
-      left: 16.0, // Adjust the horizontal position as needed
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          IconButton(
-            icon: const Icon(
-              Icons.mail,
-              size: 30.0,
-              color: Colors.blue,
-            ),
-            onPressed: () {
-              // Handle GitHub button click
-            },
-          ),
-          const SizedBox(height: 16.0), // Add spacing between icons
-          IconButton(
-            icon: const Icon(
-              Icons.shield,
-              size: 30.0,
-              color: Colors.blue,
-            ),
-            onPressed: () {
-              // Handle LinkedIn button click
-            },
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget _buildLink(String section, double offset) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -311,15 +280,15 @@ class _MyAppState extends State<MyApp> {
   }
 
   Widget _buildProjects() {
-    double padding_size = MediaQuery.of(context).size.width > 600
+    double paddingSize = MediaQuery.of(context).size.width > 600
         ? MediaQuery.of(context).size.width * 0.1
         : 40.0;
-    double margin_size = MediaQuery.of(context).size.width > 600
+    double marginSize = MediaQuery.of(context).size.width > 600
         ? MediaQuery.of(context).size.width * 0.12
         : 0.0;
     return Container(
-      padding: EdgeInsets.all(padding_size),
-      margin: EdgeInsets.only(left: margin_size, right: margin_size),
+      padding: EdgeInsets.all(paddingSize),
+      margin: EdgeInsets.only(left: marginSize, right: marginSize),
       child: const Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -327,6 +296,17 @@ class _MyAppState extends State<MyApp> {
           Text(
             'Projects',
             style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
+          ),
+          SizedBox(height: 16),
+          MainProjectWidget(
+            imageUrl:
+                'https://images.pexels.com/photos/1047524/pexels-photo-1047524.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+            playStoreUrl:
+                'https://play.google.com/store/apps/details?id=com.example.app',
+            bookDescription:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+            appDescription:
+                'Sed ut perspiciatis unde omnis iste natus error sit voluptatem.',
           ),
           SizedBox(height: 16),
           ProjectCard(

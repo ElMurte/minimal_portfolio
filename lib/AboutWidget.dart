@@ -1,12 +1,16 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 
 class ImageWithMisalignedSquareEffect extends StatefulWidget {
+  const ImageWithMisalignedSquareEffect({super.key});
+
   @override
-  _ImageWithMisalignedSquareEffectState createState() =>
-      _ImageWithMisalignedSquareEffectState();
+  ImageWithMisalignedSquareEffectState createState() =>
+      ImageWithMisalignedSquareEffectState();
 }
 
-class _ImageWithMisalignedSquareEffectState
+class ImageWithMisalignedSquareEffectState
     extends State<ImageWithMisalignedSquareEffect> {
   bool isHovered = false;
 
@@ -27,7 +31,7 @@ class _ImageWithMisalignedSquareEffectState
         alignment: Alignment.center,
         children: [
           // Wrapper for Image and Square
-          Container(
+          SizedBox(
             width: 220.0, // 10% larger than the image
             height: 220.0, // 10% larger than the image
             child: Stack(
@@ -85,24 +89,26 @@ class _ImageWithMisalignedSquareEffectState
 }
 
 class AboutWidget extends StatelessWidget {
+  const AboutWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
-    Key _projectsKey = GlobalKey();
-    double padding_size = MediaQuery.of(context).size.width > 600
+    Key projectsKey = GlobalKey();
+    double paddingSize = MediaQuery.of(context).size.width > 600
         ? MediaQuery.of(context).size.width * 0.1
         : 40.0;
-    double margin_size = MediaQuery.of(context).size.width > 600
+    double marginSize = MediaQuery.of(context).size.width > 600
         ? MediaQuery.of(context).size.width * 0.12
         : 0.0;
 
     return Container(
-      padding: EdgeInsets.all(padding_size),
-      margin: EdgeInsets.only(left: margin_size, right: margin_size),
+      padding: EdgeInsets.all(paddingSize),
+      margin: EdgeInsets.only(left: marginSize, right: marginSize),
       child: Column(
-        key: _projectsKey,
+        key: projectsKey,
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          const Row(children: <Widget>[
+        children: const <Widget>[
+          Row(children: <Widget>[
             Text(
               'About',
               style: TextStyle(fontSize: 32),
@@ -112,7 +118,7 @@ class AboutWidget extends StatelessWidget {
           Row(
             children: <Widget>[
               // Left side: Description
-              const Expanded(
+              Expanded(
                 child: Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Column(
@@ -123,14 +129,14 @@ class AboutWidget extends StatelessWidget {
                           fontSize: 19.0,
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      SizedBox(height: 16),
                       Text(
                         'Currently, I\'m contributing in the dynamic field of air transport. Here are some of the most recent technologies I\'ve worked with:',
                         style: TextStyle(
                           fontSize: 19.0,
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      SizedBox(height: 16),
                       Text(
                         ' List the technologies here.',
                         style: TextStyle(
@@ -142,9 +148,7 @@ class AboutWidget extends StatelessWidget {
                 ),
               ),
               // Right side: Image
-              Container(
-                child: ImageWithMisalignedSquareEffect(),
-              ),
+              ImageWithMisalignedSquareEffect(),
             ],
           )
         ],

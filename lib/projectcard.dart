@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProjectCard extends StatefulWidget {
   final String title;
@@ -19,6 +20,7 @@ class ProjectCard extends StatefulWidget {
   static const defaulttimeframe = "Placeholder";
 
   const ProjectCard({
+    super.key,
     this.title = defaulttitle,
     this.numberOfPersons = defaultnumberofpersons,
     this.context = defaultcontext,
@@ -29,10 +31,20 @@ class ProjectCard extends StatefulWidget {
   });
 
   @override
-  _ProjectCardState createState() => _ProjectCardState();
+  ProjectCardState createState() => ProjectCardState();
 }
 
-class _ProjectCardState extends State<ProjectCard> {
+Future<void> _launchUrl() async {
+  final Uri url = Uri.parse('https://flutter.dev');
+
+  if (await canLaunchUrl(url)) {
+    await launchUrl(url);
+  } else {
+    throw Exception('Could not launch $url');
+  }
+}
+
+class ProjectCardState extends State<ProjectCard> {
   bool isHovered = false;
 
   @override
@@ -54,25 +66,25 @@ class _ProjectCardState extends State<ProjectCard> {
                   isHovered = false;
                 });
               },
-              child: SizedBox(
-                // 10% larger than the image
-
-                width: MediaQuery.of(context).size.width * 0.27,
-                height: MediaQuery.of(context).size.height * 0.4,
-                child: Stack(
-                  fit: StackFit.expand,
-                  children: [
-                    ColorFiltered(
-                      colorFilter: ColorFilter.mode(
-                        Colors.blue.withOpacity(!isHovered ? 0.7 : 0),
-                        BlendMode.modulate,
-                      ),
-                      child: Image.network(
-                        widget.mainUrlImage,
-                        fit: BoxFit.fill,
-                      ),
+              cursor: SystemMouseCursors.click,
+              child: GestureDetector(
+                onTap: () async {
+                  //open another browser page with the link
+                  await _launchUrl();
+                },
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.27,
+                  height: MediaQuery.of(context).size.height * 0.4,
+                  color: Colors.blue,
+                  child: AnimatedOpacity(
+                    duration: const Duration(
+                        milliseconds: 300), // Set your desired duration
+                    opacity: isHovered ? 1 : 0.4, // Adjust opacity values
+                    child: Image.network(
+                      widget.mainUrlImage,
+                      fit: BoxFit.fill,
                     ),
-                  ],
+                  ),
                 ),
               ),
             ),

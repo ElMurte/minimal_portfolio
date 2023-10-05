@@ -12,11 +12,13 @@ class BackgroundAnimation {
 }
 
 class AnimatedBackground extends StatefulWidget {
+  const AnimatedBackground({super.key});
+
   @override
-  _AnimatedBackgroundState createState() => _AnimatedBackgroundState();
+  AnimatedBackgroundState createState() => AnimatedBackgroundState();
 }
 
-class _AnimatedBackgroundState extends State<AnimatedBackground>
+class AnimatedBackgroundState extends State<AnimatedBackground>
     with SingleTickerProviderStateMixin {
   late BackgroundAnimation animation;
 
@@ -26,7 +28,7 @@ class _AnimatedBackgroundState extends State<AnimatedBackground>
     animation = BackgroundAnimation(
       AnimationController(
         vsync: this,
-        duration: Duration(seconds: 5), // Adjust the duration as needed
+        duration: const Duration(seconds: 5), // Adjust the duration as needed
       )..repeat(reverse: true),
     );
   }
@@ -99,7 +101,8 @@ class AnimatedShape extends StatelessWidget {
   final Color color;
   final BoxShape shape;
 
-  AnimatedShape({
+  const AnimatedShape({
+    super.key,
     required this.animationValue,
     required this.color,
     required this.shape,
@@ -108,6 +111,7 @@ class AnimatedShape extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double widthm = MediaQuery.of(context).size.width;
+    // ignore: unused_local_variable
     double heightm = MediaQuery.of(context).size.height;
     return Transform.translate(
       offset: Offset(0,
