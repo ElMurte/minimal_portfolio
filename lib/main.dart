@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:minimal_portfolio/animated_shapes.dart';
+import 'package:minimal_portfolio/firstcontent.dart';
 import 'package:minimal_portfolio/mainproject.dart';
 import 'package:minimal_portfolio/projectcard.dart';
 import 'aboutwidget.dart';
@@ -158,48 +159,8 @@ class MyAppState extends State<MyApp> {
                   child: const AnimatedBackground()),
               Column(
                 children: [
-                  Container(
-                    margin: EdgeInsets.only(
-                        top: MediaQuery.of(context).size.width * 0.12,
-                        bottom: MediaQuery.of(context).size.width * 0.12,
-                        left: MediaQuery.of(context).size.width * 0.0,
-                        right: MediaQuery.of(context).size.width * 0.0),
-                    child: Column(
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              'Hello people!  I am',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w700,
-                                color: Theme.of(context).primaryColorDark,
-                              ),
-                            ),
-                            const SizedBox(height: 16),
-                            const Text(
-                              'Elvis Murtezan.',
-                              style: TextStyle(
-                                  fontSize: 66, fontWeight: FontWeight.bold),
-                            ),
-                            const SizedBox(height: 16),
-                            const Text(
-                              'I build software with different technologies.',
-                              style: TextStyle(
-                                  fontSize: 43, fontWeight: FontWeight.bold),
-                            ),
-                            const SizedBox(height: 16),
-                            const Text(
-                              'I’m a confident software engineer, I consider myself a full stack developer \nand enjoy it a lot, currently working in the air transport industry.',
-                              style: TextStyle(fontSize: 19),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  AboutWidget(),
+                  FirstContent(),
+                  const AboutWidget(),
                   _buildProjects(),
                   _buildExperience(),
                   // Footer section
@@ -317,6 +278,7 @@ class MyAppState extends State<MyApp> {
             technology: 'flutter',
             mainUrlImage:
                 'https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+            description: "This is a sample for a description",
           ),
         ],
       ),

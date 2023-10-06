@@ -53,6 +53,10 @@ class ProjectCardState extends State<ProjectCard> {
       padding: const EdgeInsets.all(16),
       margin: const EdgeInsets.only(bottom: 16),
       child: Card(
+        elevation: 10.0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.0),
+        ),
         child: Row(
           children: [
             MouseRegion(

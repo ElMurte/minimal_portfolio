@@ -1,9 +1,9 @@
-// ignore_for_file: file_names
-
 import 'package:flutter/material.dart';
 
+import 'skilllist.dart';
+
 class ImageWithMisalignedSquareEffect extends StatefulWidget {
-  const ImageWithMisalignedSquareEffect({super.key});
+  const ImageWithMisalignedSquareEffect({Key? key});
 
   @override
   ImageWithMisalignedSquareEffectState createState() =>
@@ -89,17 +89,17 @@ class ImageWithMisalignedSquareEffectState
 }
 
 class AboutWidget extends StatelessWidget {
-  const AboutWidget({super.key});
+  const AboutWidget({Key? key});
 
   @override
   Widget build(BuildContext context) {
     Key projectsKey = GlobalKey();
     double paddingSize = MediaQuery.of(context).size.width > 600
         ? MediaQuery.of(context).size.width * 0.1
-        : 40.0;
+        : MediaQuery.of(context).size.width * 0.05;
     double marginSize = MediaQuery.of(context).size.width > 600
         ? MediaQuery.of(context).size.width * 0.12
-        : 0.0;
+        : MediaQuery.of(context).size.width * 0.07;
 
     return Container(
       padding: EdgeInsets.all(paddingSize),
@@ -137,12 +137,14 @@ class AboutWidget extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: 16),
-                      Text(
-                        ' List the technologies here.',
-                        style: TextStyle(
-                          fontSize: 19.0,
-                        ),
-                      ),
+                      SkillsList([
+                        'Azure',
+                        'Python',
+                        'Kubernetes',
+                        'Containers',
+                        'Flutter',
+                        'SQL',
+                      ])
                     ],
                   ),
                 ),

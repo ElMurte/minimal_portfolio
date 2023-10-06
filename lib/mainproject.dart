@@ -68,34 +68,32 @@ class MainProjectWidgetState extends State<MainProjectWidget> {
               height: 8,
               width: 20,
             ),
-            Container(
-              child: Expanded(
-                child: Column(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          widget.bookDescription,
-                          style: const TextStyle(
-                            fontSize: 19,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          overflow:
-                              TextOverflow.visible, // Allow text to overflow
+            Expanded(
+              child: Column(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        widget.bookDescription,
+                        style: const TextStyle(
+                          fontSize: 19,
+                          fontWeight: FontWeight.bold,
                         ),
-                        const SizedBox(height: 8),
-                        Text(
-                          widget.appDescription,
-                          style: const TextStyle(fontSize: 16),
-                          overflow:
-                              TextOverflow.visible, // Allow text to overflow
-                        ),
-                        const SizedBox(height: 8),
-                      ],
-                    ),
-                  ],
-                ),
+                        overflow:
+                            TextOverflow.visible, // Allow text to overflow
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        widget.appDescription,
+                        style: const TextStyle(fontSize: 16),
+                        overflow:
+                            TextOverflow.visible, // Allow text to overflow
+                      ),
+                      const SizedBox(height: 8),
+                    ],
+                  ),
+                ],
               ),
             ),
           ],
