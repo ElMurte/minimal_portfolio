@@ -9,9 +9,6 @@ class SkillsList extends StatelessWidget {
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
     int numberOfColumns;
-    double columnSpacing = 8.0; // Adjust the spacing between columns
-    double itemSpacing = 4.0; // Adjust the spacing between list items
-
     if (screenWidth >= 600) {
       numberOfColumns = 3; // For larger screens, display 3 columns
     } else {

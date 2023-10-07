@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:minimal_portfolio/animated_shapes.dart';
+import 'package:minimal_portfolio/expiriences.dart';
 import 'package:minimal_portfolio/firstcontent.dart';
 import 'package:minimal_portfolio/mainproject.dart';
 import 'package:minimal_portfolio/projectcard.dart';
@@ -20,48 +21,19 @@ class MyAppState extends State<MyApp> {
   bool _isDarkMode = false;
   String _selectedSection = 'About';
   final ScrollController _scrollController = ScrollController();
-  double _aboutOffset = 1.0;
-  double _projectsOffset = 100.0;
-  double _experienceOffset = 400.0;
-
+  final GlobalKey _aboutKey = GlobalKey();
+  final GlobalKey _experienceKey = GlobalKey();
+  final GlobalKey _projectKey = GlobalKey();
+  final GlobalKey _initial = GlobalKey();
   @override
   void initState() {
     super.initState();
-    _scrollController.addListener(_scrollListener);
   }
 
   @override
   void dispose() {
     _scrollController.dispose();
     super.dispose();
-  }
-
-  void _scrollListener() {
-    setState(() {
-      _aboutOffset = 0.0;
-      _projectsOffset = _aboutOffset + _buildAboutHeight();
-      _experienceOffset = _projectsOffset + _buildProjectsHeight();
-    });
-  }
-
-  double _buildAboutHeight() {
-    // Calculate the height of the About section
-    // You can add your own logic here
-    return 200.0; // Change this to the actual height
-  }
-
-  double _buildProjectsHeight() {
-    // Calculate the height of the Projects section
-    // You can add your own logic here
-    return 400.0; // Change this to the actual height
-  }
-
-  void _scrollToSection(double offset) {
-    _scrollController.animateTo(
-      offset,
-      duration: const Duration(milliseconds: 500),
-      curve: Curves.easeInOut,
-    );
   }
 
   void _toggleTheme() {
@@ -78,30 +50,28 @@ class MyAppState extends State<MyApp> {
       home: Scaffold(
         appBar: AppBar(
           title: TextButton(
-            style: TextButton.styleFrom(
-              padding: EdgeInsets.zero,
-            ),
-            child: const Text(
-              'Elvis Murtezan',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
+              style: TextButton.styleFrom(
+                padding: EdgeInsets.zero,
               ),
-            ),
-            onPressed: () {
-              setState(() {
-                _selectedSection = 'About';
-                _scrollToSection(_aboutOffset);
-              });
-            },
-          ),
+              child: const Text(
+                'Elvis Murtezan',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              onPressed: () {
+                setState(() {
+                  scrollIntoWidget(_initial);
+                });
+              }),
           actions: <Widget>[
             if (MediaQuery.of(context).size.width > 600)
               Row(
                 children: <Widget>[
-                  _buildLink('About', _aboutOffset),
-                  _buildLink('Projects', _projectsOffset),
-                  _buildLink('Experience', _experienceOffset),
+                  _buildLink('About', _aboutKey),
+                  _buildLink('Projects', _projectKey),
+                  _buildLink('Experience', _experienceKey),
                 ],
               )
             else
@@ -112,14 +82,18 @@ class MyAppState extends State<MyApp> {
                   onSelected: (value) {
                     setState(() {
                       _selectedSection = value;
+                      switch (value) {
+                        case "About":
+                          scrollIntoWidget(_aboutKey);
+                        case "Projects":
+                          scrollIntoWidget(_projectKey);
+                        case "Experience":
+                          scrollIntoWidget(_experienceKey);
+                          break;
+                        default:
+                          scrollIntoWidget(_initial);
+                      }
                     });
-                    _scrollToSection(
-                      value == 'About'
-                          ? _aboutOffset
-                          : value == 'Projects'
-                              ? _projectsOffset
-                              : _experienceOffset,
-                    );
                   },
                   itemBuilder: (BuildContext context) {
                     return <PopupMenuEntry<String>>[
@@ -149,85 +123,91 @@ class MyAppState extends State<MyApp> {
             ),
           ],
         ),
-        body: SingleChildScrollView(
-          controller: _scrollController,
-          child: Stack(
-            children: [
-              SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
-                  child: const AnimatedBackground()),
-              Column(
-                children: [
-                  FirstContent(),
-                  const AboutWidget(),
-                  _buildProjects(),
-                  _buildExperience(),
-                  // Footer section
-                  Container(
-                    alignment: Alignment.center,
-                    color: Colors.blue, // Customize the background color.
-                    padding:
-                        const EdgeInsets.all(16.0), // Add padding for content.
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          'Built with Flutter and AI tools using',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14.0,
+        body: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              stops: const [0.25, 1.0],
+              colors: [
+                Colors.white70.withOpacity(0.001), Colors.white,
+                //Theme.of(context).primaryColor,
+                //Theme.of(context).scaffoldBackgroundColor,
+              ],
+            ),
+          ),
+          child: SingleChildScrollView(
+            controller: _scrollController,
+            child: Stack(
+              children: [
+                SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height,
+                    child: const AnimatedBackground()),
+                Column(
+                  children: [
+                    RepaintBoundary(key: _initial, child: const FirstContent()),
+
+                    RepaintBoundary(key: _aboutKey, child: const AboutWidget()),
+
+                    RepaintBoundary(
+                        key: _experienceKey, child: const ExperienceWidget()),
+
+                    RepaintBoundary(key: _projectKey, child: _buildProjects()),
+                    // Footer section
+                    Container(
+                      alignment: Alignment.center,
+                      color: Colors.blue, // Customize the background color.
+                      padding: const EdgeInsets.all(
+                          16.0), // Add padding for content.
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            'Built with Flutter and AI tools using',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14.0,
+                            ),
                           ),
-                        ),
-                        Row(
-                          children: [
-                            Image.network(
-                              'https://github.gallerycdn.vsassets.io/extensions/github/copilotvs/1.110.0.0/1694462364886/Microsoft.VisualStudio.Services.Icons.Default',
-                              height: 50.0, // Limit the height to 50 pixels.
-                            ),
-                            const SizedBox(
-                                width: 8.0), // Add spacing between icons.
-                            Image.network(
-                              'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/2048px-ChatGPT_logo.svg.png',
-                              height: 50.0, // Limit the height to 50 pixels.
-                            ),
-                          ],
-                        ),
-                      ],
+                          Row(
+                            children: [
+                              Image.network(
+                                'https://github.gallerycdn.vsassets.io/extensions/github/copilotvs/1.110.0.0/1694462364886/Microsoft.VisualStudio.Services.Icons.Default',
+                                height: 50.0, // Limit the height to 50 pixels.
+                              ),
+                              const SizedBox(
+                                  width: 8.0), // Add spacing between icons.
+                              Image.network(
+                                'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/2048px-ChatGPT_logo.svg.png',
+                                height: 50.0, // Limit the height to 50 pixels.
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 
-  Widget _buildExperience() {
-    return const Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Text(
-          'Experience',
-          style: TextStyle(fontSize: 24),
-        ),
-        SizedBox(height: 16),
-        // Add your experience content here
-      ],
-    );
-  }
-
-  Widget _buildLink(String section, double offset) {
+  Widget _buildLink(String section, GlobalKey key) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: GestureDetector(
         onTap: () {
           setState(() {
             _selectedSection = section;
-            _scrollToSection(offset);
+
+            scrollIntoWidget(key);
           });
+          //_scrollToSection(offset);
         },
         child: Text(
           section,
@@ -285,6 +265,19 @@ class MyAppState extends State<MyApp> {
     );
   }
 
+  void scrollIntoWidget(key) {
+    final RenderObject? renderObject = key.currentContext?.findRenderObject();
+    if (renderObject != null) {
+      final scrollableState = Scrollable.of(key.currentContext!);
+      final position = scrollableState.position;
+      position.ensureVisible(
+        renderObject,
+        alignment: 0.0,
+        duration: const Duration(milliseconds: 500),
+      );
+    }
+  }
+
   ThemeData _buildTheme() {
     return _isDarkMode
         ? ThemeData.dark().copyWith(
@@ -293,7 +286,43 @@ class MyAppState extends State<MyApp> {
               foregroundColor: Colors.white,
             ),
             scaffoldBackgroundColor: const Color(0xFF011638),
-            textTheme: const TextTheme(),
+            textTheme: const TextTheme(
+                headlineLarge: TextStyle(
+                  color: Colors.white70,
+                ),
+                headlineMedium: TextStyle(
+                  color: Colors.white70,
+                ),
+                headlineSmall: TextStyle(
+                  color: Colors.white,
+                ),
+                bodyLarge: TextStyle(
+                  color: Colors.white70,
+                ),
+                bodyMedium: TextStyle(
+                  color: Colors.white70,
+                ),
+                bodySmall: TextStyle(
+                  color: Colors.white70,
+                ),
+                displayLarge: TextStyle(
+                  color: Colors.white,
+                ),
+                displayMedium: TextStyle(
+                  color: Colors.white,
+                ),
+                displaySmall: TextStyle(
+                  color: Colors.white,
+                ),
+                titleLarge: TextStyle(
+                  color: Colors.white,
+                ),
+                titleMedium: TextStyle(
+                  color: Colors.white,
+                ),
+                titleSmall: TextStyle(
+                  color: Colors.white,
+                )),
           )
         : ThemeData.light().copyWith(
             appBarTheme: const AppBarTheme(
