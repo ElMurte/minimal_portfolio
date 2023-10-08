@@ -141,7 +141,6 @@ class MyAppState extends State<MyApp> {
             child: Stack(
               children: [
                 SizedBox(
-                    width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height,
                     child: const AnimatedBackground()),
                 Column(

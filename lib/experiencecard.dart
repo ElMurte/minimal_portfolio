@@ -19,44 +19,46 @@ class ExperienceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.all(16.0),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              experience.role,
-              style: const TextStyle(
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
+    return Container(
+      width: double.infinity,
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                experience.role,
+                style: const TextStyle(
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            const SizedBox(height: 8.0),
-            Text(
-              'Date: ${experience.date}',
-              style: const TextStyle(
-                fontSize: 14.0,
-                color: Colors.grey,
+              const SizedBox(height: 8.0),
+              Text(
+                'Date: ${experience.date}',
+                style: const TextStyle(
+                  fontSize: 18.0,
+                  color: Colors.grey,
+                ),
               ),
-            ),
-            const SizedBox(height: 12.0),
-            const Text(
-              'Description:',
-              style: TextStyle(
-                fontSize: 16.0,
-                fontWeight: FontWeight.bold,
+              const SizedBox(height: 12.0),
+              const Text(
+                'Description:',
+                style: TextStyle(
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            const SizedBox(height: 8.0),
-            Text(
-              experience.description,
-              style: const TextStyle(
-                fontSize: 14.0,
+              const SizedBox(height: 8.0),
+              Text(
+                experience.description,
+                style: const TextStyle(
+                  fontSize: 17.0,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
