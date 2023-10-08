@@ -28,7 +28,7 @@ class MainProjectWidgetState extends State<MainProjectWidget> {
       padding: const EdgeInsets.all(16),
       child: Card(
         elevation: isHovered ? 8 : 2, // Apply elevation on hover
-        child: Row(
+        child: Stack(
           children: [
             MouseRegion(
               onEnter: (_) {
@@ -48,9 +48,9 @@ class MainProjectWidgetState extends State<MainProjectWidget> {
                   await _launchUrl();
                 },
                 child: Container(
-                  width: MediaQuery.of(context).size.width * 0.35,
+                  width: MediaQuery.of(context).size.width * 0.9,
                   height: MediaQuery.of(context).size.height * 0.5,
-                  color: isHovered
+                  color: !isHovered
                       ? Colors.blue
                       : Colors.grey[300], // Apply hover effect
                   child: AnimatedOpacity(
@@ -64,36 +64,40 @@ class MainProjectWidgetState extends State<MainProjectWidget> {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 8,
-              width: 20,
-            ),
-            Expanded(
-              child: Column(
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        widget.bookDescription,
-                        style: const TextStyle(
-                          fontSize: 19,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        overflow:
-                            TextOverflow.visible, // Allow text to overflow
+            Positioned.fill(
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      widget.bookDescription,
+                      style: const TextStyle(
+                        fontSize: 24,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
                       ),
-                      const SizedBox(height: 8),
-                      Text(
-                        widget.appDescription,
-                        style: const TextStyle(fontSize: 16),
-                        overflow:
-                            TextOverflow.visible, // Allow text to overflow
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.visible, // Allow text to overflow
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      widget.appDescription,
+                      style: const TextStyle(fontSize: 16),
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.visible, // Allow text to overflow
+                    ),
+                    const SizedBox(height: 8),
+                    Container(
+                      width: 75,
+                      height: 75,
+                      child: Image.network(
+                        widget.playStoreUrl,
+                        fit: BoxFit.cover,
                       ),
-                      const SizedBox(height: 8),
-                    ],
-                  ),
-                ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

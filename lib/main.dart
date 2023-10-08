@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:minimal_portfolio/animated_shapes.dart';
 import 'package:minimal_portfolio/expiriences.dart';
 import 'package:minimal_portfolio/firstcontent.dart';
+import 'package:minimal_portfolio/hovertext.dart';
 import 'package:minimal_portfolio/mainproject.dart';
 import 'package:minimal_portfolio/projectcard.dart';
+import 'package:minimal_portfolio/secondaryprojectcard.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'aboutwidget.dart';
 
 void main() {
@@ -70,8 +73,8 @@ class MyAppState extends State<MyApp> {
               Row(
                 children: <Widget>[
                   _buildLink('About', _aboutKey),
-                  _buildLink('Projects', _projectKey),
                   _buildLink('Experience', _experienceKey),
+                  _buildLink('Projects', _projectKey),
                 ],
               )
             else
@@ -154,21 +157,38 @@ class MyAppState extends State<MyApp> {
 
                     RepaintBoundary(key: _projectKey, child: _buildProjects()),
                     // Footer section
+
+                    const Text("Other projects",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.w500)),
+                    const SizedBox(height: 16),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      child: const Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              SecondaryProjectCard(),
+                              SecondaryProjectCard(),
+                              SecondaryProjectCard(),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
                     Container(
                       alignment: Alignment.center,
-                      color: Colors.blue, // Customize the background color.
+                      color: Colors.blue
+                          .withOpacity(0.5), // Customize the background color.
                       padding: const EdgeInsets.all(
                           16.0), // Add padding for content.
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text(
-                            'Built with Flutter and AI tools using',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14.0,
-                            ),
-                          ),
+                          HoverTextWidget(
+                              "Built with Flutter and AI tools using"),
+                          const SizedBox(width: 8.0),
                           Row(
                             children: [
                               Image.network(
@@ -220,36 +240,33 @@ class MyAppState extends State<MyApp> {
   }
 
   Widget _buildProjects() {
-    double paddingSize = MediaQuery.of(context).size.width > 600
-        ? MediaQuery.of(context).size.width * 0.1
-        : 40.0;
-    double marginSize = MediaQuery.of(context).size.width > 600
-        ? MediaQuery.of(context).size.width * 0.12
-        : 0.0;
+    final isWideScreen = MediaQuery.of(context).size.width > 600;
+    double paddingSize =
+        isWideScreen ? MediaQuery.of(context).size.width * 0.1 : 20.0;
+    double marginSize =
+        isWideScreen ? MediaQuery.of(context).size.width * 0.12 : 0.0;
     return Container(
-      padding: EdgeInsets.all(paddingSize),
+      padding: EdgeInsets.only(left: paddingSize, right: paddingSize),
       margin: EdgeInsets.only(left: marginSize, right: marginSize),
-      child: const Column(
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(
+          const Text(
             'Projects',
             style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
           ),
-          SizedBox(height: 16),
-          MainProjectWidget(
+          const SizedBox(height: 16),
+          const MainProjectWidget(
             imageUrl:
-                'https://images.pexels.com/photos/1047524/pexels-photo-1047524.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+                'https://images.pexels.com/photos/4474033/pexels-photo-4474033.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
             playStoreUrl:
-                'https://play.google.com/store/apps/details?id=com.example.app',
-            bookDescription:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-            appDescription:
-                'Sed ut perspiciatis unde omnis iste natus error sit voluptatem.',
+                'https://upload.wikimedia.org/wikipedia/commons/e/e7/Google_play_store.png?20230511225448',
+            bookDescription: 'Coming soon',
+            appDescription: '',
           ),
-          SizedBox(height: 16),
-          ProjectCard(
+          const SizedBox(height: 16),
+          const ProjectCard(
             title: 'BlockCOVID',
             numberOfPersons: '7',
             context: 'SWE Exam',

@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 
 class FirstContent extends StatelessWidget {
   const FirstContent({super.key});
-
   @override
   Widget build(BuildContext context) {
+    double padding = MediaQuery.of(context).size.width > 600
+        ? MediaQuery.of(context).size.width * 0.10
+        : 16.0;
+    double marginsize = MediaQuery.of(context).size.width > 600
+        ? MediaQuery.of(context).size.width * 0.12
+        : 16.0;
     return Container(
-      margin: EdgeInsets.only(
-        top: MediaQuery.of(context).size.width * 0.12,
-        bottom: MediaQuery.of(context).size.width * 0.12,
-        left: MediaQuery.of(context).size.width * 0.0,
-        right: MediaQuery.of(context).size.width * 0.0,
-      ),
+      margin: EdgeInsets.all(marginsize),
+      padding: EdgeInsets.only(left: padding, right: padding),
       child: Column(
         children: [
           Column(
@@ -22,7 +23,7 @@ class FirstContent extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w700,
-                  color: Theme.of(context).primaryColorDark,
+                  color: Colors.grey.shade500,
                 ),
               ),
               const SizedBox(height: 16),

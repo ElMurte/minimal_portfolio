@@ -13,7 +13,7 @@ class SkillsList extends StatelessWidget {
       numberOfColumns = 3; // For larger screens, display 3 columns
     } else {
       numberOfColumns =
-          1; // For smaller screens (e.g., mobile), display 1 column
+          2; // For smaller screens (e.g., mobile), display 1 column
     }
 
     return Column(
@@ -38,6 +38,8 @@ class SkillsList extends StatelessWidget {
                               fontSize: 19.0,
                             ),
                           ),
+                          dense: true,
+                          minLeadingWidth: screenWidth * 0.008,
                         ),
                       ),
                     ))
