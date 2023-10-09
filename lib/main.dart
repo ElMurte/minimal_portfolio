@@ -286,6 +286,9 @@ class MyAppState extends State<MyApp> {
                 'https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
             description:
                 "For the SWE exam, whitin a team of 7 students, we had develop a dashboard and a mobile app to track users of an computer laboratory with GPS, NFC, blockchain. I have mainly worked in the mobile app(using Flutter with setState pattern from the official docs). The goal was to simulate adevelopment cycle,from requirements to the initial deployment (no maintenance phase), while switching the roles during the cycle.",
+            repourl: 'https://sweleven.gitlab.io/blockcovid/',
+            externalurl:
+                'https://blog.imolainformatica.it/2021/08/26/sinergie-azienda-universitablock-covid/',
           ),
         ],
       ),

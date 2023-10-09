@@ -9,7 +9,8 @@ class ProjectCard extends StatefulWidget {
   final String technology;
   final String mainUrlImage;
   final String description;
-
+  final String repourl;
+  final String externalurl;
   static const defaulttitle = "Placeholder";
   static const defaultdescription = "Placeholder";
   static const defaultimage = "Placeholder";
@@ -28,6 +29,8 @@ class ProjectCard extends StatefulWidget {
     this.technology = defaulttechnology,
     this.mainUrlImage = defaultimage,
     this.description = defaultdescription,
+    this.repourl = defaultlink,
+    this.externalurl = defaultlink,
   });
 
   @override
