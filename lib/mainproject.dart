@@ -21,7 +21,7 @@ class MainProjectWidget extends StatefulWidget {
 
 class MainProjectWidgetState extends State<MainProjectWidget> {
   bool isHovered = false;
-
+  String cppurl = "";
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -88,7 +88,7 @@ class MainProjectWidgetState extends State<MainProjectWidget> {
                       overflow: TextOverflow.visible, // Allow text to overflow
                     ),
                     const SizedBox(height: 8),
-                    Container(
+                    SizedBox(
                       width: 75,
                       height: 75,
                       child: Image.network(

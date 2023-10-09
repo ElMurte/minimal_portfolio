@@ -19,7 +19,7 @@ class ExperienceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -42,9 +42,9 @@ class ExperienceCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 12.0),
-            Padding(
-              padding: const EdgeInsets.only(left: 10.0),
-              child: const Text(
+            const Padding(
+              padding: EdgeInsets.only(left: 10.0),
+              child: Text(
                 'Description:',
                 style: TextStyle(
                   fontSize: 18.0,

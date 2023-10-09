@@ -6,7 +6,6 @@ import 'package:minimal_portfolio/hovertext.dart';
 import 'package:minimal_portfolio/mainproject.dart';
 import 'package:minimal_portfolio/projectcard.dart';
 import 'package:minimal_portfolio/secondaryprojectcard.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'aboutwidget.dart';
 
 void main() {
@@ -22,7 +21,7 @@ class MyApp extends StatefulWidget {
 
 class MyAppState extends State<MyApp> {
   bool _isDarkMode = false;
-  String _selectedSection = 'About';
+  String _selectedSection = 'Intro';
   final ScrollController _scrollController = ScrollController();
   final GlobalKey _aboutKey = GlobalKey();
   final GlobalKey _experienceKey = GlobalKey();
@@ -64,14 +63,13 @@ class MyAppState extends State<MyApp> {
                 ),
               ),
               onPressed: () {
-                setState(() {
-                  scrollIntoWidget(_initial);
-                });
+                runApp(const MyApp());
               }),
           actions: <Widget>[
             if (MediaQuery.of(context).size.width > 600)
               Row(
                 children: <Widget>[
+                  _buildLink('Intro', _initial),
                   _buildLink('About', _aboutKey),
                   _buildLink('Experience', _experienceKey),
                   _buildLink('Projects', _projectKey),
@@ -131,9 +129,9 @@ class MyAppState extends State<MyApp> {
             gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              stops: const [0.25, 1.0],
+              stops: const [0.3, 1.0],
               colors: [
-                Colors.white70.withOpacity(0.001), Colors.white,
+                Colors.white70.withOpacity(0.001), Colors.white54
                 //Theme.of(context).primaryColor,
                 //Theme.of(context).scaffoldBackgroundColor,
               ],
@@ -162,18 +160,29 @@ class MyAppState extends State<MyApp> {
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.w500)),
                     const SizedBox(height: 16),
-                    Container(
+                    SizedBox(
                       width: MediaQuery.of(context).size.width * 0.8,
-                      child: const Column(
+                      child: Column(
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              SecondaryProjectCard(),
-                              SecondaryProjectCard(),
-                              SecondaryProjectCard(),
-                            ],
-                          ),
+                          MediaQuery.of(context).size.width > 600
+                              ? const Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    SecondaryProjectCard(),
+                                    SecondaryProjectCard(),
+                                    SecondaryProjectCard(),
+                                  ],
+                                )
+                              : const Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    SecondaryProjectCard(),
+                                    SecondaryProjectCard(),
+                                    SecondaryProjectCard(),
+                                  ],
+                                ),
                         ],
                       ),
                     ),
@@ -186,7 +195,7 @@ class MyAppState extends State<MyApp> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          HoverTextWidget(
+                          const HoverTextWidget(
                               "Built with Flutter and AI tools using"),
                           const SizedBox(width: 8.0),
                           Row(
@@ -246,18 +255,19 @@ class MyAppState extends State<MyApp> {
     double marginSize =
         isWideScreen ? MediaQuery.of(context).size.width * 0.12 : 0.0;
     return Container(
-      padding: EdgeInsets.only(left: paddingSize, right: paddingSize),
+      padding: EdgeInsets.only(
+          top: paddingSize * 0.5, left: paddingSize, right: paddingSize),
       margin: EdgeInsets.only(left: marginSize, right: marginSize),
-      child: Column(
+      child: const Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          const Text(
+          Text(
             'Projects',
             style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
           ),
-          const SizedBox(height: 16),
-          const MainProjectWidget(
+          SizedBox(height: 16),
+          MainProjectWidget(
             imageUrl:
                 'https://images.pexels.com/photos/4474033/pexels-photo-4474033.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
             playStoreUrl:
@@ -265,8 +275,8 @@ class MyAppState extends State<MyApp> {
             bookDescription: 'Coming soon',
             appDescription: '',
           ),
-          const SizedBox(height: 16),
-          const ProjectCard(
+          SizedBox(height: 16),
+          ProjectCard(
             title: 'BlockCOVID',
             numberOfPersons: '7',
             context: 'SWE Exam',
@@ -274,7 +284,8 @@ class MyAppState extends State<MyApp> {
             technology: 'flutter',
             mainUrlImage:
                 'https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-            description: "This is a sample for a description",
+            description:
+                "For the SWE exam, whitin a team of 7 students, we had develop a dashboard and a mobile app to track users of an computer laboratory with GPS, NFC, blockchain. I have mainly worked in the mobile app(using Flutter with setState pattern from the official docs). The goal was to simulate adevelopment cycle,from requirements to the initial deployment (no maintenance phase), while switching the roles during the cycle.",
           ),
         ],
       ),

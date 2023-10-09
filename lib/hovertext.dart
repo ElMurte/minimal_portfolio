@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HoverTextWidget extends StatefulWidget {
-  String child;
+  final String child;
 
-  HoverTextWidget(this.child, {super.key});
+  const HoverTextWidget(this.child, {super.key});
   @override
   HoverTextWidgetState createState() => HoverTextWidgetState();
 }

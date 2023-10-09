@@ -35,7 +35,9 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
     double marginSize =
         isWideScreen ? MediaQuery.of(context).size.width * 0.12 : 0.0;
     return Container(
-      height: MediaQuery.of(context).size.height * 0.95,
+      height: isWideScreen
+          ? MediaQuery.of(context).size.height * 0.95
+          : MediaQuery.of(context).size.height * 0.85,
       width: double.infinity,
       margin: EdgeInsets.only(
           left: marginSize,
@@ -100,26 +102,24 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
                           ),
                         ),
                         // Content (Right side on web)
-                        Container(
-                          child: Expanded(
-                            child: Column(
-                              // Your content goes here
-                              children: [
-                                // Content section 1
+                        Expanded(
+                          child: Column(
+                            // Your content goes here
+                            children: [
+                              // Content section 1
+                              if (selectedTabIndex == 0)
                                 if (selectedTabIndex == 0)
-                                  if (selectedTabIndex == 0)
-                                    Column(
-                                      children: [
-                                        experienceCardsita0!,
-                                        experienceCardsita1!,
-                                      ],
-                                    ),
-                                // Content section 2
-                                if (selectedTabIndex == 1)
-                                  experienceCardmethode0!,
-                                // Add more content sections as needed
-                              ],
-                            ),
+                                  Column(
+                                    children: [
+                                      experienceCardsita0!,
+                                      experienceCardsita1!,
+                                    ],
+                                  ),
+                              // Content section 2
+                              if (selectedTabIndex == 1)
+                                experienceCardmethode0!,
+                              // Add more content sections as needed
+                            ],
                           ),
                         ),
                       ],
@@ -128,7 +128,7 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         // Menu (Top on mobile)
-                        Container(
+                        SizedBox(
                           height: 60,
                           width: double.infinity,
                           child: Row(

@@ -57,90 +57,182 @@ class ProjectCardState extends State<ProjectCard> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
         ),
-        child: Row(
-          children: [
-            MouseRegion(
-              onEnter: (_) {
-                setState(() {
-                  isHovered = true;
-                });
-              },
-              onExit: (_) {
-                setState(() {
-                  isHovered = false;
-                });
-              },
-              cursor: SystemMouseCursors.click,
-              child: GestureDetector(
-                onTap: () async {
-                  //open another browser page with the link
-                  await _launchUrl();
-                },
-                child: Container(
-                  width: MediaQuery.of(context).size.width * 0.27,
-                  height: MediaQuery.of(context).size.height * 0.4,
-                  color: Colors.blue,
-                  child: AnimatedOpacity(
-                    duration: const Duration(
-                        milliseconds: 300), // Set your desired duration
-                    opacity: isHovered ? 1 : 0.4, // Adjust opacity values
-                    child: Image.network(
-                      widget.mainUrlImage,
-                      fit: BoxFit.fill,
+        child: MediaQuery.of(context).size.width > 600
+            ? Row(
+                children: [
+                  MouseRegion(
+                    onEnter: (_) {
+                      setState(() {
+                        isHovered = true;
+                      });
+                    },
+                    onExit: (_) {
+                      setState(() {
+                        isHovered = false;
+                      });
+                    },
+                    cursor: SystemMouseCursors.click,
+                    child: GestureDetector(
+                      onTap: () async {
+                        //open another browser page with the link
+                        await _launchUrl();
+                      },
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.35,
+                        height: MediaQuery.of(context).size.height * 0.5,
+                        color: Colors.blue,
+                        child: AnimatedOpacity(
+                          duration: const Duration(
+                              milliseconds: 300), // Set your desired duration
+                          opacity: isHovered ? 1 : 0.4, // Adjust opacity values
+                          child: Image.network(
+                            widget.mainUrlImage,
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                  const SizedBox(
+                    height: 8,
+                    width: 20,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        widget.title,
+                        style: const TextStyle(
+                          fontSize: 19,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        'Number of persons: ${widget.numberOfPersons}',
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        'Context: ${widget.context}',
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        'Timeframe: ${widget.timeframe}',
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                      const SizedBox(height: 8),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Image.network(
+                            'https://cdn.iconscout.com/icon/free/png-256/flutter-2038877-1720090.png',
+                            height: 24,
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            widget.technology,
+                            style: const TextStyle(fontSize: 16),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 8),
+                    ],
+                  ),
+                ],
+              )
+            : Column(
+                children: [
+                  MouseRegion(
+                    onEnter: (_) {
+                      setState(() {
+                        isHovered = true;
+                      });
+                    },
+                    onExit: (_) {
+                      setState(() {
+                        isHovered = false;
+                      });
+                    },
+                    cursor: SystemMouseCursors.click,
+                    child: GestureDetector(
+                      onTap: () async {
+                        //open another browser page with the link
+                        await _launchUrl();
+                      },
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.35,
+                        height: MediaQuery.of(context).size.height * 0.5,
+                        color: Colors.blue,
+                        child: AnimatedOpacity(
+                          duration: const Duration(
+                              milliseconds: 300), // Set your desired duration
+                          opacity: isHovered ? 1 : 0.4, // Adjust opacity values
+                          child: Image.network(
+                            widget.mainUrlImage,
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 8,
+                    width: 20,
+                  ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          widget.title,
+                          style: const TextStyle(
+                            fontSize: 19,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          'Number of persons: ${widget.numberOfPersons}',
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          'Context: ${widget.context}',
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          'Timeframe: ${widget.timeframe}',
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          widget.description,
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                        const SizedBox(height: 8),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Image.network(
+                              'https://cdn.iconscout.com/icon/free/png-256/flutter-2038877-1720090.png',
+                              height: 24,
+                            ),
+                            const SizedBox(width: 8),
+                            Text(
+                              widget.technology,
+                              style: const TextStyle(fontSize: 16),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 8),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-            ),
-            const SizedBox(
-              height: 8,
-              width: 20,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  widget.title,
-                  style: const TextStyle(
-                    fontSize: 19,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  'Number of persons: ${widget.numberOfPersons}',
-                  style: const TextStyle(fontSize: 16),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  'Context: ${widget.context}',
-                  style: const TextStyle(fontSize: 16),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  'Timeframe: ${widget.timeframe}',
-                  style: const TextStyle(fontSize: 16),
-                ),
-                const SizedBox(height: 8),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Image.network(
-                      'https://cdn.iconscout.com/icon/free/png-256/flutter-2038877-1720090.png',
-                      height: 24,
-                    ),
-                    const SizedBox(width: 8),
-                    Text(
-                      widget.technology,
-                      style: const TextStyle(fontSize: 16),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 8),
-              ],
-            ),
-          ],
-        ),
       ),
     );
   }
