@@ -26,17 +26,17 @@ class SecondaryProjectCardState extends State<SecondaryProjectCard> {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
         transform: isHovered
-            ? Matrix4.translationValues(0, -5, 0)
+            ? Matrix4.translationValues(0, -10, 0)
             : Matrix4.identity(),
         child: Container(
           width: MediaQuery.of(context).size.width > 600
               ? MediaQuery.of(context).size.width * 0.25
               : MediaQuery.of(context).size.width * 0.8,
           height: 360,
-          padding: const EdgeInsets.all(18),
           margin: const EdgeInsets.only(bottom: 16),
           child: Card(
-            elevation: 10.0,
+            elevation: 30.0,
+
             shadowColor: isHovered
                 ? Colors.blue
                 : Colors.grey.shade500, // Change shadow color on hover
