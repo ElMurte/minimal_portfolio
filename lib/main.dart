@@ -66,6 +66,12 @@ class MyAppState extends State<MyApp> {
                 runApp(const MyApp());
               }),
           actions: <Widget>[
+            Switch(
+              value: _isDarkMode,
+              onChanged: (value) {
+                _toggleTheme();
+              },
+            ),
             if (MediaQuery.of(context).size.width > 600)
               Row(
                 children: <Widget>[
@@ -90,7 +96,6 @@ class MyAppState extends State<MyApp> {
                           scrollIntoWidget(_projectKey);
                         case "Experience":
                           scrollIntoWidget(_experienceKey);
-                          break;
                         default:
                           scrollIntoWidget(_initial);
                       }
@@ -99,29 +104,29 @@ class MyAppState extends State<MyApp> {
                   itemBuilder: (BuildContext context) {
                     return <PopupMenuEntry<String>>[
                       const PopupMenuItem<String>(
+                        value: 'Intro',
+                        child: Text(
+                          'Intro',
+                        ),
+                      ),
+                      const PopupMenuItem<String>(
                         value: 'About',
                         child: Text(
                           'About',
                         ),
                       ),
                       const PopupMenuItem<String>(
-                        value: 'Projects',
-                        child: Text('Projects'),
-                      ),
-                      const PopupMenuItem<String>(
                         value: 'Experience',
                         child: Text('Experience'),
+                      ),
+                      const PopupMenuItem<String>(
+                        value: 'Projects',
+                        child: Text('Projects'),
                       ),
                     ];
                   },
                 ),
               ),
-            Switch(
-              value: _isDarkMode,
-              onChanged: (value) {
-                _toggleTheme();
-              },
-            ),
           ],
         ),
         body: Container(
@@ -188,8 +193,8 @@ class MyAppState extends State<MyApp> {
                     ),
                     Container(
                       alignment: Alignment.center,
-                      color: Colors.blue
-                          .withOpacity(0.5), // Customize the background color.
+                      color: Colors.transparent
+                          .withOpacity(0.01), // Customize the background color.
                       padding: const EdgeInsets.all(
                           16.0), // Add padding for content.
                       child: Row(
@@ -242,6 +247,7 @@ class MyAppState extends State<MyApp> {
           style: TextStyle(
             color: _selectedSection == section ? Colors.blue : Colors.grey,
             fontWeight: FontWeight.bold,
+            fontSize: 20.0,
           ),
         ),
       ),
@@ -269,7 +275,7 @@ class MyAppState extends State<MyApp> {
           SizedBox(height: 16),
           MainProjectWidget(
             imageUrl:
-                'https://images.pexels.com/photos/4474033/pexels-photo-4474033.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+                'https://images.pexels.com/photos/3843282/pexels-photo-3843282.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
             playStoreUrl:
                 'https://upload.wikimedia.org/wikipedia/commons/e/e7/Google_play_store.png?20230511225448',
             bookDescription: 'Coming soon',

@@ -70,7 +70,7 @@ class MainProjectWidgetState extends State<MainProjectWidget> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Text(
+                    /*Text(
                       widget.bookDescription,
                       style: const TextStyle(
                         fontSize: 24,
@@ -79,7 +79,7 @@ class MainProjectWidgetState extends State<MainProjectWidget> {
                       ),
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.visible, // Allow text to overflow
-                    ),
+                    ),*/
                     const SizedBox(height: 8),
                     Text(
                       widget.appDescription,
@@ -88,14 +88,14 @@ class MainProjectWidgetState extends State<MainProjectWidget> {
                       overflow: TextOverflow.visible, // Allow text to overflow
                     ),
                     const SizedBox(height: 8),
-                    SizedBox(
+                    /*SizedBox(
                       width: 75,
                       height: 75,
                       child: Image.network(
                         widget.playStoreUrl,
                         fit: BoxFit.cover,
                       ),
-                    ),
+                    ),*/
                   ],
                 ),
               ),
@@ -108,7 +108,7 @@ class MainProjectWidgetState extends State<MainProjectWidget> {
 }
 
 Future<void> _launchUrl() async {
-  final Uri url = Uri.parse('https://flutter.dev');
+  final Uri url = Uri.parse('https://sweleven.gitlab.io/blockcovid/');
 
   if (await canLaunchUrl(url)) {
     await launchUrl(url);

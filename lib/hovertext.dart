@@ -13,7 +13,7 @@ class HoverTextWidgetState extends State<HoverTextWidget> {
   bool isHovered = false;
   @override
   Widget build(BuildContext context) {
-    Color textColor = isHovered ? Colors.blue : Colors.white;
+    Color textColor = isHovered ? Colors.blue : Colors.grey;
 
     return InkWell(
       onTap: () {
@@ -29,6 +29,7 @@ class HoverTextWidgetState extends State<HoverTextWidget> {
         widget.child,
         style: TextStyle(
           color: textColor,
+          backgroundColor: Colors.transparent,
           fontSize: 16,
         ),
       ),
