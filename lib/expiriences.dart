@@ -34,186 +34,108 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
         isWideScreen ? MediaQuery.of(context).size.width * 0.1 : 20.0;
     double marginSize =
         isWideScreen ? MediaQuery.of(context).size.width * 0.12 : 0.0;
+    double w = isWideScreen ? 160 : 80;
+    List<Widget> content = <Widget>[
+      // Menu (Left side on web)
+      Expanded(
+        child: SizedBox(
+          width: w, // Set the fixed width for the menu
+          child: ListView(
+            // Use ListView for fixed menu
+            // Your menu items go here
+            children: [
+              // Menu item 1
+              Container(
+                color: selectedTabIndex == 0
+                    ? Theme.of(context).secondaryHeaderColor
+                    : Theme.of(context).scaffoldBackgroundColor,
+                child: ListTile(
+                  title: const Text('SITA'),
+                  onTap: () {
+                    // Handle menu item 1 click
+                    setState(() {
+                      selectedTabIndex = 0;
+                    });
+                  },
+                  selected: selectedTabIndex == 0,
+                ),
+              ),
+              // Menu item 2
+              Container(
+                color: selectedTabIndex == 1
+                    ? Theme.of(context).secondaryHeaderColor
+                    : Theme.of(context).scaffoldBackgroundColor,
+                child: ListTile(
+                  title: const Text('Methode Srl'),
+                  onTap: () {
+                    // Handle menu item 2 click
+                    setState(() {
+                      selectedTabIndex = 1;
+                    });
+                  },
+                  selected: selectedTabIndex == 1,
+                ),
+              ),
+              // Add more menu items as needed
+            ],
+          ),
+        ),
+      ),
+      // Content (Right side on web)
+      Expanded(
+        child: SizedBox(
+          height: double.infinity,
+          child: Column(
+            // Your content goes here
+            children: [
+              // Content section 1
+              if (selectedTabIndex == 0)
+                if (selectedTabIndex == 0)
+                  Column(
+                    children: [
+                      experienceCardsita0!,
+                      experienceCardsita1!,
+                    ],
+                  ),
+              // Content section 2
+              if (selectedTabIndex == 1) experienceCardmethode0!,
+              // Add more content sections as needed
+            ],
+          ),
+        ),
+      )
+    ];
     return Container(
-      height: isWideScreen
-          ? MediaQuery.of(context).size.height * 0.95
-          : MediaQuery.of(context).size.height * 0.85,
-      width: double.infinity,
-      margin: EdgeInsets.only(
-          left: marginSize,
-          right: marginSize,
-          top: marginSize * 0.05,
-          bottom: marginSize * 0.05),
-      padding: EdgeInsets.all(paddingSize),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+        height: isWideScreen
+            ? MediaQuery.of(context).size.height * 0.95
+            : MediaQuery.of(context).size.height * 0.85,
+        margin: EdgeInsets.only(
+            left: marginSize,
+            right: marginSize,
+            top: marginSize * 0.05,
+            bottom: marginSize * 0.05),
+        padding: EdgeInsets.only(
+          left: paddingSize,
+          right: paddingSize,
+          top: isWideScreen ? paddingSize * 0.5 : 0,
+          bottom: paddingSize * 0.05,
+        ),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           const Text("Experience",
               style: TextStyle(
                 fontSize: 32,
                 fontWeight: FontWeight.w500,
               )),
           Expanded(
-            child: SizedBox(
-              child: isWideScreen
-                  ? Row(
-                      children: [
-                        // Menu (Left side on web)
-                        SizedBox(
-                          width: 160, // Set the fixed width for the menu
-                          child: ListView(
-                            // Use ListView for fixed menu
-                            // Your menu items go here
-                            children: [
-                              // Menu item 1
-                              Container(
-                                color: selectedTabIndex == 0
-                                    ? Theme.of(context).secondaryHeaderColor
-                                    : Theme.of(context).scaffoldBackgroundColor,
-                                child: ListTile(
-                                  title: const Text('SITA'),
-                                  onTap: () {
-                                    // Handle menu item 1 click
-                                    setState(() {
-                                      selectedTabIndex = 0;
-                                    });
-                                  },
-                                  selected: selectedTabIndex == 0,
-                                ),
-                              ),
-                              // Menu item 2
-                              Container(
-                                color: selectedTabIndex == 1
-                                    ? Theme.of(context).secondaryHeaderColor
-                                    : Theme.of(context).scaffoldBackgroundColor,
-                                child: ListTile(
-                                  title: const Text('Methode Srl'),
-                                  onTap: () {
-                                    // Handle menu item 2 click
-                                    setState(() {
-                                      selectedTabIndex = 1;
-                                    });
-                                  },
-                                  selected: selectedTabIndex == 1,
-                                ),
-                              ),
-                              // Add more menu items as needed
-                            ],
-                          ),
-                        ),
-                        // Content (Right side on web)
-                        Expanded(
-                          child: Column(
-                            // Your content goes here
-                            children: [
-                              // Content section 1
-                              if (selectedTabIndex == 0)
-                                if (selectedTabIndex == 0)
-                                  Column(
-                                    children: [
-                                      experienceCardsita0!,
-                                      experienceCardsita1!,
-                                    ],
-                                  ),
-                              // Content section 2
-                              if (selectedTabIndex == 1)
-                                experienceCardmethode0!,
-                              // Add more content sections as needed
-                            ],
-                          ),
-                        ),
-                      ],
-                    )
-                  : Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        // Menu (Top on mobile)
-                        SizedBox(
-                          height: 60,
-                          width: double.infinity,
-                          child: Row(
-                            children: [
-                              // Mobile menu item 1
-                              GestureDetector(
-                                onTap: () {
-                                  // Handle menu item 1 click
-                                  setState(() {
-                                    selectedTabIndex = 0;
-                                  });
-                                },
-                                child: Container(
-                                  padding: EdgeInsets.all(paddingSize),
-                                  color: selectedTabIndex == 0
-                                      ? Theme.of(context).secondaryHeaderColor
-                                      : Theme.of(context)
-                                          .scaffoldBackgroundColor,
-                                  child: Text(
-                                    'SITA',
-                                    style: TextStyle(
-                                      color: selectedTabIndex == 0
-                                          ? Colors.blue
-                                          : Colors.black,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              // Mobile menu item 2
-                              GestureDetector(
-                                onTap: () {
-                                  // Handle menu item 2 click
-                                  setState(() {
-                                    selectedTabIndex = 1;
-                                  });
-                                },
-                                child: Container(
-                                  padding: EdgeInsets.all(paddingSize),
-                                  color: selectedTabIndex == 1
-                                      ? Theme.of(context).secondaryHeaderColor
-                                      : Theme.of(context)
-                                          .scaffoldBackgroundColor,
-                                  child: Text(
-                                    'Methode Srl',
-                                    style: TextStyle(
-                                      color: selectedTabIndex == 1
-                                          ? Colors.blue
-                                          : Colors.black,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              // Add more mobile menu items as needed
-                            ],
-                          ),
-                        ),
-
-                        // Content (Under the menu on mobile)
-                        Expanded(
-                          child: Column(
-                            // Your content goes here
-                            children: [
-                              // Content section 1
-                              if (selectedTabIndex == 0)
-                                Column(
-                                  children: [
-                                    experienceCardsita0!,
-                                    experienceCardsita1!,
-                                  ],
-                                ),
-                              // Content section 2
-                              if (selectedTabIndex == 1)
-                                experienceCardmethode0!,
-                              // Add more content sections as needed
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-            ),
-          ),
-        ],
-      ),
-    );
+              child: LayoutBuilder(
+            builder: (context, constraints) => constraints.maxWidth > 600
+                ? Row(
+                    children: content,
+                  )
+                : Column(
+                    children: content,
+                  ),
+          ))
+        ]));
   }
 }
