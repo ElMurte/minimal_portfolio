@@ -27,6 +27,11 @@ class MyAppState extends State<MyApp> {
   final GlobalKey _experienceKey = GlobalKey();
   final GlobalKey _projectKey = GlobalKey();
   final GlobalKey _initial = GlobalKey();
+  final List<Widget> secondaryprojects = [
+    const SecondaryProjectCard(title: 'MCBurger'),
+    const SecondaryProjectCard(title: 'Netmovies'),
+    const SecondaryProjectCard(title: 'NYC Flight Analysis'),
+  ];
   @override
   void initState() {
     super.initState();
@@ -63,7 +68,10 @@ class MyAppState extends State<MyApp> {
                 ),
               ),
               onPressed: () {
-                runApp(const MyApp());
+                setState(() {
+                  _selectedSection = 'Intro';
+                  scrollIntoWidget(_initial);
+                });
               }),
           actions: <Widget>[
             Switch(
@@ -170,23 +178,15 @@ class MyAppState extends State<MyApp> {
                       child: Column(
                         children: [
                           MediaQuery.of(context).size.width > 600
-                              ? const Row(
+                              ? Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    SecondaryProjectCard(),
-                                    SecondaryProjectCard(),
-                                    SecondaryProjectCard(),
-                                  ],
+                                  children: secondaryprojects,
                                 )
-                              : const Column(
+                              : Column(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    SecondaryProjectCard(),
-                                    SecondaryProjectCard(),
-                                    SecondaryProjectCard(),
-                                  ],
+                                  children: secondaryprojects,
                                 ),
                         ],
                       ),
@@ -247,7 +247,7 @@ class MyAppState extends State<MyApp> {
           style: TextStyle(
             color: _selectedSection == section ? Colors.blue : Colors.grey,
             fontWeight: FontWeight.bold,
-            fontSize: 20.0,
+            fontSize: 19.0,
           ),
         ),
       ),
@@ -282,19 +282,30 @@ class MyAppState extends State<MyApp> {
             appDescription: '',
           ),
           SizedBox(height: 16),
-          ProjectCard(
-            title: 'BlockCOVID',
-            numberOfPersons: '7',
-            context: 'SWE Exam',
-            timeframe: '10/2020 - 6/2021',
-            technology: 'flutter',
-            mainUrlImage:
-                'https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-            description:
-                "For the SWE exam, whitin a team of 7 students, we had develop a dashboard and a mobile app to track users of an computer laboratory with GPS, NFC, blockchain. I have mainly worked in the mobile app(using Flutter with setState pattern from the official docs). The goal was to simulate adevelopment cycle,from requirements to the initial deployment (no maintenance phase), while switching the roles during the cycle.",
-            repourl: 'https://sweleven.gitlab.io/blockcovid/',
-            externalurl:
-                'https://blog.imolainformatica.it/2021/08/26/sinergie-azienda-universitablock-covid/',
+          SizedBox(
+            width: double.infinity,
+            child: Expanded(
+              child: ProjectCard(
+                title: 'BlockCOVID',
+                numberOfPersons: '7',
+                context: 'SWE Exam',
+                timeframe: '10/2020 - 6/2021',
+                technologies: [
+                  'Flutter',
+                  'Dart',
+                  'GitLab',
+                  'Firebase',
+                  'Blockchain'
+                ],
+                mainUrlImage:
+                    'https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+                description:
+                    "For the SWE exam, whitin a team of 7 students, we had develop a dashboard and a mobile app to track users of an computer laboratory with GPS, NFC, blockchain. I have mainly worked in the mobile app(using Flutter with setState pattern from the official docs). The goal was to simulate adevelopment cycle,from requirements to the initial deployment (no maintenance phase), while switching the roles during the cycle.",
+                repourl: 'https://sweleven.gitlab.io/blockcovid/',
+                externalurl:
+                    'https://blog.imolainformatica.it/2021/08/26/sinergie-azienda-universitablock-covid/',
+              ),
+            ),
           ),
         ],
       ),

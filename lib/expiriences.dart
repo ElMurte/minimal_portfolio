@@ -29,96 +29,90 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
               'I have worked in an Agile environment and given my contribution as a Full-stack developer for a total of 320 hours, working on:\n• frontend: development of UI components during short sprints(Scrum) with React.js and Redux as a state management\n• backend: development of REST API and data entry services with Azure platform following using Typescript and third-party libraries selected from the npm register'));
   @override
   Widget build(BuildContext context) {
-    final isWideScreen = MediaQuery.of(context).size.width > 600;
+    final isWideScreen = MediaQuery.of(context).size.width > 650;
     double paddingSize =
         isWideScreen ? MediaQuery.of(context).size.width * 0.1 : 20.0;
     double marginSize =
         isWideScreen ? MediaQuery.of(context).size.width * 0.12 : 0.0;
-    double w = isWideScreen ? 160 : 80;
-    List<Widget> content = <Widget>[
-      // Menu (Left side on web)
-      Expanded(
-        child: SizedBox(
-          width: w, // Set the fixed width for the menu
-          child: ListView(
-            // Use ListView for fixed menu
-            // Your menu items go here
-            children: [
-              // Menu item 1
-              Container(
-                color: selectedTabIndex == 0
-                    ? Theme.of(context).secondaryHeaderColor
-                    : Theme.of(context).scaffoldBackgroundColor,
-                child: ListTile(
-                  title: const Text('SITA'),
-                  onTap: () {
-                    // Handle menu item 1 click
-                    setState(() {
-                      selectedTabIndex = 0;
-                    });
-                  },
-                  selected: selectedTabIndex == 0,
-                ),
-              ),
-              // Menu item 2
-              Container(
-                color: selectedTabIndex == 1
-                    ? Theme.of(context).secondaryHeaderColor
-                    : Theme.of(context).scaffoldBackgroundColor,
-                child: ListTile(
-                  title: const Text('Methode Srl'),
-                  onTap: () {
-                    // Handle menu item 2 click
-                    setState(() {
-                      selectedTabIndex = 1;
-                    });
-                  },
-                  selected: selectedTabIndex == 1,
-                ),
-              ),
-              // Add more menu items as needed
-            ],
+    double w = isWideScreen
+        ? MediaQuery.of(context).size.width * 0.2
+        : double.infinity;
+
+    Widget experiencesmenu = SizedBox(
+      width: w, // Set the fixed width for the menu
+      child: ListView(
+        // Use ListView for fixed menu
+        // Your menu items go here
+        children: [
+          // Menu item 1
+          Container(
+            color: selectedTabIndex == 0
+                ? Theme.of(context).secondaryHeaderColor
+                : Theme.of(context).scaffoldBackgroundColor,
+            child: ListTile(
+              title: const Text('SITA'),
+              onTap: () {
+                // Handle menu item 1 click
+                setState(() {
+                  selectedTabIndex = 0;
+                });
+              },
+              selected: selectedTabIndex == 0,
+            ),
           ),
-        ),
+          // Menu item 2
+          Container(
+            color: selectedTabIndex == 1
+                ? Theme.of(context).secondaryHeaderColor
+                : Theme.of(context).scaffoldBackgroundColor,
+            child: ListTile(
+              title: const Text('Methode Srl'),
+              onTap: () {
+                // Handle menu item 2 click
+                setState(() {
+                  selectedTabIndex = 1;
+                });
+              },
+              selected: selectedTabIndex == 1,
+            ),
+          ),
+          // Add more menu items as needed
+        ],
       ),
-      // Content (Right side on web)
-      Expanded(
-        child: SizedBox(
-          height: double.infinity,
-          child: Column(
-            // Your content goes here
-            children: [
-              // Content section 1
-              if (selectedTabIndex == 0)
-                if (selectedTabIndex == 0)
-                  Column(
-                    children: [
-                      experienceCardsita0!,
-                      experienceCardsita1!,
-                    ],
-                  ),
-              // Content section 2
-              if (selectedTabIndex == 1) experienceCardmethode0!,
-              // Add more content sections as needed
-            ],
-          ),
-        ),
-      )
-    ];
+    );
+    Widget expcontents = SizedBox(
+      width: double.infinity,
+      height: double.infinity,
+      child: Column(
+        // Your content goes here
+        children: [
+          // Content section 1
+          if (selectedTabIndex == 0)
+            if (selectedTabIndex == 0)
+              Column(
+                children: [
+                  experienceCardsita0!,
+                  experienceCardsita1!,
+                ],
+              ),
+          // Content section 2
+          if (selectedTabIndex == 1) experienceCardmethode0!,
+          // Add more content sections as needed
+        ],
+      ),
+    );
     return Container(
-        height: isWideScreen
-            ? MediaQuery.of(context).size.height * 0.95
-            : MediaQuery.of(context).size.height * 0.85,
+        height: MediaQuery.of(context).size.height,
         margin: EdgeInsets.only(
             left: marginSize,
             right: marginSize,
             top: marginSize * 0.05,
-            bottom: marginSize * 0.05),
+            bottom: !isWideScreen ? marginSize : marginSize * 0.05),
         padding: EdgeInsets.only(
           left: paddingSize,
           right: paddingSize,
           top: isWideScreen ? paddingSize * 0.5 : 0,
-          bottom: paddingSize * 0.05,
+          bottom: isWideScreen ? paddingSize : paddingSize * 0.05,
         ),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           const Text("Experience",
@@ -128,13 +122,21 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
               )),
           Expanded(
               child: LayoutBuilder(
-            builder: (context, constraints) => constraints.maxWidth > 600
+            builder: (context, constraints) => constraints.maxWidth > 650
                 ? Row(
-                    children: content,
+                    children: [
+                      Expanded(child: experiencesmenu),
+                      Expanded(child: expcontents)
+                    ],
                   )
                 : Column(
-                    children: content,
-                  ),
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                        Expanded(child: experiencesmenu),
+                        Expanded(child: expcontents),
+                      ]),
           ))
         ]));
   }

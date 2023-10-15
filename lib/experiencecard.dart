@@ -19,6 +19,7 @@ class ExperienceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isWideScreen = MediaQuery.of(context).size.width > 650;
     return SizedBox(
       width: double.infinity,
       child: Padding(
