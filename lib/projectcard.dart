@@ -87,7 +87,7 @@ class ProjectCardState extends State<ProjectCard> {
       ),
       const SizedBox(height: 8),
       Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Image.network(
             'https://cdn.iconscout.com/icon/free/png-256/flutter-2038877-1720090.png',
@@ -106,7 +106,7 @@ class ProjectCardState extends State<ProjectCard> {
       ),
       const SizedBox(height: 8),
     ];
-    List<Widget> children = [
+    List<Widget> imagehovered = [
       MouseRegion(
         onEnter: (_) {
           setState(() {
@@ -125,7 +125,12 @@ class ProjectCardState extends State<ProjectCard> {
             await _launchUrl();
           },
           child: Container(
-            width: isWideScreen ? screenwidth * 0.26 : screenwidth * 0.7,
+            height: isWideScreen
+                ? screenwidth * 0.25
+                : isTablet
+                    ? screenwidth * 0.3
+                    : screenwidth * 0.3,
+            width: isWideScreen ? screenwidth * 0.28 : double.infinity,
             color: Colors.blue,
             child: AnimatedOpacity(
               duration: const Duration(
@@ -156,16 +161,19 @@ class ProjectCardState extends State<ProjectCard> {
             ),
             child: isWideScreen
                 ? Padding(
-                    padding: const EdgeInsets.all(18.0),
+                    padding: const EdgeInsets.all(8.0),
                     child: isWideScreen
                         ? Row(
                             children: [
                               Column(
-                                children: children,
+                                children: imagehovered,
                               ),
-                              Expanded(
-                                child: Column(
-                                  children: descriptions,
+                              Flexible(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    children: descriptions,
+                                  ),
                                 ),
                               )
                             ],
@@ -173,9 +181,10 @@ class ProjectCardState extends State<ProjectCard> {
                         : Column(
                             children: [
                               Column(
-                                children: children,
+                                children: imagehovered,
                               ),
                               Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: descriptions,
                               )
                             ],
@@ -185,7 +194,7 @@ class ProjectCardState extends State<ProjectCard> {
                     padding: const EdgeInsets.all(8.0),
                     child: Column(children: [
                       Column(
-                        children: children,
+                        children: imagehovered,
                       ),
                       Column(
                         children: descriptions,

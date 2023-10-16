@@ -36,9 +36,9 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
     double paddingSize =
         isWideScreen ? MediaQuery.of(context).size.width * 0.1 : 20.0;
     double marginSize =
-        isWideScreen ? MediaQuery.of(context).size.width * 0.12 : 0.0;
+        isWideScreen ? MediaQuery.of(context).size.width * 0.1 : 0.0;
     double w = isWideScreen
-        ? MediaQuery.of(context).size.width * 0.2
+        ? MediaQuery.of(context).size.width * 0.3
         : double.infinity;
 
     Widget experiencesmenu = SizedBox(
@@ -85,7 +85,6 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
     );
     Widget expcontents = SizedBox(
       width: double.infinity,
-      height: double.infinity,
       child: Column(
         // Your content goes here
         children: [
@@ -105,7 +104,7 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
       ),
     );
     return Container(
-        height: MediaQuery.of(context).size.height,
+        height: MediaQuery.of(context).size.height * 0.9,
         margin: EdgeInsets.only(
             left: marginSize,
             right: marginSize,
@@ -115,32 +114,36 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
           left: paddingSize,
           right: paddingSize,
           top: isWideScreen ? paddingSize * 0.05 : 0,
-          bottom: isWideScreen ? paddingSize : paddingSize * 0.05,
+          bottom: isWideScreen ? paddingSize * 0.05 : paddingSize * 0.05,
         ),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          const Text("Experience",
-              style: TextStyle(
-                fontSize: 32,
-                fontWeight: FontWeight.w500,
-              )),
-          Expanded(
-              child: LayoutBuilder(
-            builder: (context, constraints) => constraints.maxWidth > 650
-                ? Row(
-                    children: [
-                      Expanded(child: experiencesmenu),
-                      Expanded(child: expcontents)
-                    ],
-                  )
-                : Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                        Expanded(child: experiencesmenu),
-                        Expanded(child: expcontents),
-                      ]),
-          ))
-        ]));
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text("Experience",
+                  style: TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.w500,
+                  )),
+              Flexible(
+                  fit: FlexFit.loose,
+                  child: LayoutBuilder(
+                    builder: (context, constraints) =>
+                        constraints.maxWidth > 600
+                            ? Row(
+                                children: [
+                                  Flexible(child: experiencesmenu),
+                                  Flexible(child: expcontents)
+                                ],
+                              )
+                            : Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                    Flexible(child: experiencesmenu),
+                                    Flexible(child: expcontents),
+                                  ]),
+                  ))
+            ]));
   }
 }
