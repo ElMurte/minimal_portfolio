@@ -17,6 +17,11 @@ class SecondaryProjectCardState extends State<SecondaryProjectCard> {
 
   @override
   Widget build(BuildContext context) {
+    final isWideScreen = MediaQuery.of(context).size.width > 1100;
+    final isTablet = MediaQuery.of(context).size.width > 650 &&
+        MediaQuery.of(context).size.width <= 1100;
+    final isMobile = MediaQuery.of(context).size.width < 650;
+    final screenwidth = MediaQuery.of(context).size.width;
     return MouseRegion(
       onEnter: (_) {
         setState(() {
@@ -34,9 +39,7 @@ class SecondaryProjectCardState extends State<SecondaryProjectCard> {
             ? Matrix4.translationValues(0, -10, 0)
             : Matrix4.identity(),
         child: Container(
-          width: MediaQuery.of(context).size.width > 650
-              ? MediaQuery.of(context).size.width * 0.23
-              : MediaQuery.of(context).size.width * 0.8,
+          width: isWideScreen ? screenwidth * 0.23 : screenwidth * 0.8,
           height: 360,
           margin: const EdgeInsets.only(bottom: 16),
           child: Card(

@@ -29,7 +29,10 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
               'I have worked in an Agile environment and given my contribution as a Full-stack developer for a total of 320 hours, working on:\n• frontend: development of UI components during short sprints(Scrum) with React.js and Redux as a state management\n• backend: development of REST API and data entry services with Azure platform following using Typescript and third-party libraries selected from the npm register'));
   @override
   Widget build(BuildContext context) {
-    final isWideScreen = MediaQuery.of(context).size.width > 650;
+    final isWideScreen = MediaQuery.of(context).size.width > 1100;
+    final isTablet = MediaQuery.of(context).size.width > 650 &&
+        MediaQuery.of(context).size.width <= 1100;
+    final isMobile = MediaQuery.of(context).size.width < 650;
     double paddingSize =
         isWideScreen ? MediaQuery.of(context).size.width * 0.1 : 20.0;
     double marginSize =
@@ -111,7 +114,7 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
         padding: EdgeInsets.only(
           left: paddingSize,
           right: paddingSize,
-          top: isWideScreen ? paddingSize * 0.5 : 0,
+          top: isWideScreen ? paddingSize * 0.05 : 0,
           bottom: isWideScreen ? paddingSize : paddingSize * 0.05,
         ),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [

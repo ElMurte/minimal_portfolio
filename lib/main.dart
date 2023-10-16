@@ -51,6 +51,22 @@ class MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    final screenwidth = MediaQuery.of(context).size.width;
+    final screenheight = MediaQuery.of(context).size.height;
+    final isWideScreen = MediaQuery.of(context).size.width > 1100;
+    final isTablet = MediaQuery.of(context).size.width > 650 &&
+        MediaQuery.of(context).size.width <= 1100;
+    final isMobile = MediaQuery.of(context).size.width < 650;
+    double paddingSize = isWideScreen
+        ? screenwidth * 0.11
+        : isTablet
+            ? screenwidth * 0.06
+            : screenwidth * 0.03;
+    double marginSize = isWideScreen
+        ? screenwidth * 0.12
+        : isTablet
+            ? screenwidth * 0.06
+            : screenwidth * 0.03;
     return MaterialApp(
       title: 'Elvis Murtezan',
       theme: _buildTheme(),
@@ -80,14 +96,17 @@ class MyAppState extends State<MyApp> {
                 _toggleTheme();
               },
             ),
-            if (MediaQuery.of(context).size.width > 600)
-              Row(
-                children: <Widget>[
-                  _buildLink('Intro', _initial),
-                  _buildLink('About', _aboutKey),
-                  _buildLink('Experience', _experienceKey),
-                  _buildLink('Projects', _projectKey),
-                ],
+            if (isWideScreen)
+              Padding(
+                padding: const EdgeInsets.only(right: 16.0),
+                child: Row(
+                  children: <Widget>[
+                    _buildLink('Intro', _initial),
+                    _buildLink('About', _aboutKey),
+                    _buildLink('Experience', _experienceKey),
+                    _buildLink('Projects', _projectKey),
+                  ],
+                ),
               )
             else
               SingleChildScrollView(
@@ -154,9 +173,10 @@ class MyAppState extends State<MyApp> {
             controller: _scrollController,
             child: Stack(
               children: [
-                SizedBox(
-                    height: MediaQuery.of(context).size.height,
-                    child: const AnimatedBackground()),
+                Expanded(
+                  child: SizedBox(
+                      height: screenheight, child: const AnimatedBackground()),
+                ),
                 Column(
                   children: [
                     RepaintBoundary(key: _initial, child: const FirstContent()),
@@ -174,10 +194,10 @@ class MyAppState extends State<MyApp> {
                             fontSize: 20, fontWeight: FontWeight.w500)),
                     const SizedBox(height: 16),
                     SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.8,
+                      width: screenwidth * 0.8,
                       child: Column(
                         children: [
-                          MediaQuery.of(context).size.width > 600
+                          isWideScreen
                               ? Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
@@ -255,11 +275,10 @@ class MyAppState extends State<MyApp> {
   }
 
   Widget _buildProjects() {
-    final isWideScreen = MediaQuery.of(context).size.width > 600;
-    double paddingSize =
-        isWideScreen ? MediaQuery.of(context).size.width * 0.1 : 20.0;
-    double marginSize =
-        isWideScreen ? MediaQuery.of(context).size.width * 0.12 : 0.0;
+    double screenwidth = MediaQuery.of(context).size.width;
+    final isWideScreen = screenwidth > 1100;
+    double paddingSize = isWideScreen ? screenwidth * 0.1 : 20.0;
+    double marginSize = isWideScreen ? screenwidth * 0.06 : 0.0;
     return Container(
       padding: EdgeInsets.only(
           top: paddingSize * 0.5, left: paddingSize, right: paddingSize),
@@ -283,7 +302,6 @@ class MyAppState extends State<MyApp> {
           ),
           SizedBox(height: 16),
           SizedBox(
-            width: double.infinity,
             child: Expanded(
               child: ProjectCard(
                 title: 'BlockCOVID',
