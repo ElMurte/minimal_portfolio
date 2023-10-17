@@ -108,7 +108,7 @@ class MainProjectWidgetState extends State<MainProjectWidget> {
 }
 
 Future<void> _launchUrl() async {
-  final Uri url = Uri.parse('https://sweleven.gitlab.io/blockcovid/');
+  final Uri url = Uri.parse('https://www.flutter.dev');
 
   if (await canLaunchUrl(url)) {
     await launchUrl(url);

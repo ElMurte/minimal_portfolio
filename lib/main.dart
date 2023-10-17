@@ -28,9 +28,32 @@ class MyAppState extends State<MyApp> {
   final GlobalKey _projectKey = GlobalKey();
   final GlobalKey _initial = GlobalKey();
   final List<Widget> secondaryprojects = [
-    const SecondaryProjectCard(title: 'MCBurger'),
-    const SecondaryProjectCard(title: 'Netmovies'),
-    const SecondaryProjectCard(title: 'NYC Flight Analysis'),
+    const SecondaryProjectCard(
+      title: 'MCBurger',
+      context_of_project: "OOP exam",
+      description:
+          "Developed a simple fast food management system, following the MVC design pattern",
+      maintechnologies: ["C++", "Qt", "CSS"],
+      repourl: "https://github.com/ElMurte/MCBURGER",
+    ),
+    const SecondaryProjectCard(
+      title: 'Netmovies',
+      num_of_people: 3,
+      context_of_project: "Web Technologies exam",
+      description:
+          "Created a streaming website without using third-party libraries(as accessible as possible).",
+      maintechnologies: ["Javascript", "HTML", "CSS", "PHP"],
+      repourl: "https://github.com/ElMurte/GFE",
+    ),
+    const SecondaryProjectCard(
+      title: 'NYC Flight Analysis',
+      description:
+          "built a model at first with a subset of the covariates(7) and second with all the covariates(19)",
+      repourl:
+          "https://github.com/ElMurte/Data-Mining-Project-analysis-Datasets-using-R",
+      maintechnologies: ["R"],
+      context_of_project: "Data Mining exam",
+    ),
   ];
   @override
   void initState() {
@@ -161,7 +184,7 @@ class MyAppState extends State<MyApp> {
             gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              stops: const [0.3, 1.0],
+              stops: const [0.4, 1.0],
               colors: [
                 Colors.white70.withOpacity(0.001), Colors.white54
                 //Theme.of(context).primaryColor,
@@ -310,10 +333,10 @@ class MyAppState extends State<MyApp> {
                 timeframe: '10/2020 - 6/2021',
                 technologies: [
                   'Flutter',
-                  'Dart',
-                  'GitLab',
-                  'Firebase',
-                  'Blockchain'
+                  'NFC/GPS',
+                  'Angular',
+                  'NodeJS',
+                  'MongoDB'
                 ],
                 mainUrlImage:
                     'https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',

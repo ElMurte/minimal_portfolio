@@ -37,16 +37,6 @@ class ProjectCard extends StatefulWidget {
   ProjectCardState createState() => ProjectCardState();
 }
 
-Future<void> _launchUrl() async {
-  final Uri url = Uri.parse('https://flutter.dev');
-
-  if (await canLaunchUrl(url)) {
-    await launchUrl(url);
-  } else {
-    throw Exception('Could not launch $url');
-  }
-}
-
 class ProjectCardState extends State<ProjectCard> {
   bool isHovered = false;
 
@@ -89,17 +79,14 @@ class ProjectCardState extends State<ProjectCard> {
       Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          Image.network(
-            'https://cdn.iconscout.com/icon/free/png-256/flutter-2038877-1720090.png',
-            height: 24,
-          ),
+          Icon(Icons.code),
           const SizedBox(width: 8),
           Positioned(
             bottom: 0,
             right: 0,
             child: Text(
-              widget.technologies.toString(),
-              style: const TextStyle(fontSize: 16),
+              widget.technologies.join(", "),
+              style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
             ),
           ),
         ],
@@ -107,7 +94,31 @@ class ProjectCardState extends State<ProjectCard> {
       const SizedBox(height: 8),
     ];
     List<Widget> imagehovered = [
-      MouseRegion(
+      Container(
+        height: isWideScreen
+            ? screenwidth * 0.25
+            : isTablet
+                ? screenwidth * 0.3
+                : screenwidth * 0.3,
+        width: isWideScreen ? screenwidth * 0.28 : double.infinity,
+        color: Colors.blue,
+        child: AnimatedOpacity(
+          duration:
+              const Duration(milliseconds: 300), // Set your desired duration
+          opacity: isHovered ? 1 : 0.4, // Adjust opacity values
+          child: Image.network(
+            widget.mainUrlImage,
+            fit: BoxFit.fill,
+          ),
+        ),
+      ),
+      const SizedBox(
+        height: 8,
+        width: 20,
+      ),
+    ];
+
+    return MouseRegion(
         onEnter: (_) {
           setState(() {
             isHovered = true;
@@ -120,86 +131,64 @@ class ProjectCardState extends State<ProjectCard> {
         },
         cursor: SystemMouseCursors.click,
         child: GestureDetector(
-          onTap: () async {
-            //open another browser page with the link
-            await _launchUrl();
-          },
-          child: Container(
-            height: isWideScreen
-                ? screenwidth * 0.25
-                : isTablet
-                    ? screenwidth * 0.3
-                    : screenwidth * 0.3,
-            width: isWideScreen ? screenwidth * 0.28 : double.infinity,
-            color: Colors.blue,
-            child: AnimatedOpacity(
-              duration: const Duration(
-                  milliseconds: 300), // Set your desired duration
-              opacity: isHovered ? 1 : 0.4, // Adjust opacity values
-              child: Image.network(
-                widget.mainUrlImage,
-                fit: BoxFit.fill,
-              ),
-            ),
-          ),
-        ),
-      ),
-      const SizedBox(
-        height: 8,
-        width: 20,
-      ),
-    ];
-
-    return Container(
-        width: double.infinity,
-        padding: const EdgeInsets.all(16),
-        margin: const EdgeInsets.only(left: 0, bottom: 16),
-        child: Card(
-            elevation: 10.0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15.0),
-            ),
-            child: isWideScreen
-                ? Padding(
-                    padding: const EdgeInsets.all(8.0),
+            onTap: () async {
+              //open another browser page with the link
+              await launchUrl(Uri.parse(widget.repourl));
+            },
+            child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(16),
+                margin: const EdgeInsets.only(left: 0, bottom: 16),
+                child: Card(
+                    elevation: 30.0,
+                    shadowColor: isHovered
+                        ? Colors.blue
+                        : Colors.grey.shade500, // Change shadow color on hover
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
                     child: isWideScreen
-                        ? Row(
-                            children: [
-                              Column(
-                                children: imagehovered,
-                              ),
-                              Flexible(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    children: descriptions,
+                        ? Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: isWideScreen
+                                ? Row(
+                                    children: [
+                                      Column(
+                                        children: imagehovered,
+                                      ),
+                                      Flexible(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Column(
+                                            children: descriptions,
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  )
+                                : Column(
+                                    children: [
+                                      Column(
+                                        children: imagehovered,
+                                      ),
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: descriptions,
+                                      )
+                                    ],
                                   ),
-                                ),
-                              )
-                            ],
                           )
-                        : Column(
-                            children: [
+                        : Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(children: [
                               Column(
                                 children: imagehovered,
                               ),
                               Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: descriptions,
                               )
-                            ],
-                          ),
-                  )
-                : Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(children: [
-                      Column(
-                        children: imagehovered,
-                      ),
-                      Column(
-                        children: descriptions,
-                      )
-                    ]),
-                  )));
+                            ]),
+                          )))));
   }
 }
