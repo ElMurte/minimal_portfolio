@@ -184,7 +184,7 @@ class MyAppState extends State<MyApp> {
             gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              stops: const [0.4, 1.0],
+              stops: const [0.35, 1.0],
               colors: [
                 Colors.white70.withOpacity(0.001), Colors.white54
                 //Theme.of(context).primaryColor,
@@ -243,20 +243,25 @@ class MyAppState extends State<MyApp> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const HoverTextWidget(
-                              "Built with Flutter and AI tools using"),
+                          isMobile
+                              ? Expanded(
+                                  child: const HoverTextWidget(
+                                      "Built with Flutter and AI copilot tools"),
+                                )
+                              : const HoverTextWidget(
+                                  "Built with Flutter and AI copilot tools"),
                           const SizedBox(width: 8.0),
                           Row(
                             children: [
                               Image.network(
                                 'https://github.gallerycdn.vsassets.io/extensions/github/copilotvs/1.110.0.0/1694462364886/Microsoft.VisualStudio.Services.Icons.Default',
-                                height: 50.0, // Limit the height to 50 pixels.
+                                height: 45.0, // Limit the height to 50 pixels.
                               ),
                               const SizedBox(
-                                  width: 8.0), // Add spacing between icons.
+                                  width: 5.0), // Add spacing between icons.
                               Image.network(
                                 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/2048px-ChatGPT_logo.svg.png',
-                                height: 50.0, // Limit the height to 50 pixels.
+                                height: 45.0, // Limit the height to 50 pixels.
                               ),
                             ],
                           ),

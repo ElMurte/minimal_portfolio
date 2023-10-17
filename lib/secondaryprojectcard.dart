@@ -57,7 +57,7 @@ class SecondaryProjectCardState extends State<SecondaryProjectCard> {
               ? Matrix4.translationValues(0, -10, 0)
               : Matrix4.identity(),
           child: Container(
-            width: isWideScreen ? screenwidth * 0.23 : screenwidth * 0.8,
+            width: isWideScreen ? screenwidth * 0.23 : screenwidth * 0.95,
             height: 360,
             margin: const EdgeInsets.only(bottom: 16),
             child: Card(
@@ -73,9 +73,9 @@ class SecondaryProjectCardState extends State<SecondaryProjectCard> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(18.0),
-                    child: Container(
+                    child: SizedBox(
                       width:
-                          isWideScreen ? screenwidth * 0.18 : screenwidth * 0.7,
+                          isWideScreen ? screenwidth * 0.18 : screenwidth * 0.6,
                       child: Stack(
                         children: [
                           Column(
@@ -95,40 +95,53 @@ class SecondaryProjectCardState extends State<SecondaryProjectCard> {
                               const SizedBox(height: 16),
                               Row(
                                 children: [
-                                  Icon(Icons.people),
                                   Text(
                                     widget.num_of_people.toString(),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold),
                                   ),
+                                  const Icon(Icons.people),
                                 ],
                               ),
-                              Text(
-                                " - " + widget.context_of_project,
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
+                              Row(
+                                children: [
+                                  Text(
+                                    widget.context_of_project,
+                                    style: const TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  const Icon(Icons.topic),
+                                ],
                               ),
                               const SizedBox(height: 16),
                               Text(
                                 widget.description,
-                                style: TextStyle(fontSize: 19),
+                                style: const TextStyle(fontSize: 19),
                               ),
                               const SizedBox(height: 16),
-                              Row(
-                                children: [
-                                  Icon(Icons.code),
-                                  Text(
-                                    widget.maintechnologies.join(", "),
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ],
+                              Positioned(
+                                bottom: 0,
+                                child: Row(
+                                  children: [
+                                    const Icon(Icons.code),
+                                    Expanded(
+                                      child: Text(
+                                        " " +
+                                            widget.maintechnologies.join(", "),
+                                        style: const TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
-                          Positioned(top: 0, right: 0, child: Icon(Icons.link))
+                          const Positioned(
+                              top: 0, right: 0, child: Icon(Icons.link))
                         ],
                       ),
                     ),

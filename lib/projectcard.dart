@@ -81,9 +81,7 @@ class ProjectCardState extends State<ProjectCard> {
         children: <Widget>[
           Icon(Icons.code),
           const SizedBox(width: 8),
-          Positioned(
-            bottom: 0,
-            right: 0,
+          Expanded(
             child: Text(
               widget.technologies.join(", "),
               style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
@@ -99,9 +97,12 @@ class ProjectCardState extends State<ProjectCard> {
             ? screenwidth * 0.25
             : isTablet
                 ? screenwidth * 0.3
-                : screenwidth * 0.3,
+                : screenwidth * 0.5,
+        decoration: BoxDecoration(
+          color: Colors.blue,
+          borderRadius: BorderRadius.circular(15.0),
+        ),
         width: isWideScreen ? screenwidth * 0.28 : double.infinity,
-        color: Colors.blue,
         child: AnimatedOpacity(
           duration:
               const Duration(milliseconds: 300), // Set your desired duration
