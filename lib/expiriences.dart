@@ -30,9 +30,9 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
   @override
   Widget build(BuildContext context) {
     final isWideScreen = MediaQuery.of(context).size.width > 1100;
-    final isTablet = MediaQuery.of(context).size.width > 650 &&
-        MediaQuery.of(context).size.width <= 1100;
-    final isMobile = MediaQuery.of(context).size.width < 650;
+    //final isTablet = MediaQuery.of(context).size.width > 650 &&
+    //  MediaQuery.of(context).size.width <= 1100;
+    //final isMobile = MediaQuery.of(context).size.width < 650;
     double paddingSize =
         isWideScreen ? MediaQuery.of(context).size.width * 0.1 : 20.0;
     double marginSize =
@@ -42,7 +42,9 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
         : double.infinity;
 
     Widget experiencesmenu = SizedBox(
-      width: w, // Set the fixed width for the menu
+      width: w,
+      height: isWideScreen ? double.infinity : 100,
+      // Set the fixed width for the menu
       child: ListView(
         // Use ListView for fixed menu
         // Your menu items go here
@@ -104,7 +106,9 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
       ),
     );
     return Container(
-        height: MediaQuery.of(context).size.height * 0.9,
+        height: isWideScreen
+            ? MediaQuery.of(context).size.height * 0.7
+            : MediaQuery.of(context).size.height * 0.9,
         margin: EdgeInsets.only(
             left: marginSize,
             right: marginSize,
@@ -126,7 +130,7 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
                     fontWeight: FontWeight.w500,
                   )),
               Flexible(
-                  fit: FlexFit.loose,
+                  fit: FlexFit.tight,
                   child: LayoutBuilder(
                     builder: (context, constraints) =>
                         constraints.maxWidth > 600
@@ -140,8 +144,8 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                    Flexible(child: experiencesmenu),
-                                    Flexible(child: expcontents),
+                                    Flexible(flex: 1, child: experiencesmenu),
+                                    Flexible(flex: 5, child: expcontents),
                                   ]),
                   ))
             ]));

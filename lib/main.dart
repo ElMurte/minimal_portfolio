@@ -77,10 +77,10 @@ class MyAppState extends State<MyApp> {
     final screenwidth = MediaQuery.of(context).size.width;
     final screenheight = MediaQuery.of(context).size.height;
     final isWideScreen = MediaQuery.of(context).size.width > 1100;
-    final isTablet = MediaQuery.of(context).size.width > 650 &&
-        MediaQuery.of(context).size.width <= 1100;
+    //final isTablet = MediaQuery.of(context).size.width > 650 &&
+    MediaQuery.of(context).size.width <= 1100;
     final isMobile = MediaQuery.of(context).size.width < 650;
-    double paddingSize = isWideScreen
+    /*double paddingSize = isWideScreen
         ? screenwidth * 0.11
         : isTablet
             ? screenwidth * 0.06
@@ -89,7 +89,7 @@ class MyAppState extends State<MyApp> {
         ? screenwidth * 0.12
         : isTablet
             ? screenwidth * 0.06
-            : screenwidth * 0.03;
+            : screenwidth * 0.03;*/
     return MaterialApp(
       title: 'Elvis Murtezan',
       theme: _buildTheme(),
@@ -244,8 +244,8 @@ class MyAppState extends State<MyApp> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           isMobile
-                              ? Expanded(
-                                  child: const HoverTextWidget(
+                              ? const Expanded(
+                                  child: HoverTextWidget(
                                       "Built with Flutter and AI copilot tools"),
                                 )
                               : const HoverTextWidget(
@@ -310,7 +310,8 @@ class MyAppState extends State<MyApp> {
     return Container(
       padding: EdgeInsets.only(
           top: paddingSize * 0.5, left: paddingSize, right: paddingSize),
-      margin: EdgeInsets.only(left: marginSize, right: marginSize),
+      margin:
+          EdgeInsets.only(top: marginSize, left: marginSize, right: marginSize),
       child: const Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,

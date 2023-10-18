@@ -10,7 +10,7 @@ class SecondaryProjectCard extends StatefulWidget {
   final String context_of_project;
   final String description;
   //final imageurl;
-  final repourl;
+  final String repourl;
   //final liveurl;
   const SecondaryProjectCard(
       {Key? key,
@@ -32,9 +32,9 @@ class SecondaryProjectCardState extends State<SecondaryProjectCard> {
   @override
   Widget build(BuildContext context) {
     final isWideScreen = MediaQuery.of(context).size.width > 1100;
-    final isTablet = MediaQuery.of(context).size.width > 650 &&
-        MediaQuery.of(context).size.width <= 1100;
-    final isMobile = MediaQuery.of(context).size.width < 650;
+    //final isTablet = MediaQuery.of(context).size.width > 650 &&
+    //    MediaQuery.of(context).size.width <= 1100;
+    //final isMobile = MediaQuery.of(context).size.width < 650;
     final screenwidth = MediaQuery.of(context).size.width;
     return GestureDetector(
       onTap: () {
@@ -108,9 +108,9 @@ class SecondaryProjectCardState extends State<SecondaryProjectCard> {
                                 children: [
                                   Text(
                                     widget.context_of_project,
-                                    style: const TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
+                                    style: TextStyle(
+                                        fontSize: isWideScreen ? 18 : 16,
+                                        fontWeight: FontWeight.w700),
                                   ),
                                   const Icon(Icons.topic),
                                 ],
@@ -128,6 +128,7 @@ class SecondaryProjectCardState extends State<SecondaryProjectCard> {
                                     const Icon(Icons.code),
                                     Expanded(
                                       child: Text(
+                                        // ignore: prefer_interpolation_to_compose_strings
                                         " " +
                                             widget.maintechnologies.join(", "),
                                         style: const TextStyle(

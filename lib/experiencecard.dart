@@ -19,14 +19,14 @@ class ExperienceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isWideScreen = MediaQuery.of(context).size.width > 1100;
-    final isTablet = MediaQuery.of(context).size.width > 650 &&
-        MediaQuery.of(context).size.width <= 1100;
-    final isMobile = MediaQuery.of(context).size.width < 650;
+    //final isWideScreen = MediaQuery.of(context).size.width > 1100;
+    //final isTablet = MediaQuery.of(context).size.width > 650 &&
+    //  MediaQuery.of(context).size.width <= 1100;
+    //final isMobile = MediaQuery.of(context).size.width < 650;
     return SizedBox(
       width: double.infinity,
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(10.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -37,7 +37,7 @@ class ExperienceCard extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   decoration: TextDecoration.underline),
             ),
-            const SizedBox(height: 8.0),
+            const SizedBox(height: 8),
             Text(
               'Date: ${experience.date}',
               style: const TextStyle(
@@ -45,7 +45,7 @@ class ExperienceCard extends StatelessWidget {
                 color: Colors.grey,
               ),
             ),
-            const SizedBox(height: 12.0),
+            const SizedBox(height: 8),
             const Padding(
               padding: EdgeInsets.only(left: 10.0),
               child: Text(
@@ -56,13 +56,15 @@ class ExperienceCard extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 8.0),
+            const SizedBox(height: 8),
             Padding(
               padding: const EdgeInsets.only(left: 10.0),
-              child: Text(
-                experience.description,
-                style: const TextStyle(
-                  fontSize: 17.0,
+              child: Flexible(
+                child: Text(
+                  experience.description,
+                  style: const TextStyle(
+                    fontSize: 17.0,
+                  ),
                 ),
               ),
             ),

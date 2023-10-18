@@ -45,7 +45,7 @@ class ProjectCardState extends State<ProjectCard> {
     final isWideScreen = MediaQuery.of(context).size.width > 1100;
     final isTablet = MediaQuery.of(context).size.width > 650 &&
         MediaQuery.of(context).size.width <= 1100;
-    final isMobile = MediaQuery.of(context).size.width < 650;
+    //final isMobile = MediaQuery.of(context).size.width < 650;
     final double screenwidth = MediaQuery.of(context).size.width;
     List<Widget> descriptions = [
       Text(
@@ -79,12 +79,12 @@ class ProjectCardState extends State<ProjectCard> {
       Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          Icon(Icons.code),
+          const Icon(Icons.code),
           const SizedBox(width: 8),
           Expanded(
             child: Text(
               widget.technologies.join(", "),
-              style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
             ),
           ),
         ],
