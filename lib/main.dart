@@ -119,12 +119,12 @@ class MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    final screenwidth = MediaQuery.of(context).size.width;
-    final screenheight = MediaQuery.of(context).size.height;
-    final isWideScreen = MediaQuery.of(context).size.width > 1100;
+    //final screenwidth = MediaQuery.of(context).size.width;
+    //final screenheight = MediaQuery.of(context).size.height;
+    //final isWideScreen = MediaQuery.of(context).size.width > 1100;
     //final isTablet = MediaQuery.of(context).size.width > 650 &&
     MediaQuery.of(context).size.width <= 1100;
-    final isMobile = MediaQuery.of(context).size.width < 650;
+    //final isMobile = MediaQuery.of(context).size.width < 650;
     /*double paddingSize = isWideScreen
         ? screenwidth * 0.11
         : isTablet
@@ -155,7 +155,7 @@ class MyAppState extends State<MyApp> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      onPressed: () async {
+                      onPressed: () {
                         //await Navigator.pushReplacementNamed(context, '/');
 
                         setState(() {
@@ -251,7 +251,7 @@ class MyAppState extends State<MyApp> {
                           children: [
                             Expanded(
                               child: SizedBox(
-                                  height: screenheight,
+                                  height: MediaQuery.of(context).size.height,
                                   child: const AnimatedBackground()),
                             ),
                             Column(
@@ -276,7 +276,8 @@ class MyAppState extends State<MyApp> {
                                         fontWeight: FontWeight.w500)),
                                 const SizedBox(height: 16),
                                 SizedBox(
-                                  width: screenwidth * 0.8,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.8,
                                   child: Column(
                                     children: [
                                       MediaQuery.of(context).size.width > 1100
@@ -389,12 +390,14 @@ class MyAppState extends State<MyApp> {
   }
 
   Widget _buildProjects() {
-    double screenwidth = MediaQuery.of(context).size.width;
-    final isWideScreen = screenwidth > 1100;
-    double paddingSize =
-        MediaQuery.of(context).size.width > 1100 ? screenwidth * 0.1 : 20.0;
-    double marginSize =
-        MediaQuery.of(context).size.width > 1100 ? screenwidth * 0.06 : 0.0;
+    //double screenwidth = MediaQuery.of(context).size.width;
+    //final isWideScreen = MediaQuery.of(context).size.width > 1100;
+    double paddingSize = MediaQuery.of(context).size.width > 1100
+        ? MediaQuery.of(context).size.width * 0.1
+        : 20.0;
+    double marginSize = MediaQuery.of(context).size.width > 1100
+        ? MediaQuery.of(context).size.width * 0.06
+        : 0.0;
     return Container(
       padding: EdgeInsets.only(
           top: paddingSize * 0.5, left: paddingSize, right: paddingSize),

@@ -31,11 +31,11 @@ class SecondaryProjectCardState extends State<SecondaryProjectCard> {
 
   @override
   Widget build(BuildContext context) {
-    final isWideScreen = MediaQuery.of(context).size.width > 1100;
+    //final isWideScreen = MediaQuery.of(context).size.width > 1100;
     //final isTablet = MediaQuery.of(context).size.width > 650 &&
     //    MediaQuery.of(context).size.width <= 1100;
     //final isMobile = MediaQuery.of(context).size.width < 650;
-    final screenwidth = MediaQuery.of(context).size.width;
+    //final screenwidth = MediaQuery.of(context).size.width;
     return GestureDetector(
       onTap: () {
         launchUrl(Uri.parse(widget.repourl));
