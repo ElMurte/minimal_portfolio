@@ -7,9 +7,54 @@ import 'package:minimal_portfolio/mainproject.dart';
 import 'package:minimal_portfolio/projectcard.dart';
 import 'package:minimal_portfolio/secondaryprojectcard.dart';
 import 'aboutwidget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(const MyApp());
+}
+
+class SocialMediaLinks extends StatelessWidget {
+  final String githublink;
+  final String linkedinlink;
+  const SocialMediaLinks(
+      {Key? key, required this.githublink, this.linkedinlink = ""})
+      : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    const String linkedinpng =
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/600px-LinkedIn_logo_initials.png";
+    const String githubpng =
+        "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png";
+    return Row(children: [
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: InkWell(
+          onTap: () {
+            launchUrl(Uri.parse(githublink));
+          },
+          child: Image.network(
+            githubpng,
+            width: 45,
+            height: 45.0, // Limit the height to 50 pixels.
+          ),
+        ),
+      ),
+      const SizedBox(width: 5.0), // Add spacing between icons.
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: InkWell(
+          onTap: () {
+            launchUrl(Uri.parse(linkedinlink));
+          },
+          child: Image.network(
+            linkedinpng,
+            width: 45,
+            height: 45.0, // Limit the height to 50 pixels.
+          ),
+        ),
+      ),
+    ]);
+  }
 }
 
 class MyApp extends StatefulWidget {
@@ -90,192 +135,233 @@ class MyAppState extends State<MyApp> {
         : isTablet
             ? screenwidth * 0.06
             : screenwidth * 0.03;*/
+    const String github = "https://github.com/ElMurte";
+    const String linkedin = "https://www.linkedin.com/in/elvismurtezan/";
     return MaterialApp(
-      title: 'Elvis Murtezan',
-      theme: _buildTheme(),
-      home: Scaffold(
-        appBar: AppBar(
-          title: TextButton(
-              style: TextButton.styleFrom(
-                padding: EdgeInsets.zero,
-              ),
-              child: const Text(
-                'Elvis Murtezan',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+        title: 'Elvis Murtezan',
+        theme: _buildTheme(),
+        initialRoute: '/',
+        routes: {
+          '/': (context) => Scaffold(
+                appBar: AppBar(
+                  title: TextButton(
+                      style: TextButton.styleFrom(
+                        padding: EdgeInsets.zero,
+                      ),
+                      child: const Text(
+                        'Elvis Murtezan',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      onPressed: () async {
+                        //await Navigator.pushReplacementNamed(context, '/');
+
+                        setState(() {
+                          _selectedSection = 'Intro';
+                          scrollIntoWidget(_initial);
+                        });
+                      }),
+                  actions: <Widget>[
+                    Switch(
+                      value: _isDarkMode,
+                      onChanged: (value) {
+                        _toggleTheme();
+                      },
+                    ),
+                    if (MediaQuery.of(context).size.width > 1100)
+                      Padding(
+                        padding: const EdgeInsets.only(right: 16.0),
+                        child: Row(
+                          children: <Widget>[
+                            _buildLink('Intro', _initial),
+                            _buildLink('About', _aboutKey),
+                            _buildLink('Experience', _experienceKey),
+                            _buildLink('Projects', _projectKey),
+                          ],
+                        ),
+                      )
+                    else
+                      SingleChildScrollView(
+                        controller: _scrollController,
+                        child: PopupMenuButton<String>(
+                          icon: const Icon(Icons.menu),
+                          onSelected: (value) {
+                            setState(() {
+                              _selectedSection = value;
+                              switch (value) {
+                                case "About":
+                                  scrollIntoWidget(_aboutKey);
+                                case "Projects":
+                                  scrollIntoWidget(_projectKey);
+                                case "Experience":
+                                  scrollIntoWidget(_experienceKey);
+                                default:
+                                  scrollIntoWidget(_initial);
+                              }
+                            });
+                          },
+                          itemBuilder: (BuildContext context) {
+                            return <PopupMenuEntry<String>>[
+                              const PopupMenuItem<String>(
+                                value: 'Intro',
+                                child: Text(
+                                  'Intro',
+                                ),
+                              ),
+                              const PopupMenuItem<String>(
+                                value: 'About',
+                                child: Text(
+                                  'About',
+                                ),
+                              ),
+                              const PopupMenuItem<String>(
+                                value: 'Experience',
+                                child: Text('Experience'),
+                              ),
+                              const PopupMenuItem<String>(
+                                value: 'Projects',
+                                child: Text('Projects'),
+                              ),
+                            ];
+                          },
+                        ),
+                      ),
+                  ],
                 ),
-              ),
-              onPressed: () {
-                setState(() {
-                  _selectedSection = 'Intro';
-                  scrollIntoWidget(_initial);
-                });
-              }),
-          actions: <Widget>[
-            Switch(
-              value: _isDarkMode,
-              onChanged: (value) {
-                _toggleTheme();
-              },
-            ),
-            if (isWideScreen)
-              Padding(
-                padding: const EdgeInsets.only(right: 16.0),
-                child: Row(
-                  children: <Widget>[
-                    _buildLink('Intro', _initial),
-                    _buildLink('About', _aboutKey),
-                    _buildLink('Experience', _experienceKey),
-                    _buildLink('Projects', _projectKey),
+                body: Stack(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          stops: const [0.35, 1.0],
+                          colors: [
+                            Colors.white70.withOpacity(0.001), Colors.white54
+                            //Theme.of(context).primaryColor,
+                            //Theme.of(context).scaffoldBackgroundColor,
+                          ],
+                        ),
+                      ),
+                      child: SingleChildScrollView(
+                        controller: _scrollController,
+                        child: Stack(
+                          children: [
+                            Expanded(
+                              child: SizedBox(
+                                  height: screenheight,
+                                  child: const AnimatedBackground()),
+                            ),
+                            Column(
+                              children: [
+                                RepaintBoundary(
+                                    key: _initial, child: const FirstContent()),
+
+                                RepaintBoundary(
+                                    key: _aboutKey, child: const AboutWidget()),
+
+                                RepaintBoundary(
+                                    key: _experienceKey,
+                                    child: const ExperienceWidget()),
+
+                                RepaintBoundary(
+                                    key: _projectKey, child: _buildProjects()),
+                                // Footer section
+
+                                const Text("Other projects",
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w500)),
+                                const SizedBox(height: 16),
+                                SizedBox(
+                                  width: screenwidth * 0.8,
+                                  child: Column(
+                                    children: [
+                                      MediaQuery.of(context).size.width > 1100
+                                          ? Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              children: secondaryprojects,
+                                            )
+                                          : Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              children: secondaryprojects,
+                                            ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  alignment: Alignment.center,
+                                  color: Colors.transparent.withOpacity(
+                                      0.01), // Customize the background color.
+                                  padding: const EdgeInsets.all(
+                                      16.0), // Add padding for content.
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      if (MediaQuery.of(context).size.width <
+                                          950)
+                                        const Row(
+                                          children: [
+                                            SocialMediaLinks(
+                                              githublink: github,
+                                              linkedinlink: linkedin,
+                                            ),
+                                          ],
+                                        ),
+                                      MediaQuery.of(context).size.width < 600
+                                          ? const Expanded(
+                                              child: HoverTextWidget(
+                                                  "Built with Flutter and AI copilot tools"),
+                                            )
+                                          : const HoverTextWidget(
+                                              "Built with Flutter and AI copilot tools"),
+                                      const SizedBox(width: 8.0),
+                                      Row(
+                                        children: [
+                                          Image.network(
+                                            'https://github.gallerycdn.vsassets.io/extensions/github/copilotvs/1.110.0.0/1694462364886/Microsoft.VisualStudio.Services.Icons.Default',
+                                            height:
+                                                45.0, // Limit the height to 50 pixels.
+                                          ),
+                                          const SizedBox(
+                                              width:
+                                                  5.0), // Add spacing between icons.
+                                          Image.network(
+                                            'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/2048px-ChatGPT_logo.svg.png',
+                                            height:
+                                                45.0, // Limit the height to 50 pixels.
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    if (MediaQuery.of(context).size.width > 1100)
+                      const Positioned(
+                          bottom: 0,
+                          left: 0,
+                          child: SizedBox(
+                            child: SocialMediaLinks(
+                              githublink: github,
+                              linkedinlink: linkedin,
+                            ),
+                          ))
+                    else
+                      const SizedBox(),
                   ],
                 ),
               )
-            else
-              SingleChildScrollView(
-                controller: _scrollController,
-                child: PopupMenuButton<String>(
-                  icon: const Icon(Icons.menu),
-                  onSelected: (value) {
-                    setState(() {
-                      _selectedSection = value;
-                      switch (value) {
-                        case "About":
-                          scrollIntoWidget(_aboutKey);
-                        case "Projects":
-                          scrollIntoWidget(_projectKey);
-                        case "Experience":
-                          scrollIntoWidget(_experienceKey);
-                        default:
-                          scrollIntoWidget(_initial);
-                      }
-                    });
-                  },
-                  itemBuilder: (BuildContext context) {
-                    return <PopupMenuEntry<String>>[
-                      const PopupMenuItem<String>(
-                        value: 'Intro',
-                        child: Text(
-                          'Intro',
-                        ),
-                      ),
-                      const PopupMenuItem<String>(
-                        value: 'About',
-                        child: Text(
-                          'About',
-                        ),
-                      ),
-                      const PopupMenuItem<String>(
-                        value: 'Experience',
-                        child: Text('Experience'),
-                      ),
-                      const PopupMenuItem<String>(
-                        value: 'Projects',
-                        child: Text('Projects'),
-                      ),
-                    ];
-                  },
-                ),
-              ),
-          ],
-        ),
-        body: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              stops: const [0.35, 1.0],
-              colors: [
-                Colors.white70.withOpacity(0.001), Colors.white54
-                //Theme.of(context).primaryColor,
-                //Theme.of(context).scaffoldBackgroundColor,
-              ],
-            ),
-          ),
-          child: SingleChildScrollView(
-            controller: _scrollController,
-            child: Stack(
-              children: [
-                Expanded(
-                  child: SizedBox(
-                      height: screenheight, child: const AnimatedBackground()),
-                ),
-                Column(
-                  children: [
-                    RepaintBoundary(key: _initial, child: const FirstContent()),
-
-                    RepaintBoundary(key: _aboutKey, child: const AboutWidget()),
-
-                    RepaintBoundary(
-                        key: _experienceKey, child: const ExperienceWidget()),
-
-                    RepaintBoundary(key: _projectKey, child: _buildProjects()),
-                    // Footer section
-
-                    const Text("Other projects",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.w500)),
-                    const SizedBox(height: 16),
-                    SizedBox(
-                      width: screenwidth * 0.8,
-                      child: Column(
-                        children: [
-                          isWideScreen
-                              ? Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: secondaryprojects,
-                                )
-                              : Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: secondaryprojects,
-                                ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      color: Colors.transparent
-                          .withOpacity(0.01), // Customize the background color.
-                      padding: const EdgeInsets.all(
-                          16.0), // Add padding for content.
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          isMobile
-                              ? const Expanded(
-                                  child: HoverTextWidget(
-                                      "Built with Flutter and AI copilot tools"),
-                                )
-                              : const HoverTextWidget(
-                                  "Built with Flutter and AI copilot tools"),
-                          const SizedBox(width: 8.0),
-                          Row(
-                            children: [
-                              Image.network(
-                                'https://github.gallerycdn.vsassets.io/extensions/github/copilotvs/1.110.0.0/1694462364886/Microsoft.VisualStudio.Services.Icons.Default',
-                                height: 45.0, // Limit the height to 50 pixels.
-                              ),
-                              const SizedBox(
-                                  width: 5.0), // Add spacing between icons.
-                              Image.network(
-                                'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/2048px-ChatGPT_logo.svg.png',
-                                height: 45.0, // Limit the height to 50 pixels.
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
+        });
   }
 
   Widget _buildLink(String section, GlobalKey key) {
@@ -305,8 +391,10 @@ class MyAppState extends State<MyApp> {
   Widget _buildProjects() {
     double screenwidth = MediaQuery.of(context).size.width;
     final isWideScreen = screenwidth > 1100;
-    double paddingSize = isWideScreen ? screenwidth * 0.1 : 20.0;
-    double marginSize = isWideScreen ? screenwidth * 0.06 : 0.0;
+    double paddingSize =
+        MediaQuery.of(context).size.width > 1100 ? screenwidth * 0.1 : 20.0;
+    double marginSize =
+        MediaQuery.of(context).size.width > 1100 ? screenwidth * 0.06 : 0.0;
     return Container(
       padding: EdgeInsets.only(
           top: paddingSize * 0.5, left: paddingSize, right: paddingSize),

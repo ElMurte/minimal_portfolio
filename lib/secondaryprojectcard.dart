@@ -57,7 +57,9 @@ class SecondaryProjectCardState extends State<SecondaryProjectCard> {
               ? Matrix4.translationValues(0, -10, 0)
               : Matrix4.identity(),
           child: Container(
-            width: isWideScreen ? screenwidth * 0.23 : screenwidth * 0.95,
+            width: MediaQuery.of(context).size.width > 1100
+                ? MediaQuery.of(context).size.width * 0.23
+                : MediaQuery.of(context).size.width * 0.95,
             height: 360,
             margin: const EdgeInsets.only(bottom: 16),
             child: Card(
@@ -74,8 +76,9 @@ class SecondaryProjectCardState extends State<SecondaryProjectCard> {
                   Padding(
                     padding: const EdgeInsets.all(18.0),
                     child: SizedBox(
-                      width:
-                          isWideScreen ? screenwidth * 0.18 : screenwidth * 0.6,
+                      width: MediaQuery.of(context).size.width > 1100
+                          ? MediaQuery.of(context).size.width * 0.18
+                          : MediaQuery.of(context).size.width * 0.6,
                       child: Stack(
                         children: [
                           Column(
@@ -109,7 +112,11 @@ class SecondaryProjectCardState extends State<SecondaryProjectCard> {
                                   Text(
                                     widget.context_of_project,
                                     style: TextStyle(
-                                        fontSize: isWideScreen ? 18 : 16,
+                                        fontSize:
+                                            MediaQuery.of(context).size.width >
+                                                    1100
+                                                ? 18
+                                                : 16,
                                         fontWeight: FontWeight.w700),
                                   ),
                                   const Icon(Icons.topic),

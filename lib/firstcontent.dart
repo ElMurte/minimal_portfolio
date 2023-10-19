@@ -28,7 +28,7 @@ class FirstContent extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               const Text(
-                'Elvis Murtezan.',
+                'Elvis Murtezan',
                 style: TextStyle(fontSize: 66, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 16),
