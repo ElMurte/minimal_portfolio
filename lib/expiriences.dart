@@ -37,15 +37,12 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
         isWideScreen ? MediaQuery.of(context).size.width * 0.1 : 20.0;
     double marginSize =
         isWideScreen ? MediaQuery.of(context).size.width * 0.1 : 0.0;
-    double w = isWideScreen
-        ? MediaQuery.of(context).size.width * 0.3
-        : double.infinity;
 
     Widget experiencesmenu = SizedBox(
       width: MediaQuery.of(context).size.width > 1100
           ? MediaQuery.of(context).size.width * 0.5
           : MediaQuery.of(context).size.width,
-      height: 120,
+      height: 100,
       // Set the fixed width for the menu
       child: ListView(
         // Use ListView for fixed menu
@@ -89,8 +86,12 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
     );
     Widget expcontents = Container(
       width: MediaQuery.of(context).size.width,
-      height: 500,
-      margin: EdgeInsets.all(10),
+      height: MediaQuery.of(context).size.width > 1100
+          ? 540
+          : MediaQuery.of(context).size.width < 380
+              ? 680
+              : 500,
+      margin: const EdgeInsets.all(10),
       child: Column(
         // Your content goes here
         children: [
@@ -117,7 +118,7 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
         margin: EdgeInsets.only(
             left: marginSize,
             right: marginSize,
-            top: marginSize,
+            top: marginSize * 0.5,
             bottom: !isWideScreen ? marginSize : marginSize * 0.05),
         padding: EdgeInsets.only(
           left: paddingSize,

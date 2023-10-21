@@ -9,6 +9,8 @@ import 'package:minimal_portfolio/secondaryprojectcard.dart';
 import 'package:minimal_portfolio/aboutwidget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+//TODO refresh pagina normale
+//add drawer
 void main() {
   runApp(const MyApp());
 }

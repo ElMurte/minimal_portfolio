@@ -26,6 +26,9 @@ class MainProjectWidgetState extends State<MainProjectWidget> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+      ),
       child: Card(
         elevation: isHovered ? 8 : 2, // Apply elevation on hover
         child: Stack(
@@ -56,9 +59,11 @@ class MainProjectWidgetState extends State<MainProjectWidget> {
                   child: AnimatedOpacity(
                     duration: const Duration(milliseconds: 300),
                     opacity: isHovered ? 1 : 0.7,
-                    child: Image.network(
-                      widget.imageUrl,
-                      fit: BoxFit.cover,
+                    child: ClipRect(
+                      child: Image.network(
+                        widget.imageUrl,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 ),

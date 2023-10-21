@@ -50,20 +50,35 @@ class ProjectCardState extends State<ProjectCard> {
     List<Widget> descriptions = [
       Text(
         widget.title,
-        style: const TextStyle(
-          fontSize: 19,
-          fontWeight: FontWeight.bold,
+        style: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.w700,
+          color: isHovered
+              ? Colors.blue
+              : Colors.grey.shade500, // Change title text color on hover
         ),
       ),
       const SizedBox(height: 8),
-      Text(
-        'Number of persons: ${widget.numberOfPersons}',
-        style: const TextStyle(fontSize: 16),
+      Row(
+        children: [
+          Text(
+            widget.numberOfPersons,
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          const Icon(Icons.people),
+        ],
       ),
       const SizedBox(height: 8),
-      Text(
-        'Context: ${widget.context}',
-        style: const TextStyle(fontSize: 16),
+      Row(
+        children: [
+          Text(
+            widget.context,
+            style: TextStyle(
+                fontSize: MediaQuery.of(context).size.width > 1100 ? 18 : 16,
+                fontWeight: FontWeight.w400),
+          ),
+          const Icon(Icons.topic),
+        ],
       ),
       const SizedBox(height: 8),
       Text(
@@ -107,9 +122,12 @@ class ProjectCardState extends State<ProjectCard> {
           duration:
               const Duration(milliseconds: 300), // Set your desired duration
           opacity: isHovered ? 1 : 0.4, // Adjust opacity values
-          child: Image.network(
-            widget.mainUrlImage,
-            fit: BoxFit.fill,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(15.0),
+            child: Image.network(
+              widget.mainUrlImage,
+              fit: BoxFit.fill,
+            ),
           ),
         ),
       ),
@@ -161,6 +179,8 @@ class ProjectCardState extends State<ProjectCard> {
                                         child: Padding(
                                           padding: const EdgeInsets.all(8.0),
                                           child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: descriptions,
                                           ),
                                         ),
