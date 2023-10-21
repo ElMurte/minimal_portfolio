@@ -261,8 +261,7 @@ class MyAppState extends State<MyApp> {
 
                                 RepaintBoundary(
                                     key: _experienceKey,
-                                    child: Container(
-                                        child: const ExperienceWidget())),
+                                    child: const ExperienceWidget()),
 
                                 RepaintBoundary(
                                     key: _projectKey, child: _buildProjects()),

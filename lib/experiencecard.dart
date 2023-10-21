@@ -24,7 +24,7 @@ class ExperienceCard extends StatelessWidget {
     //  MediaQuery.of(context).size.width <= 1100;
     //final isMobile = MediaQuery.of(context).size.width < 650;
     return SizedBox(
-      width: double.infinity,
+      width: MediaQuery.of(context).size.width,
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
@@ -59,12 +59,10 @@ class ExperienceCard extends StatelessWidget {
             const SizedBox(height: 8),
             Padding(
               padding: const EdgeInsets.only(left: 10.0),
-              child: Flexible(
-                child: Text(
-                  experience.description,
-                  style: const TextStyle(
-                    fontSize: 17.0,
-                  ),
+              child: Text(
+                experience.description,
+                style: const TextStyle(
+                  fontSize: 17.0,
                 ),
               ),
             ),

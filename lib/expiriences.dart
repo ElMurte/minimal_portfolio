@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:minimal_portfolio/experiencecard.dart';
 
 class ExperienceWidget extends StatefulWidget {
-  const ExperienceWidget({Key? key}) : super(key: key);
+  const ExperienceWidget({super.key});
 
   @override
   ExperienceWidgetState createState() => ExperienceWidgetState();
@@ -42,8 +42,10 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
         : double.infinity;
 
     Widget experiencesmenu = SizedBox(
-      width: w,
-      height: MediaQuery.of(context).size.height * 0.6,
+      width: MediaQuery.of(context).size.width > 1100
+          ? MediaQuery.of(context).size.width * 0.5
+          : MediaQuery.of(context).size.width,
+      height: 120,
       // Set the fixed width for the menu
       child: ListView(
         // Use ListView for fixed menu
@@ -85,35 +87,38 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
         ],
       ),
     );
-    Widget expcontents = SizedBox(
-      width: double.infinity,
+    Widget expcontents = Container(
+      width: MediaQuery.of(context).size.width,
+      height: 500,
+      margin: EdgeInsets.all(10),
       child: Column(
         // Your content goes here
         children: [
           // Content section 1
           if (selectedTabIndex == 0)
-            if (selectedTabIndex == 0)
-              Column(
-                children: [
-                  experienceCardsita0!,
-                  experienceCardsita1!,
-                ],
-              ),
+            Column(
+              children: [
+                experienceCardsita0!,
+                experienceCardsita1!,
+              ],
+            ),
           // Content section 2
-          if (selectedTabIndex == 1) experienceCardmethode0!,
+          if (selectedTabIndex == 1)
+            Column(
+              children: [
+                experienceCardmethode0!,
+              ],
+            ),
           // Add more content sections as needed
         ],
       ),
     );
     return Container(
-        height: isWideScreen
-            ? MediaQuery.of(context).size.height * 0.7
-            : MediaQuery.of(context).size.height * 0.9,
         margin: EdgeInsets.only(
             left: marginSize,
             right: marginSize,
             top: marginSize,
-            bottom: !isWideScreen ? marginSize : marginSize),
+            bottom: !isWideScreen ? marginSize : marginSize * 0.05),
         padding: EdgeInsets.only(
           left: paddingSize,
           right: paddingSize,
@@ -129,23 +134,17 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
                     fontSize: 32,
                     fontWeight: FontWeight.w500,
                   )),
-              Expanded(
-                  child: LayoutBuilder(
+              const SizedBox(height: 10),
+              LayoutBuilder(
                 builder: (context, constraints) => constraints.maxWidth > 600
                     ? Row(
-                        children: [
-                          experiencesmenu,
-                          Expanded(child: expcontents)
-                        ],
+                        children: [experiencesmenu],
                       )
-                    : Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                            Flexible(flex: 1, child: experiencesmenu),
-                            Flexible(flex: 5, child: expcontents),
-                          ]),
-              ))
+                    : Column(children: [
+                        experiencesmenu,
+                      ]),
+              ),
+              expcontents
             ]));
   }
 }

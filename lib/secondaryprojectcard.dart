@@ -116,7 +116,7 @@ class SecondaryProjectCardState extends State<SecondaryProjectCard> {
                                                     1100
                                                 ? 18
                                                 : 16,
-                                        fontWeight: FontWeight.w700),
+                                        fontWeight: FontWeight.w400),
                                   ),
                                   const Icon(Icons.topic),
                                 ],
