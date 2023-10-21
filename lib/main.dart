@@ -11,6 +11,9 @@ import 'package:url_launcher/url_launcher.dart';
 
 //TODO refresh pagina normale
 //add drawer
+//togliere effetti su immagini...nel mobile...o tablet
+//traslare l'animazione o bloccarla piu in alto
+
 void main() {
   runApp(const MyApp());
 }
