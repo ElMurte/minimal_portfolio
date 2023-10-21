@@ -6,7 +6,7 @@ import 'package:minimal_portfolio/hovertext.dart';
 import 'package:minimal_portfolio/mainproject.dart';
 import 'package:minimal_portfolio/projectcard.dart';
 import 'package:minimal_portfolio/secondaryprojectcard.dart';
-import 'aboutwidget.dart';
+import 'package:minimal_portfolio/aboutwidget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 void main() {
@@ -17,8 +17,7 @@ class SocialMediaLinks extends StatelessWidget {
   final String githublink;
   final String linkedinlink;
   const SocialMediaLinks(
-      {Key? key, required this.githublink, this.linkedinlink = ""})
-      : super(key: key);
+      {super.key, required this.githublink, this.linkedinlink = ""});
   @override
   Widget build(BuildContext context) {
     const String linkedinpng =
@@ -58,7 +57,7 @@ class SocialMediaLinks extends StatelessWidget {
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   MyAppState createState() => MyAppState();
@@ -123,7 +122,7 @@ class MyAppState extends State<MyApp> {
     //final screenheight = MediaQuery.of(context).size.height;
     //final isWideScreen = MediaQuery.of(context).size.width > 1100;
     //final isTablet = MediaQuery.of(context).size.width > 650 &&
-    MediaQuery.of(context).size.width <= 1100;
+    //MediaQuery.of(context).size.width <= 1100;
     //final isMobile = MediaQuery.of(context).size.width < 650;
     /*double paddingSize = isWideScreen
         ? screenwidth * 0.11
@@ -184,7 +183,7 @@ class MyAppState extends State<MyApp> {
                       )
                     else
                       SingleChildScrollView(
-                        controller: _scrollController,
+                        // controller: _scrollController,
                         child: PopupMenuButton<String>(
                           icon: const Icon(Icons.menu),
                           onSelected: (value) {
@@ -237,7 +236,7 @@ class MyAppState extends State<MyApp> {
                         gradient: LinearGradient(
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
-                          stops: const [0.35, 1.0],
+                          stops: const [0.55, 1.0],
                           colors: [
                             Colors.white70.withOpacity(0.001), Colors.white54
                             //Theme.of(context).primaryColor,
@@ -249,11 +248,9 @@ class MyAppState extends State<MyApp> {
                         controller: _scrollController,
                         child: Stack(
                           children: [
-                            Expanded(
-                              child: SizedBox(
-                                  height: MediaQuery.of(context).size.height,
-                                  child: const AnimatedBackground()),
-                            ),
+                            SizedBox(
+                                height: MediaQuery.of(context).size.height,
+                                child: const AnimatedBackground()),
                             Column(
                               children: [
                                 RepaintBoundary(
@@ -264,7 +261,8 @@ class MyAppState extends State<MyApp> {
 
                                 RepaintBoundary(
                                     key: _experienceKey,
-                                    child: const ExperienceWidget()),
+                                    child: Container(
+                                        child: const ExperienceWidget())),
 
                                 RepaintBoundary(
                                     key: _projectKey, child: _buildProjects()),
@@ -401,8 +399,8 @@ class MyAppState extends State<MyApp> {
     return Container(
       padding: EdgeInsets.only(
           top: paddingSize * 0.5, left: paddingSize, right: paddingSize),
-      margin:
-          EdgeInsets.only(top: marginSize, left: marginSize, right: marginSize),
+      margin: EdgeInsets.only(
+          top: marginSize * 0.05, left: marginSize, right: marginSize),
       child: const Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -422,27 +420,25 @@ class MyAppState extends State<MyApp> {
           ),
           SizedBox(height: 16),
           SizedBox(
-            child: Expanded(
-              child: ProjectCard(
-                title: 'BlockCOVID',
-                numberOfPersons: '7',
-                context: 'SWE Exam',
-                timeframe: '10/2020 - 6/2021',
-                technologies: [
-                  'Flutter',
-                  'NFC/GPS',
-                  'Angular',
-                  'NodeJS',
-                  'MongoDB'
-                ],
-                mainUrlImage:
-                    'https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-                description:
-                    "For the SWE exam, whitin a team of 7 students, we had develop a dashboard and a mobile app to track users of an computer laboratory with GPS, NFC, blockchain. I have mainly worked in the mobile app(using Flutter with setState pattern from the official docs). The goal was to simulate adevelopment cycle,from requirements to the initial deployment (no maintenance phase), while switching the roles during the cycle.",
-                repourl: 'https://sweleven.gitlab.io/blockcovid/',
-                externalurl:
-                    'https://blog.imolainformatica.it/2021/08/26/sinergie-azienda-universitablock-covid/',
-              ),
+            child: ProjectCard(
+              title: 'BlockCOVID',
+              numberOfPersons: '7',
+              context: 'SWE Exam',
+              timeframe: '10/2020 - 6/2021',
+              technologies: [
+                'Flutter',
+                'NFC/GPS',
+                'Angular',
+                'NodeJS',
+                'MongoDB'
+              ],
+              mainUrlImage:
+                  'https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+              description:
+                  "For the SWE exam, whitin a team of 7 students, we had develop a dashboard and a mobile app to track users of an computer laboratory with GPS, NFC, blockchain. I have mainly worked in the mobile app(using Flutter with setState pattern from the official docs). The goal was to simulate adevelopment cycle,from requirements to the initial deployment (no maintenance phase), while switching the roles during the cycle.",
+              repourl: 'https://sweleven.gitlab.io/blockcovid/',
+              externalurl:
+                  'https://blog.imolainformatica.it/2021/08/26/sinergie-azienda-universitablock-covid/',
             ),
           ),
         ],

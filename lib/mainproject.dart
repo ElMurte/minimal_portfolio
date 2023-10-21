@@ -8,12 +8,12 @@ class MainProjectWidget extends StatefulWidget {
   final String appDescription;
 
   const MainProjectWidget({
-    Key? key,
+    super.key,
     required this.imageUrl,
     required this.playStoreUrl,
     required this.bookDescription,
     required this.appDescription,
-  }) : super(key: key);
+  });
 
   @override
   MainProjectWidgetState createState() => MainProjectWidgetState();

@@ -81,7 +81,7 @@ class ProjectCardState extends State<ProjectCard> {
         children: <Widget>[
           const Icon(Icons.code),
           const SizedBox(width: 8),
-          Expanded(
+          Flexible(
             child: Text(
               widget.technologies.join(", "),
               style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold),

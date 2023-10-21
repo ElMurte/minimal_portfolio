@@ -13,14 +13,13 @@ class SecondaryProjectCard extends StatefulWidget {
   final String repourl;
   //final liveurl;
   const SecondaryProjectCard(
-      {Key? key,
+      {super.key,
       this.title = "Title",
       this.context_of_project = "Side project",
       this.description = "",
       this.num_of_people = 1,
       this.maintechnologies = const [],
-      this.repourl = ""})
-      : super(key: key);
+      this.repourl = ""});
 
   @override
   SecondaryProjectCardState createState() => SecondaryProjectCardState();
@@ -128,25 +127,22 @@ class SecondaryProjectCardState extends State<SecondaryProjectCard> {
                                 style: const TextStyle(fontSize: 19),
                               ),
                               const SizedBox(height: 16),
-                              Positioned(
-                                bottom: 0,
-                                child: Row(
-                                  children: [
-                                    const Icon(Icons.code),
-                                    Expanded(
-                                      child: Text(
-                                        // ignore: prefer_interpolation_to_compose_strings
-                                        " " +
-                                            widget.maintechnologies.join(", "),
-                                        style: const TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
                             ],
+                          ),
+                          Positioned(
+                            bottom: 0,
+                            child: Row(
+                              children: [
+                                const Icon(Icons.code),
+                                Text(
+                                  // ignore: prefer_interpolation_to_compose_strings
+                                  " " + widget.maintechnologies.join(", "),
+                                  style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
                           ),
                           const Positioned(
                               top: 0, right: 0, child: Icon(Icons.link))

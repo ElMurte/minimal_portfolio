@@ -43,7 +43,7 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
 
     Widget experiencesmenu = SizedBox(
       width: w,
-      height: isWideScreen ? double.infinity : 100,
+      height: MediaQuery.of(context).size.height * 0.6,
       // Set the fixed width for the menu
       child: ListView(
         // Use ListView for fixed menu
@@ -112,8 +112,8 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
         margin: EdgeInsets.only(
             left: marginSize,
             right: marginSize,
-            top: marginSize * 0.05,
-            bottom: !isWideScreen ? marginSize : marginSize * 0.05),
+            top: marginSize,
+            bottom: !isWideScreen ? marginSize : marginSize),
         padding: EdgeInsets.only(
           left: paddingSize,
           right: paddingSize,
@@ -129,25 +129,23 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
                     fontSize: 32,
                     fontWeight: FontWeight.w500,
                   )),
-              Flexible(
-                  fit: FlexFit.tight,
+              Expanded(
                   child: LayoutBuilder(
-                    builder: (context, constraints) =>
-                        constraints.maxWidth > 600
-                            ? Row(
-                                children: [
-                                  Flexible(child: experiencesmenu),
-                                  Flexible(child: expcontents)
-                                ],
-                              )
-                            : Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                    Flexible(flex: 1, child: experiencesmenu),
-                                    Flexible(flex: 5, child: expcontents),
-                                  ]),
-                  ))
+                builder: (context, constraints) => constraints.maxWidth > 600
+                    ? Row(
+                        children: [
+                          experiencesmenu,
+                          Expanded(child: expcontents)
+                        ],
+                      )
+                    : Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                            Flexible(flex: 1, child: experiencesmenu),
+                            Flexible(flex: 5, child: expcontents),
+                          ]),
+              ))
             ]));
   }
 }

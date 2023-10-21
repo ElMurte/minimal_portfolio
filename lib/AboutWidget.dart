@@ -128,36 +128,34 @@ class AboutWidget extends StatelessWidget {
             Row(
               children: <Widget>[
                 // Left side: Description
-                const Expanded(
+                const Flexible(
                   child: Padding(
                     padding: EdgeInsets.all(8.0),
-                    child: Flexible(
-                      child: Column(
-                        children: [
-                          Text(
-                            'Hi again, I\'m Elvis Murtezan, an Associate Software Developer.\nMy journey in software development born in my childhood from the passion for videogames, now is driven by my genuine passion for problem-solving and technology.\n\nI approach every challenge with solid determination, whether it\'s an individual problem I\'m tackling or a collaborative effort within a team.',
-                            style: TextStyle(
-                              fontSize: 19.0,
-                            ),
+                    child: Column(
+                      children: [
+                        Text(
+                          'Hi again, I\'m Elvis Murtezan, an Associate Software Developer.\nMy journey in software development born in my childhood from the passion for videogames, now is driven by my genuine passion for problem-solving and technology.\n\nI approach every challenge with solid determination, whether it\'s an individual problem I\'m tackling or a collaborative effort within a team.',
+                          style: TextStyle(
+                            fontSize: 19.0,
                           ),
-                          SizedBox(height: 16),
-                          Text(
-                            'Currently, I\'m contributing in the dynamic field of air transport.\nHere are some of the most recent technologies I\'ve worked with:',
-                            style: TextStyle(
-                              fontSize: 19.0,
-                            ),
+                        ),
+                        SizedBox(height: 16),
+                        Text(
+                          'Currently, I\'m contributing in the dynamic field of air transport.\nHere are some of the most recent technologies I\'ve worked with:',
+                          style: TextStyle(
+                            fontSize: 19.0,
                           ),
-                          SizedBox(height: 16),
-                          SkillsList([
-                            'Azure',
-                            'Python',
-                            'Kubernetes',
-                            'Containers',
-                            'Flutter',
-                            'SQL',
-                          ])
-                        ],
-                      ),
+                        ),
+                        SizedBox(height: 16),
+                        SkillsList([
+                          'Azure',
+                          'Python',
+                          'Kubernetes',
+                          'Containers',
+                          'Flutter',
+                          'SQL',
+                        ])
+                      ],
                     ),
                   ),
                 ),
