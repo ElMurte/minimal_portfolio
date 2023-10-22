@@ -32,7 +32,7 @@ class SkillsList extends StatelessWidget {
                         child: ListTile(
                           leading: const Icon(Icons.brightness_1,
                               size: 8), // Bullet point icon
-                          title: SelectableText(
+                          title: Text(
                             skill,
                             style: const TextStyle(
                               fontSize: 19.0,

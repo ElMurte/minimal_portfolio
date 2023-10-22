@@ -25,12 +25,15 @@ class HoverTextWidgetState extends State<HoverTextWidget> {
           isHovered = hover;
         });
       },
-      child: SelectableText(
-        widget.child,
-        style: TextStyle(
-          color: textColor,
-          backgroundColor: Colors.transparent,
-          fontSize: 16,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(
+          widget.child,
+          style: TextStyle(
+            color: textColor,
+            backgroundColor: Colors.transparent,
+            fontSize: 16,
+          ),
         ),
       ),
     );

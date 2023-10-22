@@ -30,7 +30,7 @@ class ExperienceCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SelectableText(
+            Text(
               experience.role,
               style: const TextStyle(
                   fontSize: 20.0,
@@ -38,7 +38,7 @@ class ExperienceCard extends StatelessWidget {
                   decoration: TextDecoration.underline),
             ),
             const SizedBox(height: 8),
-            SelectableText(
+            Text(
               'Date: ${experience.date}',
               style: const TextStyle(
                 fontSize: 18.0,
@@ -48,7 +48,7 @@ class ExperienceCard extends StatelessWidget {
             const SizedBox(height: 8),
             const Padding(
               padding: EdgeInsets.only(left: 10.0),
-              child: SelectableText(
+              child: Text(
                 'Description:',
                 style: TextStyle(
                   fontSize: 18.0,
@@ -59,7 +59,7 @@ class ExperienceCard extends StatelessWidget {
             const SizedBox(height: 8),
             Padding(
               padding: const EdgeInsets.only(left: 10.0),
-              child: SelectableText(
+              child: Text(
                 experience.description,
                 style: const TextStyle(
                   fontSize: 17.0,

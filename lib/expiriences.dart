@@ -54,7 +54,7 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
                 ? Theme.of(context).secondaryHeaderColor
                 : Theme.of(context).scaffoldBackgroundColor,
             child: ListTile(
-              title: const SelectableText('SITA'),
+              title: const Text('SITA'),
               onTap: () {
                 // Handle menu item 1 click
                 setState(() {
@@ -70,7 +70,7 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
                 ? Theme.of(context).secondaryHeaderColor
                 : Theme.of(context).scaffoldBackgroundColor,
             child: ListTile(
-              title: const SelectableText('Methode Srl'),
+              title: const Text('Methode Srl'),
               onTap: () {
                 // Handle menu item 2 click
                 setState(() {
@@ -84,34 +84,36 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
         ],
       ),
     );
-    Widget expcontents = Container(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.width > 1100
-          ? 540
-          : MediaQuery.of(context).size.width < 380
-              ? 680
-              : 500,
-      margin: const EdgeInsets.all(10),
-      child: Column(
-        // Your content goes here
-        children: [
-          // Content section 1
-          if (selectedTabIndex == 0)
-            Column(
-              children: [
-                // experienceCardsita0!,
-                experienceCardsita1!,
-              ],
-            ),
-          // Content section 2
-          if (selectedTabIndex == 1)
-            Column(
-              children: [
-                experienceCardmethode0!,
-              ],
-            ),
-          // Add more content sections as needed
-        ],
+    Widget expcontents = SelectionArea(
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.width > 1100
+            ? 540
+            : MediaQuery.of(context).size.width < 380
+                ? 680
+                : 500,
+        margin: const EdgeInsets.all(10),
+        child: Column(
+          // Your content goes here
+          children: [
+            // Content section 1
+            if (selectedTabIndex == 0)
+              Column(
+                children: [
+                  // experienceCardsita0!,
+                  experienceCardsita1!,
+                ],
+              ),
+            // Content section 2
+            if (selectedTabIndex == 1)
+              Column(
+                children: [
+                  experienceCardmethode0!,
+                ],
+              ),
+            // Add more content sections as needed
+          ],
+        ),
       ),
     );
     return Container(
@@ -130,7 +132,7 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SelectableText("Experience",
+              const Text("Experience",
                   style: TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.w500,

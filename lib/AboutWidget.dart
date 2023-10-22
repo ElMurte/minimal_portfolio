@@ -120,61 +120,63 @@ class AboutWidget extends StatelessWidget {
         : 0.0;
 
     return RepaintBoundary(
-      child: Container(
-        padding: EdgeInsets.all(paddingSize),
-        margin: EdgeInsets.only(left: marginSize, right: marginSize),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            const Row(children: <Widget>[
-              Text(
-                'About',
-                style: TextStyle(fontSize: 32),
-              ),
-              SizedBox(width: 16),
-            ]),
-            Row(
-              children: <Widget>[
-                // Left side: Description
-                const Flexible(
-                  child: Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        Text(
-                          'I am Elvis Murtezan, a Software Developer.\nMy journey in software development born in my childhood from the passion for videogames, now is driven by my genuine passion for problem-solving and technology.\n\nI approach every challenge with solid determination, whether it\'s an individual problem I\'m tackling or a collaborative effort within a team.',
-                          style: TextStyle(
-                            fontSize: 19.0,
+      child: SelectionArea(
+        child: Container(
+          margin: EdgeInsets.all(marginSize),
+          padding: EdgeInsets.only(left: paddingSize, right: paddingSize),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              const Row(children: <Widget>[
+                Text(
+                  'About',
+                  style: TextStyle(fontSize: 32),
+                ),
+                SizedBox(width: 16),
+              ]),
+              Row(
+                children: <Widget>[
+                  // Left side: Description
+                  const Flexible(
+                    child: Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Text(
+                            'I am Elvis Murtezan, a Software Developer.\nMy journey in software development born in my childhood from the passion for videogames, now is driven by my genuine passion for problem-solving and technology.\n\nI approach every challenge with solid determination, whether it\'s an individual problem I\'m tackling or a collaborative effort within a team.',
+                            style: TextStyle(
+                              fontSize: 19.0,
+                            ),
                           ),
-                        ),
-                        SizedBox(height: 16),
-                        Text(
-                          'Currently, I\'m contributing in the dynamic field of air transport.\nHere are some of the most recent technologies I\'ve worked with:',
-                          style: TextStyle(
-                            fontSize: 19.0,
+                          SizedBox(height: 16),
+                          Text(
+                            'Currently, I\'m contributing in the dynamic field of air transport.\nHere are some of the most recent technologies I\'ve worked with:',
+                            style: TextStyle(
+                              fontSize: 19.0,
+                            ),
                           ),
-                        ),
-                        SizedBox(height: 16),
-                        SkillsList([
-                          'Azure',
-                          'Python',
-                          'Kubernetes',
-                          'Containers',
-                          'Flutter',
-                          'SQL',
-                        ])
-                      ],
+                          SizedBox(height: 16),
+                          SkillsList([
+                            'Azure',
+                            'Python',
+                            'Kubernetes',
+                            'Containers',
+                            'Flutter',
+                            'SQL',
+                          ])
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                // Right side: Image
-                if (MediaQuery.of(context).size.width > 600)
-                  const ImageWithMisalignedSquareEffect(),
-              ],
-            ),
-            if (MediaQuery.of(context).size.width < 600)
-              const ImageWithMisalignedSquareEffect(),
-          ],
+                  // Right side: Image
+                  if (MediaQuery.of(context).size.width > 600)
+                    const ImageWithMisalignedSquareEffect(),
+                ],
+              ),
+              if (MediaQuery.of(context).size.width < 600)
+                const ImageWithMisalignedSquareEffect(),
+            ],
+          ),
         ),
       ),
     );

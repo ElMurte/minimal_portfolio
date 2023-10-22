@@ -53,7 +53,7 @@ class MyAppState extends State<MyApp> {
     const SecondaryProjectCard(
       title: 'Netmovies',
       num_of_people: 3,
-      context_of_project: "Web Technologies exam",
+      context_of_project: "Tech Web exam",
       description:
           "Created a streaming website without using third-party libraries(as accessible as possible).",
       maintechnologies: ["Javascript", "HTML", "CSS", "PHP"],
@@ -111,253 +111,246 @@ class MyAppState extends State<MyApp> {
         theme: _buildTheme(),
         initialRoute: '/',
         routes: {
-          '/': (context) => SelectionArea(
-                child: Scaffold(
-                  appBar: AppBar(
-                    title: TextButton(
-                        style: TextButton.styleFrom(
-                          padding: EdgeInsets.zero,
-                        ),
-                        child: const Text(
-                          'Elvis Murtezan',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        onPressed: () {
-                          //await Navigator.pushReplacementNamed(context, '/');
-
-                          setState(() {
-                            _selectedSection = 'Intro';
-                            scrollIntoWidget(_initial);
-                          });
-                        }),
-                    actions: <Widget>[
-                      Switch(
-                        value: _isDarkMode,
-                        onChanged: (value) {
-                          _toggleTheme();
-                        },
+          '/': (context) => Scaffold(
+                appBar: AppBar(
+                  title: TextButton(
+                      style: TextButton.styleFrom(
+                        padding: EdgeInsets.zero,
                       ),
-                      if (MediaQuery.of(context).size.width > 1100)
-                        Padding(
-                          padding: const EdgeInsets.only(right: 16.0),
-                          child: Row(
-                            children: <Widget>[
-                              _buildLink('Intro', _initial),
-                              _buildLink('About', _aboutKey),
-                              _buildLink('Experience', _experienceKey),
-                              _buildLink('Projects', _projectKey),
-                            ],
-                          ),
-                        )
-                      else
-                        SingleChildScrollView(
-                          // controller: _scrollController,
-                          child: PopupMenuButton<String>(
-                            icon: const Icon(Icons.menu),
-                            onSelected: (value) {
-                              setState(() {
-                                _selectedSection = value;
-                                switch (value) {
-                                  case "About":
-                                    scrollIntoWidget(_aboutKey);
-                                  case "Projects":
-                                    scrollIntoWidget(_projectKey);
-                                  case "Experience":
-                                    scrollIntoWidget(_experienceKey);
-                                  default:
-                                    scrollIntoWidget(_initial);
-                                }
-                              });
-                            },
-                            itemBuilder: (BuildContext context) {
-                              return <PopupMenuEntry<String>>[
-                                const PopupMenuItem<String>(
-                                  value: 'Intro',
-                                  child: Text(
-                                    'Intro',
+                      child: const Text(
+                        'Elvis Murtezan',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      onPressed: () {
+                        //await Navigator.pushReplacementNamed(context, '/');
+
+                        setState(() {
+                          _selectedSection = 'Intro';
+                          scrollIntoWidget(_initial);
+                        });
+                      }),
+                  actions: <Widget>[
+                    Switch(
+                      value: _isDarkMode,
+                      onChanged: (value) {
+                        _toggleTheme();
+                      },
+                    ),
+                    if (MediaQuery.of(context).size.width > 1100)
+                      Padding(
+                        padding: const EdgeInsets.only(right: 16.0),
+                        child: Row(
+                          children: <Widget>[
+                            _buildLink('Intro', _initial),
+                            _buildLink('About', _aboutKey),
+                            _buildLink('Experience', _experienceKey),
+                            _buildLink('Projects', _projectKey),
+                          ],
+                        ),
+                      )
+                    else
+                      SingleChildScrollView(
+                        // controller: _scrollController,
+                        child: PopupMenuButton<String>(
+                          icon: const Icon(Icons.menu),
+                          onSelected: (value) {
+                            setState(() {
+                              _selectedSection = value;
+                              switch (value) {
+                                case "About":
+                                  scrollIntoWidget(_aboutKey);
+                                case "Projects":
+                                  scrollIntoWidget(_projectKey);
+                                case "Experience":
+                                  scrollIntoWidget(_experienceKey);
+                                default:
+                                  scrollIntoWidget(_initial);
+                              }
+                            });
+                          },
+                          itemBuilder: (BuildContext context) {
+                            return <PopupMenuEntry<String>>[
+                              const PopupMenuItem<String>(
+                                value: 'Intro',
+                                child: Text(
+                                  'Intro',
+                                ),
+                              ),
+                              const PopupMenuItem<String>(
+                                value: 'About',
+                                child: Text(
+                                  'About',
+                                ),
+                              ),
+                              const PopupMenuItem<String>(
+                                value: 'Experience',
+                                child: Text('Experience'),
+                              ),
+                              const PopupMenuItem<String>(
+                                value: 'Projects',
+                                child: Text('Projects'),
+                              ),
+                            ];
+                          },
+                        ),
+                      ),
+                  ],
+                ),
+                body: Stack(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          stops: const [0.55, 1.0],
+                          colors: [
+                            Colors.white70.withOpacity(0.001), Colors.white54
+                            //Theme.of(context).primaryColor,
+                            //Theme.of(context).scaffoldBackgroundColor,
+                          ],
+                        ),
+                      ),
+                      child: SingleChildScrollView(
+                        controller: _scrollController,
+                        child: Stack(
+                          children: [
+                            SizedBox(
+                                height: MediaQuery.of(context).size.height,
+                                child: const AnimatedBackground()),
+                            Column(
+                              children: [
+                                RepaintBoundary(
+                                    key: _initial,
+                                    child: const FirstContent(
+                                      thelinks: SocialMediaLinks(
+                                        githublink: github,
+                                        linkedinlink: linkedin,
+                                      ),
+                                    )),
+
+                                RepaintBoundary(
+                                    key: _aboutKey, child: const AboutWidget()),
+
+                                RepaintBoundary(
+                                    key: _experienceKey,
+                                    child: const ExperienceWidget()),
+
+                                RepaintBoundary(
+                                    key: _projectKey, child: _buildProjects()),
+                                // Footer section
+
+                                const Text("Other projects",
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w500)),
+                                const SizedBox(height: 16),
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.8,
+                                  child: Column(
+                                    children: [
+                                      MediaQuery.of(context).size.width > 1100
+                                          ? Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              children: secondaryprojects,
+                                            )
+                                          : Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              children: secondaryprojects,
+                                            ),
+                                    ],
                                   ),
                                 ),
-                                const PopupMenuItem<String>(
-                                  value: 'About',
-                                  child: Text(
-                                    'About',
-                                  ),
-                                ),
-                                const PopupMenuItem<String>(
-                                  value: 'Experience',
-                                  child: Text('Experience'),
-                                ),
-                                const PopupMenuItem<String>(
-                                  value: 'Projects',
-                                  child: Text('Projects'),
-                                ),
-                              ];
-                            },
-                          ),
-                        ),
-                    ],
-                  ),
-                  body: Stack(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            stops: const [0.55, 1.0],
-                            colors: [
-                              Colors.white70.withOpacity(0.001), Colors.white54
-                              //Theme.of(context).primaryColor,
-                              //Theme.of(context).scaffoldBackgroundColor,
-                            ],
-                          ),
-                        ),
-                        child: SingleChildScrollView(
-                          controller: _scrollController,
-                          child: Stack(
-                            children: [
-                              SizedBox(
-                                  height: MediaQuery.of(context).size.height,
-                                  child: const AnimatedBackground()),
-                              Column(
-                                children: [
-                                  RepaintBoundary(
-                                      key: _initial,
-                                      child: const FirstContent(
-                                        thelinks: SocialMediaLinks(
+                                Container(
+                                  alignment: Alignment.center,
+                                  color: Colors.transparent.withOpacity(
+                                      0.01), // Customize the background color.
+                                  padding: const EdgeInsets.all(
+                                      16.0), // Add padding for content.
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      /*if (MediaQuery.of(context).size.width <
+                                      950)
+                                    const Row(
+                                      children: [
+                                        SocialMediaLinks(
                                           githublink: github,
                                           linkedinlink: linkedin,
                                         ),
-                                      )),
-
-                                  RepaintBoundary(
-                                      key: _aboutKey,
-                                      child: const AboutWidget()),
-
-                                  RepaintBoundary(
-                                      key: _experienceKey,
-                                      child: const ExperienceWidget()),
-
-                                  RepaintBoundary(
-                                      key: _projectKey,
-                                      child: _buildProjects()),
-                                  // Footer section
-
-                                  const Text("Other projects",
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w500)),
-                                  const SizedBox(height: 16),
-                                  SizedBox(
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.8,
-                                    child: Column(
-                                      children: [
-                                        MediaQuery.of(context).size.width > 1100
-                                            ? Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceEvenly,
-                                                children: secondaryprojects,
-                                              )
-                                            : Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceEvenly,
-                                                children: secondaryprojects,
-                                              ),
                                       ],
-                                    ),
-                                  ),
-                                  Container(
-                                    alignment: Alignment.center,
-                                    color: Colors.transparent.withOpacity(
-                                        0.01), // Customize the background color.
-                                    padding: const EdgeInsets.all(
-                                        16.0), // Add padding for content.
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        /*if (MediaQuery.of(context).size.width <
-                                        950)
-                                      const Row(
+                                    ),*/
+                                      const Row(children: [
+                                        SocialMediaLinks(
+                                          githublink: github,
+                                          linkedinlink: linkedin,
+                                        )
+                                      ]),
+                                      MediaQuery.of(context).size.width < 600
+                                          ? const Expanded(
+                                              child: HoverTextWidget(
+                                                  "Built with Flutter and AI copilot tools"),
+                                            )
+                                          : const HoverTextWidget(
+                                              "Built with Flutter and AI copilot tools"),
+                                      const SizedBox(width: 8.0),
+                                      Row(
                                         children: [
-                                          SocialMediaLinks(
-                                            githublink: github,
-                                            linkedinlink: linkedin,
+                                          InkWell(
+                                            onTap: () => {
+                                              launchUrl(Uri.parse(
+                                                  "https://github.com/features/copilot"))
+                                            },
+                                            child: Image.network(
+                                              'https://github.gallerycdn.vsassets.io/extensions/github/copilotvs/1.110.0.0/1694462364886/Microsoft.VisualStudio.Services.Icons.Default',
+                                              height:
+                                                  45.0, // Limit the height to 50 pixels.
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                              width:
+                                                  5.0), // Add spacing between icons.
+                                          InkWell(
+                                            onTap: () => {
+                                              launchUrl(Uri.parse(
+                                                  "https://chat.openai.com/"))
+                                            },
+                                            child: Image.network(
+                                              'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/2048px-ChatGPT_logo.svg.png',
+                                              height:
+                                                  45.0, // Limit the height to 50 pixels.
+                                            ),
                                           ),
                                         ],
-                                      ),*/
-                                        const Row(children: [
-                                          SocialMediaLinks(
-                                            githublink: github,
-                                            linkedinlink: linkedin,
-                                          )
-                                        ]),
-                                        MediaQuery.of(context).size.width < 600
-                                            ? const Expanded(
-                                                child: HoverTextWidget(
-                                                    "Built with Flutter and AI copilot tools"),
-                                              )
-                                            : const HoverTextWidget(
-                                                "Built with Flutter and AI copilot tools"),
-                                        const SizedBox(width: 8.0),
-                                        Row(
-                                          children: [
-                                            InkWell(
-                                              onTap: () => {
-                                                launchUrl(Uri.parse(
-                                                    "https://github.com/features/copilot"))
-                                              },
-                                              child: Image.network(
-                                                'https://github.gallerycdn.vsassets.io/extensions/github/copilotvs/1.110.0.0/1694462364886/Microsoft.VisualStudio.Services.Icons.Default',
-                                                height:
-                                                    45.0, // Limit the height to 50 pixels.
-                                              ),
-                                            ),
-                                            const SizedBox(
-                                                width:
-                                                    5.0), // Add spacing between icons.
-                                            InkWell(
-                                              onTap: () => {
-                                                launchUrl(Uri.parse(
-                                                    "https://chat.openai.com/"))
-                                              },
-                                              child: Image.network(
-                                                'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/2048px-ChatGPT_logo.svg.png',
-                                                height:
-                                                    45.0, // Limit the height to 50 pixels.
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
-                            ],
-                          ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
-                      /* if (MediaQuery.of(context).size.width > 1100)
-                    const Positioned(
-                        bottom: 0,
-                        left: 0,
-                        child: SizedBox(
-                          child: SocialMediaLinks(
-                            githublink: github,
-                            linkedinlink: linkedin,
-                          ),
-                        ))
-                  else
-                    const SizedBox(),*/
-                    ],
-                  ),
+                    ),
+                    /* if (MediaQuery.of(context).size.width > 1100)
+                  const Positioned(
+                      bottom: 0,
+                      left: 0,
+                      child: SizedBox(
+                        child: SocialMediaLinks(
+                          githublink: github,
+                          linkedinlink: linkedin,
+                        ),
+                      ))
+                else
+                  const SizedBox(),*/
+                  ],
                 ),
               )
         });
