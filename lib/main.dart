@@ -10,6 +10,9 @@ import 'package:minimal_portfolio/aboutwidget.dart';
 import 'package:minimal_portfolio/socialmedialinks.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+// ignore: unused_import
+import 'techanmiation.dart';
+
 //TODO refresh pagina normale
 //add drawer
 //togliere effetti su immagini...nel mobile...o tablet
@@ -221,6 +224,14 @@ class MyAppState extends State<MyApp> {
                             SizedBox(
                                 height: MediaQuery.of(context).size.height,
                                 child: const AnimatedBackground()),
+
+                            /*SizedBox(
+                              height: MediaQuery.of(context).size.height,
+                              child: Positioned(
+                                  right: 50,
+                                  top: 50,
+                                  child: RotatingClockCircular3DImages()),
+                            ),*/
                             Column(
                               children: [
                                 RepaintBoundary(
@@ -428,7 +439,7 @@ class MyAppState extends State<MyApp> {
               mainUrlImage:
                   'https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
               description:
-                  "We had develop a dashboard and a mobile app to track users of an computer laboratory with GPS, NFC, blockchain. I have mainly worked in the mobile app(using Flutter with setState pattern from the official docs). The goal was to simulate a development cycle,from requirements to the initial deployment (no maintenance phase), while switching the roles during the cycle.",
+                  "We had developed a dashboard and a mobile app to track users of a computer laboratory with GPS, NFC, and blockchain. I have mainly worked in the mobile app(using Flutter with a setState pattern from the official docs). The goal was to simulate a development cycle, from requirements to the initial deployment (no maintenance phase), while switching the roles during the cycle.",
               repourl: 'https://sweleven.gitlab.io/blockcovid/',
               externalurl:
                   'https://blog.imolainformatica.it/2021/08/26/sinergie-azienda-universitablock-covid/',

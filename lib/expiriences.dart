@@ -20,7 +20,7 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
           role: 'Junior Software engineer',
           date: 'November 2022 - now',
           description:
-              'I have contributing with many different technologies(frontend/backend), with Azure as the main cloud provider within an Agile environment:\n• building PoC’s:\n built a sample app with Power Apps, clone an existing app with Flutter, build some simple Power BI reports\n• production:\n automating of tasks using mainly Python and Power Platform, Data factory for ETL operations'));
+              'I am contributing with many different technologies(frontend/backend), with Azure as the main cloud provider within an Agile environment:\n• building PoC’s:\n built a sample app with Power Apps, clone an existing app with Flutter, build some simple Power BI reports\n• production:\n automating of tasks using mainly Python and Power Platform, Data factory for ETL operations'));
   ExperienceCard? experienceCardmethode0 = ExperienceCard(
       experience: Experience(
           role: 'Intern Software Developer',

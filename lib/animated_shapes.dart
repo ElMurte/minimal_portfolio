@@ -53,6 +53,7 @@ class AnimatedBackgroundState extends State<AnimatedBackground>
                 left: 0.0,
                 top: MediaQuery.of(context).size.height * 0.3,
                 child: AnimatedShape(
+                  rotationSpeed: 1,
                   animationValue: animation.animation.value,
                   color: Theme.of(context).primaryColorDark,
                   shape: BoxShape.circle,
@@ -62,6 +63,7 @@ class AnimatedBackgroundState extends State<AnimatedBackground>
                 left: 50.0,
                 top: MediaQuery.of(context).size.height * 0.6,
                 child: AnimatedShape(
+                  rotationSpeed: 1,
                   animationValue: animation.animation.value,
                   color: Colors.blue,
                   shape: BoxShape.rectangle, // Square
@@ -73,6 +75,7 @@ class AnimatedBackgroundState extends State<AnimatedBackground>
                 right: 0.0,
                 top: MediaQuery.of(context).size.height * 0.2,
                 child: AnimatedShape(
+                  rotationSpeed: 1,
                   animationValue: animation.animation.value,
                   color: Theme.of(context).primaryColor,
                   shape: BoxShape.circle,
@@ -82,6 +85,7 @@ class AnimatedBackgroundState extends State<AnimatedBackground>
                 right: 50.0,
                 top: MediaQuery.of(context).size.height * 0.5,
                 child: AnimatedShape(
+                  rotationSpeed: 0.5,
                   animationValue: animation.animation.value,
                   color: Theme.of(context).primaryColorDark,
                   shape: BoxShape.rectangle, // Square
@@ -100,28 +104,33 @@ class AnimatedShape extends StatelessWidget {
   final double animationValue;
   final Color color;
   final BoxShape shape;
+  final double rotationSpeed; // Add a rotation speed for each shape
 
   const AnimatedShape({
     super.key,
     required this.animationValue,
     required this.color,
     required this.shape,
+    required this.rotationSpeed,
   });
 
   @override
   Widget build(BuildContext context) {
     double widthm = MediaQuery.of(context).size.width;
-    // ignore: unused_local_variable
-    double heightm = MediaQuery.of(context).size.height;
     return Transform.translate(
-      offset: Offset(0,
-          50 * (1 - animationValue)), // Adjust the offset for animation effect
-      child: Container(
-        width: widthm * 0.05,
-        height: widthm * 0.05,
-        decoration: BoxDecoration(
-          color: color,
-          shape: shape,
+      offset: Offset(0, 50 * (1 - animationValue)),
+      child: Transform(
+        transform: Matrix4.rotationY(2 * 3.14159265359 * animationValue) *
+            Matrix4.rotationZ(
+                2 * 3.14159265359 * animationValue * rotationSpeed),
+        alignment: Alignment.center,
+        child: Container(
+          width: widthm * 0.05,
+          height: widthm * 0.05,
+          decoration: BoxDecoration(
+            color: color,
+            shape: shape,
+          ),
         ),
       ),
     );
