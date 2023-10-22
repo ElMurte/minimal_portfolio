@@ -7,58 +7,23 @@ import 'package:minimal_portfolio/mainproject.dart';
 import 'package:minimal_portfolio/projectcard.dart';
 import 'package:minimal_portfolio/secondaryprojectcard.dart';
 import 'package:minimal_portfolio/aboutwidget.dart';
+import 'package:minimal_portfolio/socialmedialinks.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 //TODO refresh pagina normale
 //add drawer
 //togliere effetti su immagini...nel mobile...o tablet
 //traslare l'animazione o bloccarla piu in alto
+//link non appaiono su tablet done
+//immagini blu su tablet e mobile (togliere...)
+//icone technologie usate come animazione o widget nel intro
+//fix grammatica
+//margin about...DONE
+//contenuto che sia accativante e sensato descrizioen DONE
+//check links vari
 
 void main() {
   runApp(const MyApp());
-}
-
-class SocialMediaLinks extends StatelessWidget {
-  final String githublink;
-  final String linkedinlink;
-  const SocialMediaLinks(
-      {super.key, required this.githublink, this.linkedinlink = ""});
-  @override
-  Widget build(BuildContext context) {
-    const String linkedinpng =
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/600px-LinkedIn_logo_initials.png";
-    const String githubpng =
-        "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png";
-    return Row(children: [
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: InkWell(
-          onTap: () {
-            launchUrl(Uri.parse(githublink));
-          },
-          child: Image.network(
-            githubpng,
-            width: 45,
-            height: 45.0, // Limit the height to 50 pixels.
-          ),
-        ),
-      ),
-      const SizedBox(width: 5.0), // Add spacing between icons.
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: InkWell(
-          onTap: () {
-            launchUrl(Uri.parse(linkedinlink));
-          },
-          child: Image.network(
-            linkedinpng,
-            width: 45,
-            height: 45.0, // Limit the height to 50 pixels.
-          ),
-        ),
-      ),
-    ]);
-  }
 }
 
 class MyApp extends StatefulWidget {
@@ -146,222 +111,253 @@ class MyAppState extends State<MyApp> {
         theme: _buildTheme(),
         initialRoute: '/',
         routes: {
-          '/': (context) => Scaffold(
-                appBar: AppBar(
-                  title: TextButton(
-                      style: TextButton.styleFrom(
-                        padding: EdgeInsets.zero,
-                      ),
-                      child: const Text(
-                        'Elvis Murtezan',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
+          '/': (context) => SelectionArea(
+                child: Scaffold(
+                  appBar: AppBar(
+                    title: TextButton(
+                        style: TextButton.styleFrom(
+                          padding: EdgeInsets.zero,
                         ),
-                      ),
-                      onPressed: () {
-                        //await Navigator.pushReplacementNamed(context, '/');
-
-                        setState(() {
-                          _selectedSection = 'Intro';
-                          scrollIntoWidget(_initial);
-                        });
-                      }),
-                  actions: <Widget>[
-                    Switch(
-                      value: _isDarkMode,
-                      onChanged: (value) {
-                        _toggleTheme();
-                      },
-                    ),
-                    if (MediaQuery.of(context).size.width > 1100)
-                      Padding(
-                        padding: const EdgeInsets.only(right: 16.0),
-                        child: Row(
-                          children: <Widget>[
-                            _buildLink('Intro', _initial),
-                            _buildLink('About', _aboutKey),
-                            _buildLink('Experience', _experienceKey),
-                            _buildLink('Projects', _projectKey),
-                          ],
+                        child: const Text(
+                          'Elvis Murtezan',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      )
-                    else
-                      SingleChildScrollView(
-                        // controller: _scrollController,
-                        child: PopupMenuButton<String>(
-                          icon: const Icon(Icons.menu),
-                          onSelected: (value) {
-                            setState(() {
-                              _selectedSection = value;
-                              switch (value) {
-                                case "About":
-                                  scrollIntoWidget(_aboutKey);
-                                case "Projects":
-                                  scrollIntoWidget(_projectKey);
-                                case "Experience":
-                                  scrollIntoWidget(_experienceKey);
-                                default:
-                                  scrollIntoWidget(_initial);
-                              }
-                            });
-                          },
-                          itemBuilder: (BuildContext context) {
-                            return <PopupMenuEntry<String>>[
-                              const PopupMenuItem<String>(
-                                value: 'Intro',
-                                child: Text(
-                                  'Intro',
-                                ),
-                              ),
-                              const PopupMenuItem<String>(
-                                value: 'About',
-                                child: Text(
-                                  'About',
-                                ),
-                              ),
-                              const PopupMenuItem<String>(
-                                value: 'Experience',
-                                child: Text('Experience'),
-                              ),
-                              const PopupMenuItem<String>(
-                                value: 'Projects',
-                                child: Text('Projects'),
-                              ),
-                            ];
-                          },
-                        ),
+                        onPressed: () {
+                          //await Navigator.pushReplacementNamed(context, '/');
+
+                          setState(() {
+                            _selectedSection = 'Intro';
+                            scrollIntoWidget(_initial);
+                          });
+                        }),
+                    actions: <Widget>[
+                      Switch(
+                        value: _isDarkMode,
+                        onChanged: (value) {
+                          _toggleTheme();
+                        },
                       ),
-                  ],
-                ),
-                body: Stack(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          stops: const [0.55, 1.0],
-                          colors: [
-                            Colors.white70.withOpacity(0.001), Colors.white54
-                            //Theme.of(context).primaryColor,
-                            //Theme.of(context).scaffoldBackgroundColor,
-                          ],
-                        ),
-                      ),
-                      child: SingleChildScrollView(
-                        controller: _scrollController,
-                        child: Stack(
-                          children: [
-                            SizedBox(
-                                height: MediaQuery.of(context).size.height,
-                                child: const AnimatedBackground()),
-                            Column(
-                              children: [
-                                RepaintBoundary(
-                                    key: _initial, child: const FirstContent()),
-
-                                RepaintBoundary(
-                                    key: _aboutKey, child: const AboutWidget()),
-
-                                RepaintBoundary(
-                                    key: _experienceKey,
-                                    child: const ExperienceWidget()),
-
-                                RepaintBoundary(
-                                    key: _projectKey, child: _buildProjects()),
-                                // Footer section
-
-                                const Text("Other projects",
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w500)),
-                                const SizedBox(height: 16),
-                                SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.8,
-                                  child: Column(
-                                    children: [
-                                      MediaQuery.of(context).size.width > 1100
-                                          ? Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
-                                              children: secondaryprojects,
-                                            )
-                                          : Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
-                                              children: secondaryprojects,
-                                            ),
-                                    ],
+                      if (MediaQuery.of(context).size.width > 1100)
+                        Padding(
+                          padding: const EdgeInsets.only(right: 16.0),
+                          child: Row(
+                            children: <Widget>[
+                              _buildLink('Intro', _initial),
+                              _buildLink('About', _aboutKey),
+                              _buildLink('Experience', _experienceKey),
+                              _buildLink('Projects', _projectKey),
+                            ],
+                          ),
+                        )
+                      else
+                        SingleChildScrollView(
+                          // controller: _scrollController,
+                          child: PopupMenuButton<String>(
+                            icon: const Icon(Icons.menu),
+                            onSelected: (value) {
+                              setState(() {
+                                _selectedSection = value;
+                                switch (value) {
+                                  case "About":
+                                    scrollIntoWidget(_aboutKey);
+                                  case "Projects":
+                                    scrollIntoWidget(_projectKey);
+                                  case "Experience":
+                                    scrollIntoWidget(_experienceKey);
+                                  default:
+                                    scrollIntoWidget(_initial);
+                                }
+                              });
+                            },
+                            itemBuilder: (BuildContext context) {
+                              return <PopupMenuEntry<String>>[
+                                const PopupMenuItem<String>(
+                                  value: 'Intro',
+                                  child: Text(
+                                    'Intro',
                                   ),
                                 ),
-                                Container(
-                                  alignment: Alignment.center,
-                                  color: Colors.transparent.withOpacity(
-                                      0.01), // Customize the background color.
-                                  padding: const EdgeInsets.all(
-                                      16.0), // Add padding for content.
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      if (MediaQuery.of(context).size.width <
-                                          950)
-                                        const Row(
+                                const PopupMenuItem<String>(
+                                  value: 'About',
+                                  child: Text(
+                                    'About',
+                                  ),
+                                ),
+                                const PopupMenuItem<String>(
+                                  value: 'Experience',
+                                  child: Text('Experience'),
+                                ),
+                                const PopupMenuItem<String>(
+                                  value: 'Projects',
+                                  child: Text('Projects'),
+                                ),
+                              ];
+                            },
+                          ),
+                        ),
+                    ],
+                  ),
+                  body: Stack(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            stops: const [0.55, 1.0],
+                            colors: [
+                              Colors.white70.withOpacity(0.001), Colors.white54
+                              //Theme.of(context).primaryColor,
+                              //Theme.of(context).scaffoldBackgroundColor,
+                            ],
+                          ),
+                        ),
+                        child: SingleChildScrollView(
+                          controller: _scrollController,
+                          child: Stack(
+                            children: [
+                              SizedBox(
+                                  height: MediaQuery.of(context).size.height,
+                                  child: const AnimatedBackground()),
+                              Column(
+                                children: [
+                                  RepaintBoundary(
+                                      key: _initial,
+                                      child: const FirstContent(
+                                        thelinks: SocialMediaLinks(
+                                          githublink: github,
+                                          linkedinlink: linkedin,
+                                        ),
+                                      )),
+
+                                  RepaintBoundary(
+                                      key: _aboutKey,
+                                      child: const AboutWidget()),
+
+                                  RepaintBoundary(
+                                      key: _experienceKey,
+                                      child: const ExperienceWidget()),
+
+                                  RepaintBoundary(
+                                      key: _projectKey,
+                                      child: _buildProjects()),
+                                  // Footer section
+
+                                  const Text("Other projects",
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w500)),
+                                  const SizedBox(height: 16),
+                                  SizedBox(
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.8,
+                                    child: Column(
+                                      children: [
+                                        MediaQuery.of(context).size.width > 1100
+                                            ? Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                children: secondaryprojects,
+                                              )
+                                            : Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                children: secondaryprojects,
+                                              ),
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    alignment: Alignment.center,
+                                    color: Colors.transparent.withOpacity(
+                                        0.01), // Customize the background color.
+                                    padding: const EdgeInsets.all(
+                                        16.0), // Add padding for content.
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        /*if (MediaQuery.of(context).size.width <
+                                        950)
+                                      const Row(
+                                        children: [
+                                          SocialMediaLinks(
+                                            githublink: github,
+                                            linkedinlink: linkedin,
+                                          ),
+                                        ],
+                                      ),*/
+                                        const Row(children: [
+                                          SocialMediaLinks(
+                                            githublink: github,
+                                            linkedinlink: linkedin,
+                                          )
+                                        ]),
+                                        MediaQuery.of(context).size.width < 600
+                                            ? const Expanded(
+                                                child: HoverTextWidget(
+                                                    "Built with Flutter and AI copilot tools"),
+                                              )
+                                            : const HoverTextWidget(
+                                                "Built with Flutter and AI copilot tools"),
+                                        const SizedBox(width: 8.0),
+                                        Row(
                                           children: [
-                                            SocialMediaLinks(
-                                              githublink: github,
-                                              linkedinlink: linkedin,
+                                            InkWell(
+                                              onTap: () => {
+                                                launchUrl(Uri.parse(
+                                                    "https://github.com/features/copilot"))
+                                              },
+                                              child: Image.network(
+                                                'https://github.gallerycdn.vsassets.io/extensions/github/copilotvs/1.110.0.0/1694462364886/Microsoft.VisualStudio.Services.Icons.Default',
+                                                height:
+                                                    45.0, // Limit the height to 50 pixels.
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                                width:
+                                                    5.0), // Add spacing between icons.
+                                            InkWell(
+                                              onTap: () => {
+                                                launchUrl(Uri.parse(
+                                                    "https://chat.openai.com/"))
+                                              },
+                                              child: Image.network(
+                                                'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/2048px-ChatGPT_logo.svg.png',
+                                                height:
+                                                    45.0, // Limit the height to 50 pixels.
+                                              ),
                                             ),
                                           ],
                                         ),
-                                      MediaQuery.of(context).size.width < 600
-                                          ? const Expanded(
-                                              child: HoverTextWidget(
-                                                  "Built with Flutter and AI copilot tools"),
-                                            )
-                                          : const HoverTextWidget(
-                                              "Built with Flutter and AI copilot tools"),
-                                      const SizedBox(width: 8.0),
-                                      Row(
-                                        children: [
-                                          Image.network(
-                                            'https://github.gallerycdn.vsassets.io/extensions/github/copilotvs/1.110.0.0/1694462364886/Microsoft.VisualStudio.Services.Icons.Default',
-                                            height:
-                                                45.0, // Limit the height to 50 pixels.
-                                          ),
-                                          const SizedBox(
-                                              width:
-                                                  5.0), // Add spacing between icons.
-                                          Image.network(
-                                            'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/2048px-ChatGPT_logo.svg.png',
-                                            height:
-                                                45.0, // Limit the height to 50 pixels.
-                                          ),
-                                        ],
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ],
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    if (MediaQuery.of(context).size.width > 1100)
-                      const Positioned(
-                          bottom: 0,
-                          left: 0,
-                          child: SizedBox(
-                            child: SocialMediaLinks(
-                              githublink: github,
-                              linkedinlink: linkedin,
-                            ),
-                          ))
-                    else
-                      const SizedBox(),
-                  ],
+                      /* if (MediaQuery.of(context).size.width > 1100)
+                    const Positioned(
+                        bottom: 0,
+                        left: 0,
+                        child: SizedBox(
+                          child: SocialMediaLinks(
+                            githublink: github,
+                            linkedinlink: linkedin,
+                          ),
+                        ))
+                  else
+                    const SizedBox(),*/
+                    ],
+                  ),
                 ),
               )
         });
@@ -439,7 +435,7 @@ class MyAppState extends State<MyApp> {
               mainUrlImage:
                   'https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
               description:
-                  "For the SWE exam, whitin a team of 7 students, we had develop a dashboard and a mobile app to track users of an computer laboratory with GPS, NFC, blockchain. I have mainly worked in the mobile app(using Flutter with setState pattern from the official docs). The goal was to simulate adevelopment cycle,from requirements to the initial deployment (no maintenance phase), while switching the roles during the cycle.",
+                  "We had develop a dashboard and a mobile app to track users of an computer laboratory with GPS, NFC, blockchain. I have mainly worked in the mobile app(using Flutter with setState pattern from the official docs). The goal was to simulate a development cycle,from requirements to the initial deployment (no maintenance phase), while switching the roles during the cycle.",
               repourl: 'https://sweleven.gitlab.io/blockcovid/',
               externalurl:
                   'https://blog.imolainformatica.it/2021/08/26/sinergie-azienda-universitablock-covid/',

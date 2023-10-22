@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:minimal_portfolio/socialmedialinks.dart';
 
 class FirstContent extends StatelessWidget {
-  const FirstContent({super.key});
+  const FirstContent({super.key, required this.thelinks});
+  final SocialMediaLinks thelinks;
   @override
   Widget build(BuildContext context) {
     double padding = MediaQuery.of(context).size.width > 600
@@ -12,13 +14,13 @@ class FirstContent extends StatelessWidget {
         : 16.0;
     return Container(
       margin: EdgeInsets.all(marginsize),
-      padding: EdgeInsets.only(left: padding, right: padding),
+      padding: EdgeInsets.only(bottom: padding, left: padding, right: padding),
       child: Column(
         children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(
+              SelectableText(
                 'Hello people!  I am',
                 style: TextStyle(
                   fontSize: 18,
@@ -27,20 +29,24 @@ class FirstContent extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
-              const Text(
+              const SelectableText(
                 'Elvis Murtezan',
                 style: TextStyle(fontSize: 66, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 16),
-              const Text(
+              const SelectableText(
                 'I build software with different technologies.',
                 style: TextStyle(fontSize: 43, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 16),
-              const Text(
-                'I’m a confident software engineer, I consider myself a full stack developer \nand enjoy it a lot, currently working in the air transport industry.',
+              const SelectableText(
+                'I’m a passionate software engineer based in the Netherlands, with a solid foundation in both front-end and back-end development. I am currently contributing to the air transport industry.',
                 style: TextStyle(fontSize: 19),
               ),
+              const SizedBox(height: 16),
+              Row(
+                children: [thelinks],
+              )
             ],
           ),
         ],

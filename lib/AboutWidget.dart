@@ -70,7 +70,11 @@ class ImageWithMisalignedSquareEffectState
                 ),
                 // Image with Hover Effect and Positioning
                 Container(
-                  color: (!isHovered) ? Colors.blue : Colors.transparent,
+                  color: (MediaQuery.of(context).size.width > 1100)
+                      ? !isHovered
+                          ? Colors.blue
+                          : Colors.transparent
+                      : Colors.transparent,
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 300),
                     transform: isHovered
@@ -80,7 +84,11 @@ class ImageWithMisalignedSquareEffectState
                     height: imagesizeandsquare,
                     child: AnimatedOpacity(
                       duration: const Duration(milliseconds: 300),
-                      opacity: isHovered ? 1 : 0.5, // Adjust the opacity
+                      opacity: isHovered
+                          ? 1
+                          : MediaQuery.of(context).size.width > 1100
+                              ? 0.5
+                              : 1, // Adjust the opacity
                       child: Image.network(
                         'https://avatars.githubusercontent.com/u/32709092',
                         fit: BoxFit.cover,
@@ -134,7 +142,7 @@ class AboutWidget extends StatelessWidget {
                     child: Column(
                       children: [
                         Text(
-                          'Hi again, I\'m Elvis Murtezan, an Associate Software Developer.\nMy journey in software development born in my childhood from the passion for videogames, now is driven by my genuine passion for problem-solving and technology.\n\nI approach every challenge with solid determination, whether it\'s an individual problem I\'m tackling or a collaborative effort within a team.',
+                          'I am Elvis Murtezan, a Software Developer.\nMy journey in software development born in my childhood from the passion for videogames, now is driven by my genuine passion for problem-solving and technology.\n\nI approach every challenge with solid determination, whether it\'s an individual problem I\'m tackling or a collaborative effort within a team.',
                           style: TextStyle(
                             fontSize: 19.0,
                           ),

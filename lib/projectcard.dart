@@ -121,7 +121,11 @@ class ProjectCardState extends State<ProjectCard> {
         child: AnimatedOpacity(
           duration:
               const Duration(milliseconds: 300), // Set your desired duration
-          opacity: isHovered ? 1 : 0.4, // Adjust opacity values
+          opacity: isHovered
+              ? 1
+              : isWideScreen
+                  ? 0.4
+                  : 1, // Adjust opacity values
           child: ClipRRect(
             borderRadius: BorderRadius.circular(15.0),
             child: Image.network(

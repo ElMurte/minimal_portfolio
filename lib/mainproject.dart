@@ -58,7 +58,11 @@ class MainProjectWidgetState extends State<MainProjectWidget> {
                       : Colors.grey[300], // Apply hover effect
                   child: AnimatedOpacity(
                     duration: const Duration(milliseconds: 300),
-                    opacity: isHovered ? 1 : 0.7,
+                    opacity: isHovered
+                        ? 1
+                        : MediaQuery.of(context).size.width > 1100
+                            ? 0.7
+                            : 1,
                     child: ClipRect(
                       child: Image.network(
                         widget.imageUrl,

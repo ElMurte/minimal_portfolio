@@ -18,9 +18,9 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
   ExperienceCard? experienceCardsita1 = ExperienceCard(
       experience: Experience(
           role: 'Junior Software engineer',
-          date: 'November 2022 - October 2023',
+          date: 'November 2022 - now',
           description:
-              'I have contributing with many different technologies(frontend/backend), with Azure as the main cloud provider within an Agile environment:\n• building PoC’s: built a sample app with Power Apps, clone an existing app with Flutter, build some simple Power BI reports\n• production: automating of tasks using mainly Python and Power Platform, Data factory for ETL operations'));
+              'I have contributing with many different technologies(frontend/backend), with Azure as the main cloud provider within an Agile environment:\n• building PoC’s:\n built a sample app with Power Apps, clone an existing app with Flutter, build some simple Power BI reports\n• production:\n automating of tasks using mainly Python and Power Platform, Data factory for ETL operations'));
   ExperienceCard? experienceCardmethode0 = ExperienceCard(
       experience: Experience(
           role: 'Intern Software Developer',
@@ -41,7 +41,7 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
     Widget experiencesmenu = SizedBox(
       width: MediaQuery.of(context).size.width > 1100
           ? MediaQuery.of(context).size.width * 0.5
-          : MediaQuery.of(context).size.width,
+          : MediaQuery.of(context).size.width * 0.8,
       height: 100,
       // Set the fixed width for the menu
       child: ListView(
@@ -54,7 +54,7 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
                 ? Theme.of(context).secondaryHeaderColor
                 : Theme.of(context).scaffoldBackgroundColor,
             child: ListTile(
-              title: const Text('SITA'),
+              title: const SelectableText('SITA'),
               onTap: () {
                 // Handle menu item 1 click
                 setState(() {
@@ -70,7 +70,7 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
                 ? Theme.of(context).secondaryHeaderColor
                 : Theme.of(context).scaffoldBackgroundColor,
             child: ListTile(
-              title: const Text('Methode Srl'),
+              title: const SelectableText('Methode Srl'),
               onTap: () {
                 // Handle menu item 2 click
                 setState(() {
@@ -99,7 +99,7 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
           if (selectedTabIndex == 0)
             Column(
               children: [
-                experienceCardsita0!,
+                // experienceCardsita0!,
                 experienceCardsita1!,
               ],
             ),
@@ -130,7 +130,7 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text("Experience",
+              const SelectableText("Experience",
                   style: TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.w500,

@@ -40,6 +40,7 @@ class SecondaryProjectCardState extends State<SecondaryProjectCard> {
         launchUrl(Uri.parse(widget.repourl));
       },
       child: MouseRegion(
+        cursor: SystemMouseCursors.click,
         onEnter: (_) {
           setState(() {
             isHovered = true;
