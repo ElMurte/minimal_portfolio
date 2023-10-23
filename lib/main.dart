@@ -13,17 +13,8 @@ import 'package:url_launcher/url_launcher.dart';
 // ignore: unused_import
 import 'techanmiation.dart';
 
-//TODO refresh pagina normale
-//add drawer
-//togliere effetti su immagini...nel mobile...o tablet
-//traslare l'animazione o bloccarla piu in alto
-//link non appaiono su tablet done
-//immagini blu su tablet e mobile (togliere...)
-//icone technologie usate come animazione o widget nel intro
-//fix grammatica
-//margin about...DONE
-//contenuto che sia accativante e sensato descrizioen DONE
-//check links vari
+//TODO SEO
+//meta tags...
 
 void main() {
   runApp(const MyApp());
