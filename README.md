@@ -1,13 +1,16 @@
 # minimal_portfolio
 
-A new Flutter project.
+A new Flutter project about a simple minimal portfolio written in flutter.
 
 ## Getting Started
 
 This project is a minimalistic portfolio developer,
 to showcase some of my work.
 
-//TODO documentation coming soon
+1. SEO needs to be added manually (after compilation)
+    - title
+    - meta tags...
+    
 
 
 A few resources to get you started if this is your first Flutter project:

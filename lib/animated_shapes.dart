@@ -136,3 +136,78 @@ class AnimatedShape extends StatelessWidget {
     );
   }
 }
+
+class StaticBackground extends StatelessWidget {
+  const StaticBackground({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.transparent, // Transparent background
+      child: Stack(
+        children: [
+          // Shapes on the left side
+          Positioned(
+            left: 0.0,
+            top: MediaQuery.of(context).size.height * 0.3,
+            child: StaticShape(
+              color: Theme.of(context).primaryColorDark,
+              shape: BoxShape.circle,
+            ),
+          ),
+          Positioned(
+            left: 50.0,
+            top: MediaQuery.of(context).size.height * 0.6,
+            child: const StaticShape(
+              color: Colors.blue,
+              shape: BoxShape.rectangle, // Square
+            ),
+          ),
+
+          // Shapes on the right side
+          Positioned(
+            right: 0.0,
+            top: MediaQuery.of(context).size.height * 0.2,
+            child: StaticShape(
+              color: Theme.of(context).primaryColor,
+              shape: BoxShape.circle,
+            ),
+          ),
+          Positioned(
+            right: 50.0,
+            top: MediaQuery.of(context).size.height * 0.5,
+            child: StaticShape(
+              color: Theme.of(context).primaryColorDark,
+              shape: BoxShape.rectangle, // Square
+            ),
+          ),
+          // Add more shapes as needed
+        ],
+      ),
+    );
+  }
+}
+
+class StaticShape extends StatelessWidget {
+  final Color color;
+  final BoxShape shape;
+
+  const StaticShape({
+    super.key,
+    required this.color,
+    required this.shape,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    return Container(
+      width: width * 0.05,
+      height: width * 0.05,
+      decoration: BoxDecoration(
+        color: color,
+        shape: shape,
+      ),
+    );
+  }
+}

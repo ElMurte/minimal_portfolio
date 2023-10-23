@@ -110,7 +110,7 @@ class MyAppState extends State<MyApp> {
     const String github = "https://github.com/ElMurte";
     const String linkedin = "https://www.linkedin.com/in/elvismurtezan/";
     return MaterialApp(
-        title: 'Elvis Murtezan',
+        title: 'Elvis Murtezan - Flutter  Developer Portfolio',
         theme: _buildTheme(),
         initialRoute: '/',
         routes: {
@@ -223,7 +223,7 @@ class MyAppState extends State<MyApp> {
                           children: [
                             SizedBox(
                                 height: MediaQuery.of(context).size.height,
-                                child: const AnimatedBackground()),
+                                child: const StaticBackground()),
 
                             /*SizedBox(
                               height: MediaQuery.of(context).size.height,
