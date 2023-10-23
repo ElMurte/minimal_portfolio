@@ -14,7 +14,18 @@ import 'package:url_launcher/url_launcher.dart';
 import 'techanmiation.dart';
 
 //TODO SEO
-//meta tags...
+//  <title>Elvis Murtezan - Flutter Developer Portfolio</title>
+//<meta name="description" content="Explore the portfolio of Elvis Murtezan, a passionate Flutter developer based in the Netherlands. Discover his work in the air transport industry and more.">
+//<link rel="icon" type="image/png" href="your-favicon.png" />
+/*<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Person",
+  "name": "Elvis Murtezan",
+  "jobTitle": "Developer"
+}
+</script>
+*/
 
 void main() {
   runApp(const MyApp());
