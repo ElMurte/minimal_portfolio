@@ -60,7 +60,7 @@ class AnimatedBackgroundState extends State<AnimatedBackground>
                 ),
               ),
               Positioned(
-                left: 50.0,
+                left: 15.0,
                 top: MediaQuery.of(context).size.height * 0.6,
                 child: AnimatedShape(
                   rotationSpeed: 1,
@@ -82,7 +82,7 @@ class AnimatedBackgroundState extends State<AnimatedBackground>
                 ),
               ),
               Positioned(
-                right: 50.0,
+                right: 15.0,
                 top: MediaQuery.of(context).size.height * 0.5,
                 child: AnimatedShape(
                   rotationSpeed: 0.5,
@@ -156,7 +156,7 @@ class StaticBackground extends StatelessWidget {
             ),
           ),
           Positioned(
-            left: 50.0,
+            left: 5.0,
             top: MediaQuery.of(context).size.height * 0.6,
             child: const StaticShape(
               color: Colors.blue,
@@ -174,7 +174,7 @@ class StaticBackground extends StatelessWidget {
             ),
           ),
           Positioned(
-            right: 50.0,
+            right: 5.0,
             top: MediaQuery.of(context).size.height * 0.5,
             child: StaticShape(
               color: Theme.of(context).primaryColorDark,

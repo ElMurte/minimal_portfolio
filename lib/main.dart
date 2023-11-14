@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:minimal_portfolio/animated_shapes.dart';
-import 'package:minimal_portfolio/expiriences.dart';
+import 'package:minimal_portfolio/experiences.dart';
 import 'package:minimal_portfolio/firstcontent.dart';
 import 'package:minimal_portfolio/hovertext.dart';
 import 'package:minimal_portfolio/mainproject.dart';
@@ -14,10 +14,10 @@ import 'package:url_launcher/url_launcher.dart';
 import 'techanmiation.dart';
 
 //TODO SEO
-//  <title>Elvis Murtezan - Flutter Developer Portfolio</title>
-//<meta name="description" content="Explore the portfolio of Elvis Murtezan, a passionate Flutter developer based in the Netherlands. Discover his work in the air transport industry and more.">
-//<link rel="icon" type="image/png" href="your-favicon.png" />
-/*<script type="application/ld+json">
+//1  <title>Elvis Murtezan</title>
+//2  <meta name="description" content="Explore the portfolio of Elvis Murtezan build with Flutter, a passionate developer based in the Netherlands. ">//<link rel="icon" type="image/png" href="your-favicon.png" />
+/*3 optional
+<script type="application/ld+json">
 {
   "@context": "http://schema.org",
   "@type": "Person",
@@ -112,7 +112,7 @@ class MyAppState extends State<MyApp> {
     const String github = "https://github.com/ElMurte";
     const String linkedin = "https://www.linkedin.com/in/elvismurtezan/";
     return MaterialApp(
-        title: 'Elvis Murtezan - Flutter  Developer Portfolio',
+        title: 'Elvis Murtezan',
         theme: _buildTheme(),
         initialRoute: '/',
         routes: {

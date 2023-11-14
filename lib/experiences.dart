@@ -14,13 +14,13 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
       experience: Experience(
           role: 'Associate Software Developer',
           date: 'November 2023 - now',
-          description: 'Actively contributing in the Passenger portfolio...'));
+          description: 'Contributing to the Passenger portfolio'));
   ExperienceCard? experienceCardsita1 = ExperienceCard(
       experience: Experience(
           role: 'Junior Software engineer',
-          date: 'November 2022 - now',
+          date: 'November 2022 - November 2023',
           description:
-              'I am contributing with many different technologies(frontend/backend), with Azure as the main cloud provider within an Agile environment:\n• building PoC’s:\n built a sample app with Power Apps, clone an existing app with Flutter, build some simple Power BI reports\n• production:\n automating of tasks using mainly Python and Power Platform, Data factory for ETL operations'));
+              'Contributing with many different technologies(frontend/backend), within an Agile environment using:\n Azure, Power Apps, Flutter, Power BI, Containers, Python, ETL(data factory)'));
   ExperienceCard? experienceCardmethode0 = ExperienceCard(
       experience: Experience(
           role: 'Intern Software Developer',
@@ -45,6 +45,7 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
       height: 100,
       // Set the fixed width for the menu
       child: ListView(
+        prototypeItem: const ListTile(),
         // Use ListView for fixed menu
         // Your menu items go here
         children: [
@@ -100,7 +101,7 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
             if (selectedTabIndex == 0)
               Column(
                 children: [
-                  // experienceCardsita0!,
+                  experienceCardsita0!,
                   experienceCardsita1!,
                 ],
               ),
