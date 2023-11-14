@@ -1,7 +1,7 @@
 # minimal_portfolio
 
 A new Flutter project about a simple minimal portfolio written in flutter.
-Live here-> https://elvismurtezan.com/
+Live preview here -> https://elvismurtezan.com/
 
 ## Getting Started
 
