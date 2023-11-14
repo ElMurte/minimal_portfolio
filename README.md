@@ -13,6 +13,8 @@ to showcase some of my work.
 4. SEO needs to be added manually (after compilation)
     - title ex. <title>Name Surname</title>
     - meta tags...(ex. <meta name="description" content="Explore the portfolio of <Name Surname> build with Flutter, a passionate developer based in the <Country>. ">)
+
+
 Optional:
 Host the website somewhere (ex. https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages)
 
