@@ -53,9 +53,10 @@ class MainProjectWidgetState extends State<MainProjectWidget> {
                 child: Container(
                   width: MediaQuery.of(context).size.width * 0.9,
                   height: MediaQuery.of(context).size.height * 0.5,
-                  color: !isHovered
-                      ? Colors.blue
-                      : Colors.grey[300], // Apply hover effect
+                  color: !isHovered ? Colors.blue : Colors.grey[300],
+
+                  // Apply hover effect
+
                   child: AnimatedOpacity(
                     duration: const Duration(milliseconds: 300),
                     opacity: isHovered

@@ -13,7 +13,8 @@ import 'package:url_launcher/url_launcher.dart';
 // ignore: unused_import
 import 'techanmiation.dart';
 
-//TODO SEO
+//
+
 //1  <title>Elvis Murtezan</title>
 //2  <meta name="description" content="Explore the portfolio of Elvis Murtezan build with Flutter, a passionate developer based in the Netherlands. ">//<link rel="icon" type="image/png" href="your-favicon.png" />
 /*3 optional

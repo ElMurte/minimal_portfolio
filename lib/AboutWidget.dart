@@ -158,11 +158,11 @@ class AboutWidget extends StatelessWidget {
                           SizedBox(height: 16),
                           SkillsList([
                             'Azure',
-                            'Python',
-                            'Kubernetes',
-                            'Containers',
-                            'Flutter',
                             'SQL',
+                            'Python',
+                            'Power BI',
+                            'Containers',
+                            'Flutter'
                           ])
                         ],
                       ),

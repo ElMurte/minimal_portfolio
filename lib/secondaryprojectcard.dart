@@ -63,7 +63,7 @@ class SecondaryProjectCardState extends State<SecondaryProjectCard> {
             height: 360,
             margin: const EdgeInsets.only(bottom: 16),
             child: Card(
-              elevation: 30.0,
+              elevation: 30.0, color: Theme.of(context).scaffoldBackgroundColor,
 
               shadowColor: isHovered
                   ? Colors.blue

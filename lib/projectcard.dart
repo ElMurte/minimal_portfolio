@@ -163,6 +163,7 @@ class ProjectCardState extends State<ProjectCard> {
                 padding: const EdgeInsets.all(16),
                 margin: const EdgeInsets.only(left: 0, bottom: 16),
                 child: Card(
+                    color: Theme.of(context).scaffoldBackgroundColor,
                     elevation: 30.0,
                     shadowColor: isHovered
                         ? Colors.blue
