@@ -14,13 +14,36 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
       experience: Experience(
           role: 'Associate Software Developer',
           date: 'November 2023 - now',
-          description: 'Contributing to the Passenger portfolio'));
+          description:
+              '''Contributing to the Passenger portfolio:\n• as a BI dev: engage in data engineering, analysis, modeling, development, and test
+ing. I contribute to our insights solutions(Passenger Intelligent Insights),from data warehouse to reports, and dashboards. Working together with the team, we ensure our product remains adaptable to the evolving needs of airport stakeholders, consistently delivering valuable solutions.
+ • as a Frontend dev: develop and maintain a Flutter-based app(Passenger validation)''',
+          skills: [
+        'SQL',
+        'Python',
+        'Azure',
+        'Power BI',
+        'Data Factory',
+        'ETL',
+        'Agile',
+        'Flutter',
+        'Containers',
+      ]));
   ExperienceCard? experienceCardsita1 = ExperienceCard(
       experience: Experience(
           role: 'Junior Software engineer',
           date: 'November 2022 - November 2023',
           description:
-              'Contributing with many different technologies(frontend/backend), within an Agile environment using:\n Azure, Power Apps, Flutter, Power BI, Containers, Python, ETL(data factory)'));
+              'Contributing with many different technologies(frontend/backend), within an Agile environment using:\n Azure, Power Apps, Flutter, Power BI, Containers, Python, ETL(data factory)',
+          skills: [
+        'SQL',
+        'Python',
+        'Azure',
+        'Power BI',
+        'Data Factory',
+        'ETL',
+        'Agile'
+      ]));
   ExperienceCard? experienceCardmethode0 = ExperienceCard(
       experience: Experience(
           role: 'Intern Software Developer',
@@ -92,28 +115,34 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
             ? 540
             : MediaQuery.of(context).size.width < 380
                 ? 680
-                : 500,
+                : 520,
         margin: const EdgeInsets.all(10),
-        child: Column(
-          // Your content goes here
-          children: [
-            // Content section 1
-            if (selectedTabIndex == 0)
-              Column(
-                children: [
-                  experienceCardsita0!,
-                  experienceCardsita1!,
-                ],
-              ),
-            // Content section 2
-            if (selectedTabIndex == 1)
-              Column(
-                children: [
-                  experienceCardmethode0!,
-                ],
-              ),
-            // Add more content sections as needed
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            // Your content goes here
+            children: [
+              // Content section 1
+              if (selectedTabIndex == 0)
+                Column(
+                  children: [
+                    experienceCardsita0!,
+                    Divider(
+                      color: Theme.of(context).secondaryHeaderColor,
+                      thickness: 2,
+                    ),
+                    experienceCardsita1!,
+                  ],
+                ),
+              // Content section 2
+              if (selectedTabIndex == 1)
+                Column(
+                  children: [
+                    experienceCardmethode0!,
+                  ],
+                ),
+              // Add more content sections as needed
+            ],
+          ),
         ),
       ),
     );
@@ -138,7 +167,7 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
                     fontSize: 32,
                     fontWeight: FontWeight.w500,
                   )),
-              const SizedBox(height: 10),
+              const SizedBox(height: 5),
               LayoutBuilder(
                 builder: (context, constraints) => constraints.maxWidth > 600
                     ? Row(

@@ -55,7 +55,7 @@ class AnimatedBackgroundState extends State<AnimatedBackground>
                 child: AnimatedShape(
                   rotationSpeed: 1,
                   animationValue: animation.animation.value,
-                  color: Theme.of(context).primaryColorDark,
+                  color: Theme.of(context).primaryColorLight,
                   shape: BoxShape.circle,
                 ),
               ),
@@ -77,7 +77,7 @@ class AnimatedBackgroundState extends State<AnimatedBackground>
                 child: AnimatedShape(
                   rotationSpeed: 1,
                   animationValue: animation.animation.value,
-                  color: Theme.of(context).primaryColor,
+                  color: Theme.of(context).primaryColorDark,
                   shape: BoxShape.circle,
                 ),
               ),
@@ -169,7 +169,7 @@ class StaticBackground extends StatelessWidget {
             right: 0.0,
             top: MediaQuery.of(context).size.height * 0.2,
             child: StaticShape(
-              color: Theme.of(context).primaryColor,
+              color: Colors.blue,
               shape: BoxShape.circle,
             ),
           ),

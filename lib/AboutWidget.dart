@@ -155,19 +155,11 @@ class AboutWidget extends StatelessWidget {
                               fontSize: 19.0,
                             ),
                           ),
-                          SizedBox(height: 16),
-                          SkillsList([
-                            'Azure',
-                            'SQL',
-                            'Python',
-                            'Power BI',
-                            'Containers',
-                            'Flutter'
-                          ])
                         ],
                       ),
                     ),
                   ),
+
                   // Right side: Image
                   if (MediaQuery.of(context).size.width > 600)
                     const ImageWithMisalignedSquareEffect(),
@@ -175,6 +167,15 @@ class AboutWidget extends StatelessWidget {
               ),
               if (MediaQuery.of(context).size.width < 600)
                 const ImageWithMisalignedSquareEffect(),
+              SizedBox(height: 16),
+              SkillsList([
+                'Azure',
+                'SQL',
+                'Python',
+                'Power BI',
+                'Containers',
+                'Flutter'
+              ])
             ],
           ),
         ),

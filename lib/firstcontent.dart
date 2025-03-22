@@ -41,7 +41,7 @@ class FirstContent extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 const Text(
-                  'I’m a passionate software engineer based in the Netherlands, with solid foundations in both front-end and back-end development. I am currently contributing within the air transport industry in the BI domain.',
+                  'I’m a passionate software & data engineer based in the Netherlands, with solid foundations in both front-end and back-end development. I am currently contributing within the air transport industry as a developer for the passenger portfolio.',
                   style: TextStyle(fontSize: 19),
                 ),
                 const SizedBox(height: 16),

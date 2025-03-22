@@ -126,6 +126,7 @@ class MyAppState extends State<MyApp> {
                       child: const Text(
                         'Elvis Murtezan',
                         style: TextStyle(
+                          color: Colors.blue,
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
@@ -140,6 +141,7 @@ class MyAppState extends State<MyApp> {
                       }),
                   actions: <Widget>[
                     Switch(
+                      activeColor: Colors.blue,
                       value: _isDarkMode,
                       onChanged: (value) {
                         _toggleTheme();
@@ -212,7 +214,7 @@ class MyAppState extends State<MyApp> {
                         gradient: LinearGradient(
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
-                          stops: const [0.55, 1.0],
+                          stops: const [0.75, 1.0],
                           colors: [
                             Colors.white70.withOpacity(0.001), Colors.white54
                             //Theme.of(context).primaryColor,
@@ -470,10 +472,10 @@ class MyAppState extends State<MyApp> {
     return _isDarkMode
         ? ThemeData.dark().copyWith(
             appBarTheme: const AppBarTheme(
-              backgroundColor: Color(0xFF011638),
+              backgroundColor: Color.fromARGB(255, 0, 14, 37),
               foregroundColor: Colors.white,
             ),
-            scaffoldBackgroundColor: const Color(0xFF011638),
+            scaffoldBackgroundColor: Color.fromARGB(255, 0, 10, 26),
             textTheme: const TextTheme(
                 headlineLarge: TextStyle(
                   color: Colors.white70,
