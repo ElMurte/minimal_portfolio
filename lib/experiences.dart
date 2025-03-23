@@ -78,7 +78,10 @@ ing. I contribute to our insights solutions(Passenger Intelligent Insights),from
                 ? Theme.of(context).secondaryHeaderColor
                 : Theme.of(context).scaffoldBackgroundColor,
             child: ListTile(
-              title: const Text('SITA'),
+              title: const Text('SITA',
+                  style: TextStyle(
+                    color: Colors.blue,
+                  )),
               onTap: () {
                 // Handle menu item 1 click
                 setState(() {
@@ -94,7 +97,10 @@ ing. I contribute to our insights solutions(Passenger Intelligent Insights),from
                 ? Theme.of(context).secondaryHeaderColor
                 : Theme.of(context).scaffoldBackgroundColor,
             child: ListTile(
-              title: const Text('Methode Srl'),
+              title: const Text('Methode Srl',
+                  style: TextStyle(
+                    color: Colors.blue,
+                  )),
               onTap: () {
                 // Handle menu item 2 click
                 setState(() {
