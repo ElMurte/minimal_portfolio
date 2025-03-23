@@ -168,7 +168,7 @@ class StaticBackground extends StatelessWidget {
           Positioned(
             right: 0.0,
             top: MediaQuery.of(context).size.height * 0.2,
-            child: StaticShape(
+            child: const StaticShape(
               color: Colors.blue,
               shape: BoxShape.circle,
             ),

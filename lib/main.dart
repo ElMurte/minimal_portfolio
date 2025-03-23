@@ -475,7 +475,7 @@ class MyAppState extends State<MyApp> {
               backgroundColor: Color.fromARGB(255, 0, 14, 37),
               foregroundColor: Colors.white,
             ),
-            scaffoldBackgroundColor: Color.fromARGB(255, 0, 10, 26),
+            scaffoldBackgroundColor: const Color.fromARGB(255, 0, 10, 26),
             textTheme: const TextTheme(
                 headlineLarge: TextStyle(
                   color: Colors.white70,

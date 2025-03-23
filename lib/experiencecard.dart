@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:minimal_portfolio/skilllist.dart';
 
 class Experience {
   final String role;

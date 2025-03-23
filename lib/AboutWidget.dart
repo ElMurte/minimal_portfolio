@@ -167,8 +167,8 @@ class AboutWidget extends StatelessWidget {
               ),
               if (MediaQuery.of(context).size.width < 600)
                 const ImageWithMisalignedSquareEffect(),
-              SizedBox(height: 16),
-              SkillsList([
+              const SizedBox(height: 16),
+              const SkillsList([
                 'Azure',
                 'SQL',
                 'Python',
