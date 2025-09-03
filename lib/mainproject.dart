@@ -15,6 +15,8 @@ class MainProjectWidget extends StatefulWidget {
     required this.appDescription,
   });
 
+  get _skills => ["Containers","Python", "Airflow","dbt","Supabase"];
+
   @override
   MainProjectWidgetState createState() => MainProjectWidgetState();
 }
@@ -24,93 +26,101 @@ class MainProjectWidgetState extends State<MainProjectWidget> {
   String cppurl = "";
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Card(
-        elevation: isHovered ? 8 : 2, // Apply elevation on hover
-        child: Stack(
-          children: [
-            MouseRegion(
-              onEnter: (_) {
-                setState(() {
-                  isHovered = true;
-                });
-              },
-              onExit: (_) {
-                setState(() {
-                  isHovered = false;
-                });
-              },
-              cursor: SystemMouseCursors.click,
-              child: GestureDetector(
-                onTap: () async {
-                  // Open another browser page with the link
-                  await _launchUrl();
-                },
-                child: Container(
+    return MouseRegion(
+      onEnter: (_) {
+        setState(() {
+          isHovered = true;
+        });
+      },
+      onExit: (_) {
+        setState(() {
+          isHovered = false;
+        });
+      },
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: () async {
+          // Open another browser page with the link
+          await _launchUrl();
+        },
+        child: Card(
+          shadowColor: isHovered ? Colors.blue : Colors.grey,
+          elevation: isHovered ? 10 : 2, // Apply elevation on hover
+          
+          child: Container(
+            padding: const EdgeInsets.all(32),
+            margin: const EdgeInsets.all(1),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Column(
+              children: [
+                Container(
                   width: MediaQuery.of(context).size.width * 0.9,
-                  height: MediaQuery.of(context).size.height * 0.5,
-                  color: !isHovered ? Colors.blue : Colors.grey[300],
-
-                  // Apply hover effect
-
+                  height: MediaQuery.of(context).size.height * 0.6,
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),
                   child: AnimatedOpacity(
                     duration: const Duration(milliseconds: 300),
                     opacity: isHovered
                         ? 1
                         : MediaQuery.of(context).size.width > 1100
-                            ? 0.7
+                            ? 0.4
                             : 1,
-                    child: ClipRect(
-                      child: Image.network(
-                        widget.imageUrl,
-                        fit: BoxFit.cover,
-                      ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(15.0),
+                      child: widget.imageUrl.startsWith('assets/')
+                          ? Image.asset(
+                              widget.imageUrl,
+                              fit: BoxFit.fill,
+                            )
+                          : Image.network(
+                              widget.imageUrl,
+                              fit: BoxFit.fill,
+                            ),
                     ),
                   ),
                 ),
-              ),
-            ),
-            Positioned.fill(
-              child: Center(
-                child: Column(
+                const SizedBox(height: 10),
+                Text(
+                  "Stock Signals",
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w700,
+                    color: isHovered
+                        ? Colors.blue
+                        : Colors.grey.shade500,
+                  ),
+                  textAlign: TextAlign.center,
+                ),  
+                const SizedBox(height: 8),
+                Text(
+                  widget.appDescription,
+                  style: const TextStyle(fontSize: 16),
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.visible,
+                ),
+                const SizedBox(height: 18),
+                Row(
+                  textBaseline: TextBaseline.alphabetic,
                   mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    /*Text(
-                      widget.bookDescription,
-                      style: const TextStyle(
-                        fontSize: 24,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      textAlign: TextAlign.center,
-                      overflow: TextOverflow.visible, // Allow text to overflow
-                    ),*/
-                    const SizedBox(height: 8),
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Icon(Icons.code),
                     Text(
-                      widget.appDescription,
-                      style: const TextStyle(fontSize: 16),
-                      textAlign: TextAlign.center,
-                      overflow: TextOverflow.visible, // Allow text to overflow
+                      " " + widget._skills.join(", "),
+                      style: const TextStyle(
+                          overflow: TextOverflow.clip,
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold),
                     ),
-                    const SizedBox(height: 8),
-                    /*SizedBox(
-                      width: 75,
-                      height: 75,
-                      child: Image.network(
-                        widget.playStoreUrl,
-                        fit: BoxFit.cover,
-                      ),
-                    ),*/
                   ],
                 ),
-              ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );

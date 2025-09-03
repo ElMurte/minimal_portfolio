@@ -48,6 +48,26 @@ class MyAppState extends State<MyApp> {
   final GlobalKey _projectKey = GlobalKey();
   final GlobalKey _initial = GlobalKey();
   final List<Widget> secondaryprojects = [
+    
+     const SizedBox(
+            child: ProjectCard(
+              title: 'BlockCOVID',
+              numberOfPersons: '7',
+              context: 'SWE Exam',
+              timeframe: '10/2020 - 6/2021',
+              technologies: [
+                'Flutter',
+                'NFC/GPS',
+                'Angular',
+                'NodeJS',
+                'MongoDB'
+              ],
+              mainUrlImage: 'https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+              description: "We had developed a dashboard and a mobile app to track users of a computer laboratory with GPS, NFC, and blockchain. I have mainly worked in the mobile app(using Flutter with a setState pattern from the official docs). The goal was to simulate a development cycle, from requirements to the initial deployment (no maintenance phase), while switching the roles during the cycle.",
+              repourl: 'https://sweleven.gitlab.io/blockcovid/',
+              externalurl: 'https://blog.imolainformatica.it/2021/08/26/sinergie-azienda-universitablock-covid/',
+            ),
+          ),
     const SecondaryProjectCard(
       title: 'MCBurger',
       context_of_project: "OOP exam",
@@ -141,7 +161,7 @@ class MyAppState extends State<MyApp> {
                       }),
                   actions: <Widget>[
                     Switch(
-                      activeColor: Colors.blue,
+                      activeThumbColor: Colors.blue,
                       value: _isDarkMode,
                       onChanged: (value) {
                         _toggleTheme();
@@ -407,7 +427,7 @@ class MyAppState extends State<MyApp> {
         : 0.0;
     return Container(
       padding: EdgeInsets.only(
-          top: paddingSize * 0.5, left: paddingSize, right: paddingSize),
+          top: paddingSize * 0.15, left: paddingSize, right: paddingSize),
       margin: EdgeInsets.only(
           top: marginSize * 0.05, left: marginSize, right: marginSize),
       child: const Column(
@@ -421,35 +441,14 @@ class MyAppState extends State<MyApp> {
           SizedBox(height: 16),
           MainProjectWidget(
             imageUrl:
-                'https://images.pexels.com/photos/3843282/pexels-photo-3843282.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+                'https://raw.githubusercontent.com/ElMurte/Assetsremote/refs/heads/main/financeprojectimginfo.png',
             playStoreUrl:
                 'https://upload.wikimedia.org/wikipedia/commons/e/e7/Google_play_store.png?20230511225448',
             bookDescription: 'Coming soon',
-            appDescription: '',
+            appDescription: 'Stock market intelligence platform that collects and enriches financial data from various sources, providing users with comprehensive insights and analysis tools to make informed investment decisions.',
           ),
-          SizedBox(height: 16),
-          SizedBox(
-            child: ProjectCard(
-              title: 'BlockCOVID',
-              numberOfPersons: '7',
-              context: 'SWE Exam',
-              timeframe: '10/2020 - 6/2021',
-              technologies: [
-                'Flutter',
-                'NFC/GPS',
-                'Angular',
-                'NodeJS',
-                'MongoDB'
-              ],
-              mainUrlImage:
-                  'https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-              description:
-                  "We had developed a dashboard and a mobile app to track users of a computer laboratory with GPS, NFC, and blockchain. I have mainly worked in the mobile app(using Flutter with a setState pattern from the official docs). The goal was to simulate a development cycle, from requirements to the initial deployment (no maintenance phase), while switching the roles during the cycle.",
-              repourl: 'https://sweleven.gitlab.io/blockcovid/',
-              externalurl:
-                  'https://blog.imolainformatica.it/2021/08/26/sinergie-azienda-universitablock-covid/',
-            ),
-          ),
+          SizedBox(height: 16)
+         ,
         ],
       ),
     );

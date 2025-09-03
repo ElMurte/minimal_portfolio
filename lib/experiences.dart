@@ -10,14 +10,31 @@ class ExperienceWidget extends StatefulWidget {
 
 class ExperienceWidgetState extends State<ExperienceWidget> {
   int selectedTabIndex = 0; // Track the selected tab index
+  ExperienceCard? experienceCardsita00 = ExperienceCard(
+      experience: Experience(
+          role: 'Software Engineer',
+          date: 'April 2025 - now',
+          description:
+              '''Contributing to the Passenger portfolio:\n• as a <bf>BI dev: engage in data engineering, analysis, modeling, development, and test
+ing. I contribute to our insights solutions(Passenger Intelligent Insights),from data warehouse to reports, and dashboards. Working together with the team, we ensure our product remains adaptable to the evolving needs of airport stakeholders, consistently delivering valuable solutions.
+ • as a Frontend dev: develop and maintain a Flutter-based app(Passenger validation)''',
+          skills: [
+        'SQL',
+        'Python',
+        'Azure',
+        'Power BI',
+        'Data Factory',
+        'ETL',
+        'Agile',
+        'Flutter',
+        'Containers',
+      ]));
   ExperienceCard? experienceCardsita0 = ExperienceCard(
       experience: Experience(
           role: 'Associate Software Developer',
-          date: 'November 2023 - now',
+          date: 'November 2023 - April 2025',
           description:
-              '''Contributing to the Passenger portfolio:\n• as a BI dev: engage in data engineering, analysis, modeling, development, and test
-ing. I contribute to our insights solutions(Passenger Intelligent Insights),from data warehouse to reports, and dashboards. Working together with the team, we ensure our product remains adaptable to the evolving needs of airport stakeholders, consistently delivering valuable solutions.
- • as a Frontend dev: develop and maintain a Flutter-based app(Passenger validation)''',
+              '''Engage in data engineering, analysis, modeling, development, and testing. Contribute to our insights solutions (Passenger Intelligent Insights), from data warehouse to reports and dashboards. Work together with the team to ensure our product remains adaptable to the evolving needs of airport stakeholders, consistently delivering valuable solutions.''',
           skills: [
         'SQL',
         'Python',
@@ -131,6 +148,11 @@ ing. I contribute to our insights solutions(Passenger Intelligent Insights),from
               if (selectedTabIndex == 0)
                 Column(
                   children: [
+                    experienceCardsita00!,
+                    Divider(
+                      color: Theme.of(context).secondaryHeaderColor,
+                      thickness: 2,
+                    ),
                     experienceCardsita0!,
                     Divider(
                       color: Theme.of(context).secondaryHeaderColor,

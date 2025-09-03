@@ -67,8 +67,8 @@ class ExperienceCard extends StatelessWidget {
             ),
           ),
           if (experience.skills.isNotEmpty)
-            Positioned(
-              bottom: 0,
+            Container(
+             // bottom: 0,
               child: (MediaQuery.of(context).size.width < 600)
                   ? Column(
                       textBaseline: TextBaseline.alphabetic,
