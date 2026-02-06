@@ -49,25 +49,6 @@ class MyAppState extends State<MyApp> {
   final GlobalKey _initial = GlobalKey();
   final List<Widget> secondaryprojects = [
     
-     const SizedBox(
-            child: ProjectCard(
-              title: 'BlockCOVID',
-              numberOfPersons: '7',
-              context: 'SWE Exam',
-              timeframe: '10/2020 - 6/2021',
-              technologies: [
-                'Flutter',
-                'NFC/GPS',
-                'Angular',
-                'NodeJS',
-                'MongoDB'
-              ],
-              mainUrlImage: 'https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-              description: "We had developed a dashboard and a mobile app to track users of a computer laboratory with GPS, NFC, and blockchain. I have mainly worked in the mobile app(using Flutter with a setState pattern from the official docs). The goal was to simulate a development cycle, from requirements to the initial deployment (no maintenance phase), while switching the roles during the cycle.",
-              repourl: 'https://sweleven.gitlab.io/blockcovid/',
-              externalurl: 'https://blog.imolainformatica.it/2021/08/26/sinergie-azienda-universitablock-covid/',
-            ),
-          ),
     const SecondaryProjectCard(
       title: 'MCBurger',
       context_of_project: "OOP exam",
@@ -88,7 +69,7 @@ class MyAppState extends State<MyApp> {
     const SecondaryProjectCard(
       title: 'NYC Flight Analysis',
       description:
-          "built a model at first with a subset of the covariates(7) and second with all the covariates(19)",
+          "built a model at first with a subset of the covariates(7) and after with all the covariates(19)",
       repourl:
           "https://github.com/ElMurte/Data-Mining-Project-analysis-Datasets-using-R",
       maintechnologies: ["R"],
@@ -236,9 +217,7 @@ class MyAppState extends State<MyApp> {
                           end: Alignment.bottomRight,
                           stops: const [0.75, 1.0],
                           colors: [
-                            Colors.white70.withOpacity(0.001), Colors.white54
-                            //Theme.of(context).primaryColor,
-                            //Theme.of(context).scaffoldBackgroundColor,
+                                                        Colors.white70.withValues(alpha: 0.001), Colors.white54
                           ],
                         ),
                       ),
@@ -248,7 +227,7 @@ class MyAppState extends State<MyApp> {
                           children: [
                             SizedBox(
                                 height: MediaQuery.of(context).size.height,
-                                child: const StaticBackground()),
+                                child: const AnimatedBackground()),
 
                             /*SizedBox(
                               height: MediaQuery.of(context).size.height,
@@ -274,7 +253,7 @@ class MyAppState extends State<MyApp> {
                                 RepaintBoundary(
                                     key: _experienceKey,
                                     child: const ExperienceWidget()),
-
+                        
                                 RepaintBoundary(
                                     key: _projectKey, child: _buildProjects()),
                                 // Footer section
@@ -289,6 +268,26 @@ class MyAppState extends State<MyApp> {
                                       MediaQuery.of(context).size.width * 0.8,
                                   child: Column(
                                     children: [
+                                      
+     const SizedBox(
+            child: ProjectCard(
+              title: 'BlockCOVID',
+              numberOfPersons: '7',
+              context: 'SWE Exam',
+              timeframe: '10/2020 - 6/2021',
+              technologies: [
+                'Flutter',
+                'NFC/GPS',
+                'Angular',
+                'NodeJS',
+                'MongoDB'
+              ],
+              mainUrlImage: 'https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+              description: "We had developed a dashboard and a mobile app to track users of a computer laboratory with GPS, NFC, and blockchain. I have mainly worked in the mobile app(using Flutter with a setState pattern from the official docs). The goal was to simulate a development cycle, from requirements to the initial deployment (no maintenance phase), while switching the roles during the cycle.",
+              repourl: 'https://sweleven.gitlab.io/blockcovid/',
+              externalurl: 'https://blog.imolainformatica.it/2021/08/26/sinergie-azienda-universitablock-covid/',
+            ),
+          ),
                                       MediaQuery.of(context).size.width > 1100
                                           ? Row(
                                               mainAxisAlignment:
@@ -305,8 +304,7 @@ class MyAppState extends State<MyApp> {
                                 ),
                                 Container(
                                   alignment: Alignment.center,
-                                  color: Colors.transparent.withOpacity(
-                                      0.01), // Customize the background color.
+                                  color: Colors.transparent.withValues(alpha: 0.01), // Customize the background color.
                                   padding: const EdgeInsets.all(
                                       16.0), // Add padding for content.
                                   child: Row(
@@ -331,10 +329,10 @@ class MyAppState extends State<MyApp> {
                                       MediaQuery.of(context).size.width < 600
                                           ? const Expanded(
                                               child: HoverTextWidget(
-                                                  "Built with Flutter and AI copilot tools"),
+                                                  "Built with Flutter "),
                                             )
                                           : const HoverTextWidget(
-                                              "Built with Flutter and AI copilot tools"),
+                                              "Built with Flutter"),
                                       const SizedBox(width: 8.0),
                                       Row(
                                         children: [
@@ -420,14 +418,14 @@ class MyAppState extends State<MyApp> {
     //double screenwidth = MediaQuery.of(context).size.width;
     //final isWideScreen = MediaQuery.of(context).size.width > 1100;
     double paddingSize = MediaQuery.of(context).size.width > 1100
-        ? MediaQuery.of(context).size.width * 0.1
+        ? MediaQuery.of(context).size.width * 0.01
         : 20.0;
     double marginSize = MediaQuery.of(context).size.width > 1100
         ? MediaQuery.of(context).size.width * 0.06
         : 0.0;
     return Container(
       padding: EdgeInsets.only(
-          top: paddingSize * 0.15, left: paddingSize, right: paddingSize),
+          top: paddingSize * 0.05, left: paddingSize, right: paddingSize),
       margin: EdgeInsets.only(
           top: marginSize * 0.05, left: marginSize, right: marginSize),
       child: const Column(

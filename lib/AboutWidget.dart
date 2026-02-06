@@ -143,14 +143,14 @@ class AboutWidget extends StatelessWidget {
                       child: Column(
                         children: [
                           Text(
-                            'I am Elvis Murtezan, a Software Developer.\nMy journey in software development born in my childhood from the passion for videogames, now is driven by my genuine passion for problem-solving and technology.\n\nI approach every challenge with solid determination, whether it\'s an individual problem I\'m tackling or a collaborative effort within a team.',
+                            'I am Elvis Murtezan, a Software Developer.\nMy journey in software development born in my childhood from the passion for videogames, after driven by my genuine passion for problem-solving and technology.\n\nI approach every challenge with solid determination, whether it\'s an individual problem I\'m tackling or a collaborative effort within a team.',
                             style: TextStyle(
                               fontSize: 19.0,
                             ),
                           ),
                           SizedBox(height: 16),
                           Text(
-                            'Currently, I\'m contributing in the dynamic field of air transport.\nHere are some of the most recent technologies I\'ve worked with:',
+                            'Experienced with the following technologies:',
                             style: TextStyle(
                               fontSize: 19.0,
                             ),

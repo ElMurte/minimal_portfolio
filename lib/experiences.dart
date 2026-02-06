@@ -12,12 +12,11 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
   int selectedTabIndex = 0; // Track the selected tab index
   ExperienceCard? experienceCardsita00 = ExperienceCard(
       experience: Experience(
-          role: 'Software Engineer',
-          date: 'April 2025 - now',
+          role: 'Data/Software Engineer',
+          date: 'April 2025 - October 2025',
           description:
-              '''Contributing to the Passenger portfolio:\n• as a <bf>BI dev: engage in data engineering, analysis, modeling, development, and test
-ing. I contribute to our insights solutions(Passenger Intelligent Insights),from data warehouse to reports, and dashboards. Working together with the team, we ensure our product remains adaptable to the evolving needs of airport stakeholders, consistently delivering valuable solutions.
- • as a Frontend dev: develop and maintain a Flutter-based app(Passenger validation)''',
+              '''Contributed to the Passenger portfolio:\n• as a BI dev: engage in data engineering, analysis, modeling, development, and testing. I have worked on insights solutions(Passenger Intelligent Insights),from data warehouse to reports, and dashboards. Together with the team, we ensured our product remains adaptable to the evolving needs of airport stakeholders(50+ airports), consistently delivering value and accuracy.
+ • as a Frontend dev: develop and maintain a Flutter-based app(Passenger validation) serving multiple airports''',
           skills: [
         'SQL',
         'Python',
@@ -34,7 +33,7 @@ ing. I contribute to our insights solutions(Passenger Intelligent Insights),from
           role: 'Associate Software Developer',
           date: 'November 2023 - April 2025',
           description:
-              '''Engage in data engineering, analysis, modeling, development, and testing. Contribute to our insights solutions (Passenger Intelligent Insights), from data warehouse to reports and dashboards. Work together with the team to ensure our product remains adaptable to the evolving needs of airport stakeholders, consistently delivering valuable solutions.''',
+              '''Engage in data engineering, analysis, modeling, development, and testing. Contribute to our insights solutions (Passenger Intelligent Insights), from data warehouse to reports and dashboards.''',
           skills: [
         'SQL',
         'Python',
@@ -51,7 +50,7 @@ ing. I contribute to our insights solutions(Passenger Intelligent Insights),from
           role: 'Junior Software engineer',
           date: 'November 2022 - November 2023',
           description:
-              'Contributing with many different technologies(frontend/backend), within an Agile environment using:\n Azure, Power Apps, Flutter, Power BI, Containers, Python, ETL(data factory)',
+              'Contributing with many different technologies(frontend/backend), within an Agile environment using different tools and frameworks.',
           skills: [
         'SQL',
         'Python',
@@ -95,8 +94,11 @@ ing. I contribute to our insights solutions(Passenger Intelligent Insights),from
                 ? Theme.of(context).secondaryHeaderColor
                 : Theme.of(context).scaffoldBackgroundColor,
             child: ListTile(
-              title: const Text('SITA',
+              title:  Text('SITA',
                   style: TextStyle(
+                    fontWeight: selectedTabIndex == 0
+                        ? FontWeight.bold
+                        : FontWeight.normal,
                     color: Colors.blue,
                   )),
               onTap: () {
@@ -114,8 +116,12 @@ ing. I contribute to our insights solutions(Passenger Intelligent Insights),from
                 ? Theme.of(context).secondaryHeaderColor
                 : Theme.of(context).scaffoldBackgroundColor,
             child: ListTile(
-              title: const Text('Methode Srl',
+              title:  Text('Methode Srl',
                   style: TextStyle(
+                    
+                    fontWeight: selectedTabIndex == 1
+                        ? FontWeight.bold
+                        : FontWeight.normal,
                     color: Colors.blue,
                   )),
               onTap: () {

@@ -44,11 +44,12 @@ class MainProjectWidgetState extends State<MainProjectWidget> {
           await _launchUrl();
         },
         child: Card(
+          color: Theme.of(context).scaffoldBackgroundColor,
           shadowColor: isHovered ? Colors.blue : Colors.grey,
           elevation: isHovered ? 10 : 2, // Apply elevation on hover
           
           child: Container(
-            padding: const EdgeInsets.all(32),
+            padding: const EdgeInsets.all(16),
             margin: const EdgeInsets.all(1),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
@@ -57,9 +58,10 @@ class MainProjectWidgetState extends State<MainProjectWidget> {
               children: [
                 Container(
                   width: MediaQuery.of(context).size.width * 0.9,
-                  height: MediaQuery.of(context).size.height * 0.6,
+                  height: MediaQuery.of(context).size.height * 0.5 > 400
+                      ? MediaQuery.of(context).size.height * 0.5
+                      : 400,
                   decoration: BoxDecoration(
-                    color: Colors.blue,
                     borderRadius: BorderRadius.circular(15.0),
                   ),
                   child: AnimatedOpacity(
@@ -74,11 +76,11 @@ class MainProjectWidgetState extends State<MainProjectWidget> {
                       child: widget.imageUrl.startsWith('assets/')
                           ? Image.asset(
                               widget.imageUrl,
-                              fit: BoxFit.fill,
+                              fit: BoxFit.contain,
                             )
                           : Image.network(
                               widget.imageUrl,
-                              fit: BoxFit.fill,
+                              fit: BoxFit.contain,
                             ),
                     ),
                   ),
@@ -110,6 +112,7 @@ class MainProjectWidgetState extends State<MainProjectWidget> {
                   children: [
                     const Icon(Icons.code),
                     Text(
+                      // ignore: prefer_interpolation_to_compose_strings
                       " " + widget._skills.join(", "),
                       style: const TextStyle(
                           overflow: TextOverflow.clip,
@@ -128,7 +131,7 @@ class MainProjectWidgetState extends State<MainProjectWidget> {
 }
 
 Future<void> _launchUrl() async {
-  final Uri url = Uri.parse('https://www.flutter.dev');
+  final Uri url = Uri.parse('https://finance.yahoo.com/');
 
   if (await canLaunchUrl(url)) {
     await launchUrl(url);
