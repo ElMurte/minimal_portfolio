@@ -17,7 +17,7 @@ class AnimatedBackground extends StatelessWidget {
   const AnimatedBackground({
     super.key,
     this.avoidRects,
-    this.minWidthForDecor = 420.0,
+    this.minWidthForDecor = 600.0,
   });
 
   bool _isAvoided(Rect r) {

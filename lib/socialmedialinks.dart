@@ -9,7 +9,7 @@ class SocialMediaLinks extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const String linkedinpng =
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/600px-LinkedIn_logo_initials.png";
+        "https://images.rawpixel.com/image_png_social_square/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvdjk4Mi1kMS0xMC5wbmc.png";
     const String githubpng =
         "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png";
     return Row(children: [

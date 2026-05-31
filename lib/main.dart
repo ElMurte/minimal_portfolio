@@ -356,7 +356,7 @@ class MyAppState extends State<MyApp> {
                                                   "https://chat.openai.com/"))
                                             },
                                             child: Image.network(
-                                              'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/2048px-ChatGPT_logo.svg.png',
+                                              'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/960px-ChatGPT_logo.svg.png',
                                               height:
                                                   45.0, // Limit the height to 50 pixels.
                                             ),

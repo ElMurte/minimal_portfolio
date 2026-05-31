@@ -10,6 +10,19 @@ class ExperienceWidget extends StatefulWidget {
 
 class ExperienceWidgetState extends State<ExperienceWidget> {
   int selectedTabIndex = 0; // Track the selected tab index
+  ExperienceCard? experienceCardbank00 = ExperienceCard(
+      experience: Experience(
+          role: 'Data Engineer',
+          date: 'May 2026 - Ongoing',
+          description:
+              '''Financial data management''',
+          skills: [
+        'SQL',
+        'Python',
+        'Azure',
+        'ETL',
+        'Agile'
+      ]));
   ExperienceCard? experienceCardsita00 = ExperienceCard(
       experience: Experience(
           role: 'Data/Software Engineer',
@@ -81,20 +94,19 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
       width: MediaQuery.of(context).size.width > 1100
           ? MediaQuery.of(context).size.width * 0.5
           : MediaQuery.of(context).size.width * 0.8,
-      height: 100,
+      height: 150,
       // Set the fixed width for the menu
       child: ListView(
         prototypeItem: const ListTile(),
         // Use ListView for fixed menu
         // Your menu items go here
         children: [
-          // Menu item 1
           Container(
             color: selectedTabIndex == 0
                 ? Theme.of(context).secondaryHeaderColor
                 : Theme.of(context).scaffoldBackgroundColor,
             child: ListTile(
-              title:  Text('SITA',
+              title:  Text('Rabobank',
                   style: TextStyle(
                     fontWeight: selectedTabIndex == 0
                         ? FontWeight.bold
@@ -110,16 +122,38 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
               selected: selectedTabIndex == 0,
             ),
           ),
-          // Menu item 2
+          // Menu item 1
           Container(
             color: selectedTabIndex == 1
+                ? Theme.of(context).secondaryHeaderColor
+                : Theme.of(context).scaffoldBackgroundColor,
+            child: ListTile(
+              title:  Text('SITA',
+                  style: TextStyle(
+                    fontWeight: selectedTabIndex == 1
+                        ? FontWeight.bold
+                        : FontWeight.normal,
+                    color: Colors.blue,
+                  )),
+              onTap: () {
+                // Handle menu item 1 click
+                setState(() {
+                  selectedTabIndex = 1;
+                });
+              },
+              selected: selectedTabIndex == 1,
+            ),
+          ),
+          // Menu item 2
+          Container(
+            color: selectedTabIndex == 2
                 ? Theme.of(context).secondaryHeaderColor
                 : Theme.of(context).scaffoldBackgroundColor,
             child: ListTile(
               title:  Text('Methode Srl',
                   style: TextStyle(
                     
-                    fontWeight: selectedTabIndex == 1
+                    fontWeight: selectedTabIndex == 2
                         ? FontWeight.bold
                         : FontWeight.normal,
                     color: Colors.blue,
@@ -127,10 +161,10 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
               onTap: () {
                 // Handle menu item 2 click
                 setState(() {
-                  selectedTabIndex = 1;
+                  selectedTabIndex = 2;
                 });
               },
-              selected: selectedTabIndex == 1,
+              selected: selectedTabIndex == 2,
             ),
           ),
           // Add more menu items as needed
@@ -150,8 +184,15 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
           child: Column(
             // Your content goes here
             children: [
+              if(selectedTabIndex == 0)
+               Column(
+                  children: [
+                    experienceCardbank00!,
+                  ],
+                ),
+              
               // Content section 1
-              if (selectedTabIndex == 0)
+              if (selectedTabIndex == 1)
                 Column(
                   children: [
                     experienceCardsita00!,
@@ -168,7 +209,7 @@ class ExperienceWidgetState extends State<ExperienceWidget> {
                   ],
                 ),
               // Content section 2
-              if (selectedTabIndex == 1)
+              if (selectedTabIndex == 2)
                 Column(
                   children: [
                     experienceCardmethode0!,
